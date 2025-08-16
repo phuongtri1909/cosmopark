@@ -1,0 +1,11 @@
+@include('client.layouts.partials.header')
+
+@include('components.sweetalert')
+@include('components.toast-main')
+@include('components.toast')
+
+@yield('content')
+@include('components.top_button')
+
+@include('components.form-contact')
+@include('client.layouts.partials.footer')

@@ -1,0 +1,151 @@
+<article class="card-zone animate-on-scroll">
+    <!-- Image Section -->
+    <section class="card-image animate-on-scroll">
+        <div class="bg animate-on-scroll" style="background-image: url('{{ asset('assets/images/dev/hero-slider-1.jpg') }}');"></div>
+        <button class="action-btn animate-on-scroll">
+            <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
+        </button>
+    </section>
+
+    <!-- Content Section -->
+    <section class="card-content animate-on-scroll">
+        <div>
+            <p class="fw-bold text-lg-2">COMSPARK ECO-INDUSTRIAL ZONE</p>
+        </div>
+    </section>
+</article>
+@once
+    @push('styles')
+        <style>
+            @keyframes fadeInCard {
+                from { opacity: 0; transform: translateY(40px) scale(0.96);}
+                to { opacity: 1; transform: none;}
+            }
+            @keyframes zoomInCardImg {
+                from { opacity: 0; transform: scale(0.92);}
+                to { opacity: 1; transform: scale(1);}
+            }
+            @keyframes popBtn {
+                0% { transform: scale(0.7); opacity: 0;}
+                60% { transform: scale(1.1);}
+                100% { transform: scale(1); opacity: 1;}
+            }
+            .card-zone {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                background: white;
+                border-radius: 24px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                padding: 12px 12px 32px;
+                width: 400px;
+                max-width: 100%;
+            }
+
+            .card-image {
+                position: relative;
+                height: 300px;
+                overflow: visible;
+            }
+
+            .card-image .bg {
+                position: relative;
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: 276px;
+                border-radius: 16px;
+
+                -webkit-mask: radial-gradient(circle 30px at 85% 100%, transparent 99%, black 100%);
+                mask: radial-gradient(circle 30px at 78.5% 100%, transparent 99%, black 100%);
+            }
+
+            .action-btn {
+                position: absolute;
+                bottom: 0;
+                right: 15%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #047857;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+                padding: 12px;
+                width: 48px;
+                height: 48px;
+                border: none;
+                z-index: 2;
+            }
+
+            .action-btn:hover {
+                background-color: #065f46;
+            }
+
+            .action-btn:focus {
+                outline: none;
+                box-shadow: 0 0 0 2px #10b981, 0 0 0 4px #fff;
+            }
+
+            .action-btn svg {
+                width: 24px;
+                height: 24px;
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .action-btn:hover svg {
+                transform: translate(2px, -2px);
+            }
+
+            .card-content {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                padding: 0 32px;
+            }
+
+            .card-content h1 {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #111827;
+                line-height: 2rem;
+            }
+
+            .card-zone.animate-on-scroll { opacity: 0; }
+            .card-zone.animate-on-scroll.animated { animation: fadeInCard 0.7s both; opacity: 1; }
+            .card-image.animate-on-scroll.animated .bg { animation: zoomInCardImg 0.8s 0.2s both; }
+            .action-btn.animate-on-scroll.animated { animation: popBtn 0.6s 0.5s both; }
+            .card-content.animate-on-scroll.animated { animation: fadeInCard 0.7s 0.3s both; }
+
+            @media (max-width: 640px) {
+                .card-zone {
+                    width: 350px;
+                }
+
+                .card-image {
+                    height: 250px;
+                }
+
+                .card-image .bg {
+                    height: 226px;
+                }
+
+                .action-btn {
+
+                    top: 202px;
+
+                }
+
+                .card-content {
+                    padding: 0 20px;
+                    gap: 16px;
+                }
+
+                .card-content h1 {
+                    font-size: 1.125rem;
+                    line-height: 1.25rem;
+                }
+            }
+        </style>
+    @endpush
+@endonce
