@@ -15,7 +15,16 @@
 
     <x-zone-slider />
 
-    <x-image-home />
+    <x-image-home
+    :main="asset('assets/images/dev/image-1.jpg')"
+    :images="[
+        asset('assets/images/dev/image-2.jpg'),
+        asset('assets/images/dev/image-3.jpg'),
+        asset('assets/images/dev/image-4.jpg'),
+        asset('assets/images/dev/image-5.jpg')
+    ]"
+    overlay="rgba(24,36,64,0.35)"
+/>
 
     <x-intro-image />
 

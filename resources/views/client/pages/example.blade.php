@@ -1,12 +1,15 @@
-@extends('layouts.app')
+@extends('client.layouts.app')
 @section('title', '')
 @section('description', '')
 @section('keyword', '')
-@push('styles')
 
 
-@endpush
+@section('content')
+
+@endsection
 
 @push('scripts')
+@endpush
 
+@push('styles')
 @endpush

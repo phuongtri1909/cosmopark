@@ -70,8 +70,8 @@
                 <div class="d-flex align-items-center">
                     <img src="{{ $logoPath }}" alt="Logo" style="margin-right: 20px;" height="30px">
                     <div class="header-nav d-none d-xl-flex">
-                        <a href="#" class="text-sm fw-medium">{{ __('home') }} </a>
-                        <a href="#" class="text-sm fw-medium">{{ __('About COSMOPark') }}</a>
+                        <a href="{{ route('home') }}" class="text-sm fw-medium {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }} </a>
+                        <a href="{{ route('about') }}" class="text-sm fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a>
                         <a href="#" class="text-sm fw-medium">{{ __('Projects') }}</a>
                         <a href="#" class="text-sm fw-medium">{{ __('Infomation & Gallery') }}</a>
                         <a href="#" class="text-sm fw-medium">{{ __('Contact') }}</a>
@@ -107,8 +107,8 @@
         </div>
 
         <ul class="mobile-nav-list">
-            <li><a href="#" class="text-md fw-medium">{{ __('home') }}</a></li>
-            <li><a href="#" class="text-md fw-medium">{{ __('About COSMOPark') }}</a></li>
+            <li><a href="{{ route('home') }}" class="text-md fw-medium  {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }}</a></li>
+            <li><a href="{{ route('about') }}" class="text-md fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a></li>
             <li><a href="#" class="text-md fw-medium">{{ __('Projects') }}</a></li>
             <li><a href="#" class="text-md fw-medium">{{ __('Infomation & Gallery') }}</a></li>
             <li><a href="#" class="text-md fw-medium">{{ __('Contact') }}</a></li>

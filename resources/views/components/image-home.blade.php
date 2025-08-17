@@ -1,11 +1,17 @@
+@props([
+    'main' => null,
+    'images' => [],
+    'overlay' => 'rgba(24,36,64,0.35)'
+])
+
 <div class="container py-4 py-lg-5">
     <div class="row g-4 h-100">
         <div class="col-12 col-lg-6">
             <div class="position-relative h-100">
-                <img src="{{ asset('assets/images/dev/image-1.jpg') }}"
+                <img src="{{ $main ?? asset('assets/images/dev/image-1.jpg') }}"
                     class="img-fluid w-100 rounded-4 h-100 object-fit-cover animate-on-scroll" style="min-height:258px;">
                 <div class="rounded-4 position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end align-items-center"
-                    style="background:rgba(24,36,64,0.35); ">
+                    style="background:{{ $overlay }};">
                     <h2 class="text-white fw-bold text-center text-md-start text-1lg-3 pb-3 animate-on-scroll" style="line-height:1.2;">
                         TỪ VÙNG ĐẤT GIÀU TIỀM NĂNG<br>
                         ĐẾN HÌNH MẪU<br>
@@ -16,22 +22,11 @@
         </div>
         <div class="col-12 col-lg-6 h-100">
             <div class="row g-4">
+                @foreach($images as $img)
                 <div class="col-6">
-                    <img src="{{ asset('assets/images/dev/image-2.jpg') }}"
-                        class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll" style="aspect-ratio: 4/3;">
+                    <img src="{{ $img }}" class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll" style="aspect-ratio: 4/3;">
                 </div>
-                <div class="col-6">
-                    <img src="{{ asset('assets/images/dev/image-3.jpg') }}"
-                        class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll" style="aspect-ratio: 4/3;">
-                </div>
-                <div class="col-6">
-                    <img src="{{ asset('assets/images/dev/image-4.jpg') }}"
-                        class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll" style="aspect-ratio: 4/3;">
-                </div>
-                <div class="col-6">
-                    <img src="{{ asset('assets/images/dev/image-5.jpg') }}"
-                        class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll" style="aspect-ratio: 4/3;">
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

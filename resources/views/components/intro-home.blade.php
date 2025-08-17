@@ -344,24 +344,5 @@
 @endpush
 
 @push('scripts')
-    <script>
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top < window.innerHeight - 60 && // 60px để animation sớm hơn chút
-                rect.bottom > 0
-            );
-        }
 
-        function animateOnScroll() {
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                if (isInViewport(el)) {
-                    el.classList.add('animated');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('DOMContentLoaded', animateOnScroll);
-    </script>
 @endpush

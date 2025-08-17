@@ -7,6 +7,8 @@
     --primary-color-6: #37814B;
     --primary-color-7: #F2F5FC;
     --primary-color-8: #101828;
+    --primary-color-9: #394b9b99;
+    --primary-color-10: #E1EAF8;
     --primary-hover: #444444;
     --secondary-color: #8C5E3B;
     --accent-color: #D1A66E;
@@ -123,6 +125,10 @@ html {
     font-size: var(--font-size-md) !important;
 }
 
+.text-1lg{
+    font-size: var(--font-size-1lg) !important;
+}
+
 
 .text-1lg-8 {
     font-size: var(--font-size-1lg) !important;
@@ -190,9 +196,15 @@ html {
     background-color: var(--primary-color) !important;
 }
 
+.bg-primary-6 {
+    background-color: var(--primary-color-6) !important;
+}
+
 .color-primary {
     color: var(--primary-color) !important;
 }
+
+
 
 
 .color-primary-hover:hover,
@@ -226,6 +238,14 @@ html {
 
 .color-primary-8 {
     color: var(--primary-color-8) !important;
+}
+
+.color-primary-9 {
+    color: var(--primary-color-9) !important;
+}
+
+.color-primary-10 {
+    color: var(--primary-color-10) !important;
 }
 
 .font-light {
@@ -364,6 +384,10 @@ html {
 }
 
 .header-nav a:hover {
+    border-bottom: 1px solid white;
+}
+
+.header-nav .active {
     border-bottom: 1px solid white;
 }
 
