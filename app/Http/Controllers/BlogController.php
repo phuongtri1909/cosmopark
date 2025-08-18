@@ -17,7 +17,7 @@ class BlogController extends Controller
         // Lấy bài viết với sắp xếp và lọc
         $blogsQuery = Blog::with(['author', 'categories'])
             ->where('is_active', true);
-            
+
         // Lọc theo từ khóa tìm kiếm
         if ($request->has('search') && !empty($request->search)) {
             $keyword = $request->search;
@@ -35,7 +35,7 @@ class BlogController extends Controller
         // Phân trang kết quả
         $blogs = $blogsQuery->latest()->paginate(20);
 
-        
+
         // Lấy danh mục và bài viết mới nhất cho sidebar
         $categories = CategoryBlog::withCount('blogs')->orderBy('name')->get();
         $latestPosts = Blog::where('is_active', true)
@@ -51,49 +51,51 @@ class BlogController extends Controller
      */
     public function show($slug)
     {
-        $blog = Blog::with(['author', 'categories'])
-            ->where('slug', $slug)
-            ->where('is_active', true)
-            ->firstOrFail();
-            
-        // Tăng lượt xem
-        $blog->incrementViews();
+        // $blog = Blog::with(['author', 'categories'])
+        //     ->where('slug', $slug)
+        //     ->where('is_active', true)
+        //     ->firstOrFail();
 
-        // Lấy bài viết liên quan
-        $relatedPosts = Blog::with(['categories'])
-            ->where('id', '!=', $blog->id)
-            ->where('is_active', true)
-            ->whereHas('categories', function ($query) use ($blog) {
-                $query->whereIn('category_blogs.id', $blog->categories->pluck('id'));
-            })
-            ->latest()
-            ->take(2)
-            ->get();
-            
-        
-        // Lấy danh mục và bài viết mới nhất cho sidebar
-        $categories = CategoryBlog::withCount('blogs')->orderBy('name')->get();
-        $latestPosts = Blog::where('is_active', true)
-            ->where('id', '!=', $blog->id)
-            ->latest()
-            ->take(5)
-            ->get();
+        // // Tăng lượt xem
+        // $blog->incrementViews();
 
-        return view('client.pages.blogs.show', compact(
-            'blog', 
-            'relatedPosts', 
-            'categories', 
-            'latestPosts'
-        ));
+        // // Lấy bài viết liên quan
+        // $relatedPosts = Blog::with(['categories'])
+        //     ->where('id', '!=', $blog->id)
+        //     ->where('is_active', true)
+        //     ->whereHas('categories', function ($query) use ($blog) {
+        //         $query->whereIn('category_blogs.id', $blog->categories->pluck('id'));
+        //     })
+        //     ->latest()
+        //     ->take(2)
+        //     ->get();
+
+
+        // // Lấy danh mục và bài viết mới nhất cho sidebar
+        // $categories = CategoryBlog::withCount('blogs')->orderBy('name')->get();
+        // $latestPosts = Blog::where('is_active', true)
+        //     ->where('id', '!=', $blog->id)
+        //     ->latest()
+        //     ->take(5)
+        //     ->get();
+
+        // return view('client.pages.blogs.show', compact(
+        //     'blog',
+        //     'relatedPosts',
+        //     'categories',
+        //     'latestPosts'
+        // ));
+
+        return view('client.pages.blogs.show');
     }
-    
+
     /**
      * Hiển thị danh sách bài viết theo danh mục
      */
     public function category($slug)
     {
         $category = CategoryBlog::where('slug', $slug)->firstOrFail();
-        
+
         $blogs = Blog::with(['author', 'categories'])
             ->where('is_active', true)
             ->whereHas('categories', function ($q) use ($category) {
@@ -101,7 +103,7 @@ class BlogController extends Controller
             })
             ->latest()
             ->paginate(6);
-        
+
         // Lấy danh mục và bài viết mới nhất cho sidebar
         $categories = CategoryBlog::withCount('blogs')->orderBy('name')->get();
         $latestPosts = Blog::where('is_active', true)
@@ -111,25 +113,25 @@ class BlogController extends Controller
 
         return view('client.pages.blogs.index', compact('blogs', 'categories', 'latestPosts', 'category'));
     }
-    
+
     /**
      * Lưu bình luận cho bài viết
      */
     public function storeComment(Request $request, $slug)
     {
         $blog = Blog::where('slug', $slug)->firstOrFail();
-        
+
         $validated = $request->validate([
             'content' => 'required|string|max:1000',
         ]);
-        
+
         $comment = new BlogComment();
         $comment->blog_id = $blog->id;
         $comment->user_id = auth()->id();
         $comment->content = $validated['content'];
         $comment->is_approved = true; // Có thể bạn muốn thay đổi thành false để kiểm duyệt trước
         $comment->save();
-        
+
         return redirect()->back()->with('success', 'Your comment has been posted successfully!');
     }
 }

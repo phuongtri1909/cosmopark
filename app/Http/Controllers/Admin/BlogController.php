@@ -47,7 +47,7 @@ class BlogController extends Controller
 
         // Lấy danh sách bài viết
         $blogs = $query->paginate(10);
-        
+
         // Lấy danh sách danh mục cho bộ lọc
         $categories = CategoryBlog::orderBy('name')->get();
 
@@ -94,7 +94,7 @@ class BlogController extends Controller
         $slug = Str::slug($validated['title']);
         $originalSlug = $slug;
         $count = 1;
-        
+
         while (Blog::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $count++;
         }
@@ -124,11 +124,11 @@ class BlogController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Bài viết đã được tạo thành công!',
-                'redirect' => route('admin.blogs.index')
+                'redirect' => route('admin.news.index')
             ]);
         }
 
-        return redirect()->route('admin.blogs.index')
+        return redirect()->route('admin.news.index')
             ->with('success', 'Bài viết đã được tạo thành công!');
     }
 
@@ -139,7 +139,7 @@ class BlogController extends Controller
     {
         $categories = CategoryBlog::orderBy('name')->get();
         $selectedCategories = $blog->categories->pluck('id')->toArray();
-        
+
         return view('admin.pages.blogs.edit', compact('blog', 'categories', 'selectedCategories'));
     }
 
@@ -172,7 +172,7 @@ class BlogController extends Controller
 
         // Xử lý hình ảnh
         $imagePath = $blog->image;
-        
+
         if ($request->has('remove_avatar') && $request->remove_avatar == 1) {
             // Xóa hình ảnh cũ nếu có
             if ($blog->image && Storage::disk('public')->exists($blog->image)) {
@@ -180,13 +180,13 @@ class BlogController extends Controller
             }
             $imagePath = null;
         }
-        
+
         if ($request->hasFile('avatar')) {
             // Xóa hình ảnh cũ nếu có
             if ($blog->image && Storage::disk('public')->exists($blog->image)) {
                 Storage::disk('public')->delete($blog->image);
             }
-            
+
             $imagePath = $request->file('avatar')->store('blogs', 'public');
         }
 
@@ -224,13 +224,13 @@ class BlogController extends Controller
         if ($blog->image && Storage::disk('public')->exists($blog->image)) {
             Storage::disk('public')->delete($blog->image);
         }
-        
+
         $blog->delete();
 
         return redirect()->route('admin.blogs.index')
             ->with('success', 'Bài viết đã được xóa thành công!');
     }
-    
+
     /**
      * Upload hình ảnh từ CKEditor
      */
@@ -239,14 +239,14 @@ class BlogController extends Controller
         if ($request->hasFile('upload')) {
             $fileName = $request->file('upload')->store('blogs/content', 'public');
             $url = asset('storage/' . $fileName);
-            
+
             return response()->json([
                 'uploaded' => 1,
                 'fileName' => basename($fileName),
                 'url' => $url
             ]);
         }
-        
+
         return response()->json([
             'uploaded' => 0,
             'error' => [

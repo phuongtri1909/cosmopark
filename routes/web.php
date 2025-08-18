@@ -22,9 +22,9 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
 
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-Route::get('/blogs/category/{slug}', [BlogController::class, 'category'])->name('blogs.category');
-Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+Route::get('/news', [BlogController::class, 'index'])->name('news.index');
+Route::get('/news/category/{slug}', [BlogController::class, 'category'])->name('news.category');
+Route::get('/news/{slug}', [BlogController::class, 'show'])->name('news.show');
 
 
 

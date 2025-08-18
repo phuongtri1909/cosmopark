@@ -2,7 +2,7 @@
     <!-- Search Form -->
     <div class="mb-4">
         <h5 class="fw-bold mb-4">Search</h5>
-        <form action="{{ route('blogs.index') }}" method="GET">
+        <form action="{{ route('news.index') }}" method="GET">
             <div class="input-group blog-search">
                 <input type="text" class="form-control rounded-4" placeholder="Search..." name="search" value="{{ request('search') }}">
                 <button type="submit"><i class="fas fa-search"></i></button>
@@ -16,7 +16,7 @@
 
         @foreach ($categories as $category)
             <div class="d-flex justify-content-between align-items-center">
-                <a class="text-decoration-none color-primary-5 mb-2" href="{{ route('blogs.category', $category->slug) }}">{{ $category->name }}</a>
+                <a class="text-decoration-none color-primary-5 mb-2" href="{{ route('news.category', $category->slug) }}">{{ $category->name }}</a>
                 <span class="category-count">{{ $category->blogs_count }}</span>
             </div>
         @endforeach
@@ -32,17 +32,17 @@
                     <div class="media-body ms-3">
                         <div class="d-flex">
                             @foreach ($post->categories as $category)
-                                <a href="{{ route('blogs.category', $category->slug) }}" class="text-decoration-none text-sm color-primary-5">
+                                <a href="{{ route('news.category', $category->slug) }}" class="text-decoration-none text-sm color-primary-5">
                                     <h6 class="text-sm">{{ Str::limit($category->name, 40) }}</h6>
                                 </a>
-                                
+
                                 @if (!$loop->last)
                                     <span class="text-sm color-primary-5 me-1">,</span>
                                 @endif
                             @endforeach
                         </div>
-                        
-                        <a href="{{ route('blogs.show', $post->slug) }}" class="text-decoration-none color-primary">
+
+                        <a href="{{ route('news.show', $post->slug) }}" class="text-decoration-none color-primary">
                             <h6 class="fw-bold">{{ Str::limit($post->title, 40) }}</h6>
                         </a>
                     </div>
@@ -94,28 +94,28 @@
             box-shadow: none;
             outline: none;
         }
-        
+
         .img-blog {
             width: 100%;
             height: 300px;
             object-fit: cover;
             border-radius: 8px;
         }
-        
+
         .blog-meta {
             font-size: 13px;
             color: #777;
             margin-bottom: 10px;
         }
-        
+
         .blog-meta i {
             margin-right: 4px;
         }
-        
+
         .blog-meta span {
             margin-right: 12px;
         }
-        
+
         .category-count {
             background-color: #f5f5f5;
             padding: 2px 8px;

@@ -69,7 +69,7 @@
                 <!-- Logo -->
                 <div class="d-flex align-items-center">
                     <img src="{{ $logoPath }}" alt="Logo" style="margin-right: 20px;" height="30px">
-                    <div class="header-nav d-none d-xl-flex">
+                    <div class="header-nav d-none d-xl-flex align-items-end">
                         <a href="{{ route('home') }}"
                             class="text-sm fw-medium {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }}
                         </a>

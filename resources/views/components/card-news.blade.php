@@ -33,7 +33,7 @@
                 position: relative;
                 align-self: stretch;
                 width: 100%;
-                height: 200px;
+                height: 225px;
                 object-fit: cover;
             }
 
@@ -68,7 +68,7 @@
             }
 
             @media (min-width: 768px) {
-              
+
 
                 .card-tin-tc .rectangle {
                     height: 300px;

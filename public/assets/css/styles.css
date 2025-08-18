@@ -9,6 +9,8 @@
     --primary-color-8: #101828;
     --primary-color-9: #394b9b99;
     --primary-color-10: #E1EAF8;
+    --primary-color-11: #f6f6f8;
+    --primary-color-12: #F8F8FF;
     --primary-hover: #444444;
     --secondary-color: #8C5E3B;
     --accent-color: #D1A66E;
@@ -137,6 +139,10 @@ html {
     font-size: var(--font-size-1lg) !important;
 }
 
+.text-1lg-2 {
+    font-size: var(--font-size-1lg) !important;
+}
+
 
 .text-1lg-8 {
     font-size: var(--font-size-1lg) !important;
@@ -220,16 +226,21 @@ html {
     background-color: var(--primary-color-8) !important;
 }
 
-.bg-primary-10{
+.bg-primary-10 {
     background-color: var(--primary-color-10) !important;
+}
+
+.bg-primary-11 {
+    background-color: var(--primary-color-11) !important;
+}
+
+.bg-primary-12 {
+    background-color: var(--primary-color-12) !important;
 }
 
 .color-primary {
     color: var(--primary-color) !important;
 }
-
-
-
 
 .color-primary-hover:hover,
 .color-primary-hover:focus {
@@ -366,6 +377,10 @@ html {
         font-size: var(--font-size-xl) !important;
     }
 
+    .text-1lg-2 {
+        font-size: var(--font-size-2xl) !important;
+    }
+
 
     .text-xl-2 {
         font-size: var(--font-size-4xl) !important;
@@ -397,7 +412,7 @@ html {
 }
 
 @media (min-width: 1200px) {
-.text-6xl-6 {
+    .text-6xl-6 {
         font-size: var(--font-size-12xl) !important;
     }
 }

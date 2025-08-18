@@ -8,6 +8,7 @@
 
 @section('content')
     <x-banner-about />
+    
     <x-vision-mission />
 
     <x-feature-section />
