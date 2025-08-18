@@ -42,13 +42,13 @@
                             </div>
                             <!-- Nút mobile -->
                             <div class="d-flex justify-content-center mt-3">
-                                <button type="submit" class="btn submit-btn-custom rounded-pill p-2 d-flex d-md-none animate-on-scroll">
+                                <a href="{{ route('news.index') }}" type="submit" class="btn submit-btn-custom rounded-pill p-2 mb-3 d-none d-md-flex animate-on-scroll text-decoration-none">
                                     <span class="submit-text me-2 ps-3">Xem chi tiết</span>
                                     <div class="submit-icon submit-icon-custom">
                                         <img class="arrow-icon-main"
                                             src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
                                     </div>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="d-none d-md-block">
