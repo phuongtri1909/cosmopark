@@ -61,6 +61,54 @@
     @stack('styles')
 
     {{-- end styles --}}
+
+    <style>
+        /* Language Switcher Styles */
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-flag {
+            display: inline-block;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .language-flag:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .language-flag img {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        /* Mobile Language Switcher */
+        .mobile-language-switcher {
+            margin-bottom: 10px;
+        }
+
+        .mobile-language-switcher .language-flag {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .mobile-language-switcher .language-flag img {
+            width: 28px;
+            height: 18px;
+        }
+
+        /* Flag icon existing styles */
+        .flag-icon {
+            width: 24px;
+            height: 16px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -106,8 +154,24 @@
 
                 <!-- Call & Button -->
                 <div class="d-flex align-items-center d-none d-xl-flex">
-                    <img src="{{ asset('assets/images/vi.webp') }}" alt="Flag Icon" class="flag-icon me-3">
-                    <span class="me-4 text-sm fw-medium">Call us: <span class="phone-us">01234567890</span></span>
+                    <!-- Language Switcher -->
+                    <div class="language-switcher me-3">
+                        @php
+                            $currentLocale = App\Http\Controllers\LanguageController::getCurrentLocale();
+                        @endphp
+
+                        @if($currentLocale === 'vi')
+                            <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="Switch to English">
+                                <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag" class="flag-icon">
+                            </a>
+                        @else
+                            <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="Chuyển sang tiếng Việt">
+                                <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag" class="flag-icon">
+                            </a>
+                        @endif
+                    </div>
+
+                    <span class="me-4 text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">01234567890</span></span>
                     <button class="btn btn-lg border rounded-5 bg-white text-md fw-medium">Nhận thông tin</button>
                 </div>
 
@@ -172,8 +236,24 @@
 
         <div class="mobile-contact-section">
             <div class="mobile-contact-item">
-                <img src="{{ asset('assets/images/vi.webp') }}" alt="Flag Icon" class="flag-icon">
-                <span class="text-sm fw-medium">Call us: <span class="phone-us">01234567890</span></span>
+                <!-- Mobile Language Switcher -->
+                <div class="mobile-language-switcher">
+                    @php
+                        $currentLocale = App\Http\Controllers\LanguageController::getCurrentLocale();
+                    @endphp
+
+                    @if($currentLocale === 'vi')
+                        <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="Switch to English">
+                            <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag" class="flag-icon">
+                        </a>
+                    @else
+                        <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="Chuyển sang tiếng Việt">
+                            <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag" class="flag-icon">
+                        </a>
+                    @endif
+                </div>
+
+                <span class="text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">01234567890</span></span>
             </div>
             <button class="mobile-cta-button">
                 Nhận thông tin

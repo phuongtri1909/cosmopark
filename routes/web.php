@@ -27,6 +27,9 @@ Route::get('/news/category/{slug}', [BlogController::class, 'category'])->name('
 Route::get('/news/{slug}', [BlogController::class, 'show'])->name('news.show');
 Route::post('/news/filter', [BlogController::class, 'filter'])->name('news.filter');
 
+// Language switching
+Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'switchLanguage'])->name('language.switch');
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', function () {
