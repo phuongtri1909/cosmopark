@@ -8,7 +8,7 @@
     'number' => '822',
     'unit' => 'ha',
     'image' => asset('assets/images/dev/intro-project.jpg'),
-    'button' => false
+    'button' => false,
 ])
 
 <div class="intro-project position-relative overflow-hidden">
@@ -26,13 +26,14 @@
                     {{ $desc }}
                 </p>
 
-                @if($button)
-                <a href="https://royallongangolfandcountryclub.com/en/home/" target="_blank" type="submit" class="btn submit-btn-custom animate-on-scroll rounded-pill p-2 mt-3 text-decoration-none d-inline-flex">
-                    <span class="submit-text me-2 ps-3">Đặt sân ngay</span>
-                    <div class="submit-icon submit-icon-custom">
-                        <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
-                    </div>
-                </a>
+                @if ($button)
+                    <a href="https://royallongangolfandcountryclub.com/en/home/" target="_blank" type="submit"
+                        class="btn submit-btn-custom animate-on-scroll rounded-pill p-2 mt-3 text-decoration-none d-inline-flex">
+                        <span class="submit-text me-2 ps-3">Đặt sân ngay</span>
+                        <div class="submit-icon submit-icon-custom">
+                            <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
+                        </div>
+                    </a>
                 @endif
             </div>
 
@@ -42,12 +43,14 @@
                 <div class="d-flex justify-content-end align-items-center"
                     style="position: relative; min-height: 150px;">
                     <div style="position: relative; display: inline-block;">
-                        <div class="circle-intro-project bg-primary-10"></div>
-                        <span class="text-6xl-6 fw-bold animate-on-scroll color-primary-4 line-2-intro-project"
-                            data-target="{{ $number }}">
-                            {{ $number }} <span
-                                class="fw-semibold text-xl-5 color-primary-4">{{ $unit }}</span>
-                        </span>
+                        <div class="circle-intro-project bg-primary-10 "></div>
+                        <div class="line-2-intro-project">
+                            <span class="text-6xl-6 fw-bold animate-on-scroll color-primary-4 line-2"
+                                data-target="{{ $number }}">
+                                {{ $number }}
+                            </span>
+                            <span class="fw-semibold text-xl-5 color-primary-4 ms-1">{{ $unit }}</span>
+                        </div>
                     </div>
                 </div>
             </div>

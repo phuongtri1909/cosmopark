@@ -78,7 +78,7 @@
             $number = '>1000';
             $unit = 'ha';
             $image = asset('assets/images/dev/image-1.jpg');
-            $button = true;
+            $button = false;
         @endphp
     @endif
 
