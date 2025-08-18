@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.css?v=' . time()) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles_admin.css?v=' . time()) }}">
 
     <!-- Page specific CSS -->
     @stack('styles')

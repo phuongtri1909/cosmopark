@@ -39,8 +39,15 @@ class LogoSiteController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validate([
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif,ico|max:1024',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'favicon' => 'required|image|mimes:jpeg,png,jpg,gif,ico|max:1024',
+        ], [
+            'logo.image' => 'Logo phải là một hình ảnh.',
+            'favicon.image' => 'Favicon phải là một hình ảnh.',
+            'logo.mimes' => 'Logo chỉ hỗ trợ các định dạng: jpeg, png, jpg, gif.',
+            'favicon.mimes' => 'Favicon chỉ hỗ trợ các định dạng: jpeg, png, jpg, gif, ico.',
+            'logo.max' => 'Kích thước logo không được vượt quá 2MB.',
+            'favicon.max' => 'Kích thước favicon không được vượt quá 1MB.',
         ]);
 
         // Get existing record or create new

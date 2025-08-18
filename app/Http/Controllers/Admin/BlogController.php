@@ -124,11 +124,11 @@ class BlogController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Bài viết đã được tạo thành công!',
-                'redirect' => route('admin.news.index')
+                'redirect' => route('admin.blogs.index')
             ]);
         }
 
-        return redirect()->route('admin.news.index')
+        return redirect()->route('admin.blogs.index')
             ->with('success', 'Bài viết đã được tạo thành công!');
     }
 

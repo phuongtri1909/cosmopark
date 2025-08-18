@@ -5,40 +5,40 @@
 @section('main-content')
 <div class="row">
     <div class="col-12">
-        <div class="card mb-0 mx-0 mx-md-4 mb-md-4">
-            <div class="card-header pb-0">
+        <div class="content-card mb-0 mx-0 mx-md-4 mb-md-4">
+            <div class="card-top pb-0">
                 <h5 class="mb-0">Cấu hình Logo và Favicon</h5>
             </div>
-            <div class="card-body">
+            <div class="card-content">
                 <form action="{{ route('admin.logo-site.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    
+
                     <div class="row">
                         <!-- Logo Section -->
                         <div class="col-md-6 mb-4">
-                            <div class="card">
-                                <div class="card-header p-3">
+                            <div class="content-card">
+                                <div class="card-top p-3">
                                     <h6 class="mb-0">Logo Trang Web</h6>
                                 </div>
-                                <div class="card-body p-3">
+                                <div class="card-content p-3">
                                     <div class="form-group">
                                         <label for="logo" class="form-control-label">Tệp Logo</label>
-                                        <input type="file" class="form-control @error('logo') is-invalid @enderror" 
-                                               name="logo" id="logo" accept="image/*">
+                                        <input type="file" class="form-control @error('logo') is-invalid @enderror"
+                                               name="logo" id="logo" accept="image/*" required>
                                         <small class="form-text text-muted">
-                                            Chiều cao sẽ được điều chỉnh thành 50px. 
+                                            Chiều cao sẽ được điều chỉnh thành 50px.
                                             Hình ảnh sẽ được chuyển đổi thành định dạng WebP để tối ưu.
                                         </small>
                                         @error('logo')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
+
                                     @if(isset($logoSite) && $logoSite->logo)
                                         <div class="mt-3 mb-4 text-center p-3 bg-light rounded">
                                             <p>Logo hiện tại:</p>
-                                            <img src="{{ Storage::url($logoSite->logo) }}" alt="Site Logo" class="img-fluid">
+                                            <img src="{{ Storage::url($logoSite->logo) }}" alt="Site Logo" class="img-fluid" >
                                         </div>
                                     @endif
                                 </div>
@@ -47,15 +47,15 @@
 
                         <!-- Favicon Section -->
                         <div class="col-md-6 mb-4">
-                            <div class="card">
-                                <div class="card-header p-3">
+                            <div class="content-card">
+                                <div class="card-top p-3">
                                     <h6 class="mb-0">Favicon</h6>
                                 </div>
-                                <div class="card-body p-3">
+                                <div class="card-content p-3">
                                     <div class="form-group">
                                         <label for="favicon" class="form-control-label">Tệp Favicon</label>
-                                        <input type="file" class="form-control @error('favicon') is-invalid @enderror" 
-                                               name="favicon" id="favicon" accept="image/*,image/x-icon">
+                                        <input type="file" class="form-control @error('favicon') is-invalid @enderror"
+                                               name="favicon" id="favicon" accept="image/*,image/x-icon" required>
                                         <small class="form-text text-muted">
                                             Favicon sẽ được điều chỉnh về kích thước 32x32px và chuyển đổi thành định dạng WebP.
                                             Đề xuất dùng hình ảnh vuông.
@@ -64,7 +64,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
+
                                     @if(isset($logoSite) && $logoSite->favicon)
                                         <div class="mt-3 mb-4 text-center p-3 bg-light rounded">
                                             <p>Favicon hiện tại:</p>
@@ -87,7 +87,7 @@
                         </div>
 
                         <div class="col-12 text-center mt-4">
-                            <button type="submit" class="btn bg-gradient-primary">Lưu cấu hình</button>
+                            <button type="submit" class="btn btn-pry">Lưu cấu hình</button>
                         </div>
                     </div>
                 </form>

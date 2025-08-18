@@ -5,7 +5,7 @@
         <!-- Sidebar -->
         <div id="sidebar" class="sidebar">
             <div class="sidebar-header">
-                <img src="{{ asset('assets/images/logo/logo.png') }}" alt="logo" height="70">
+                <img src="{{ asset('assets/images/logo/logo-color.png') }}" alt="logo" height="30">
                 <button id="close-sidebar" class="close-sidebar d-md-none">
                     <i class="fas fa-times"></i>
                 </button>
@@ -74,7 +74,7 @@
                                     <span>Logo Site</span>
                                 </a>
                             </li>
-                          
+
                             <li class="{{ Route::currentRouteNamed('admin.setting.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.setting.index') }}">
                                     <i class="fas fa-cog"></i>
@@ -118,6 +118,7 @@
 
     @push('styles')
         <style>
+
             /* Submenu styles */
             .has-submenu {
                 position: relative;
@@ -240,7 +241,7 @@
                     transform: translateY(-40px) !important;
                     background: #2c3e50;
                     border-radius: 6px;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
                     z-index: 1100;
                     padding: 8px 0;
                     margin: 0;
@@ -302,7 +303,7 @@
                     font-size: 14px;
                     white-space: nowrap;
                     z-index: 1100;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
                 }
             }
 
@@ -379,10 +380,10 @@
                 }
 
                 .toggle-sidebar-btn {
-                   left: 0 !important;
+                    left: 0 !important;
                 }
 
-                .sidebar.show ~ .toggle-sidebar-btn {
+                .sidebar.show~.toggle-sidebar-btn {
                     left: 20px !important;
                     background-color: #dc3545 !important;
                 }
