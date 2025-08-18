@@ -1,3 +1,5 @@
+@props(['latestNews' => []])
+
 <div class="news-home animate-on-scroll">
     <div class="col-12 p-100">
         <div class="container">
@@ -25,45 +27,48 @@
                     </div>
 
                     <div class="col-12 mt-4 card-news-slider">
-                        <!-- Swiper for mobile, grid for desktop -->
-                        <div class="d-block d-md-none">
-                            <div class="swiper news-swiper animate-on-scroll">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <x-card-news />
+                        @if($latestNews->count() > 0)
+                            <!-- Swiper for mobile, grid for desktop -->
+                            <div class="d-block d-md-none">
+                                <div class="swiper news-swiper animate-on-scroll">
+                                    <div class="swiper-wrapper">
+                                        @foreach($latestNews as $news)
+                                            <div class="swiper-slide">
+                                                <x-card-news :news="$news" />
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div class="swiper-slide">
-                                        <x-card-news />
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <x-card-news />
-                                    </div>
+                                </div>
+                                <!-- Nút mobile -->
+                                <div class="d-flex justify-content-center mt-3">
+                                     <a href="{{ route('news.index') }}" type="submit" class="btn submit-btn-custom rounded-pill p-2 mb-3 d-flex d-md-none animate-on-scroll text-decoration-none">
+                                        <span class="submit-text me-2 ps-3">Xem chi tiết</span>
+                                        <div class="submit-icon submit-icon-custom">
+                                            <img class="arrow-icon-main"
+                                                src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
-                            <!-- Nút mobile -->
-                            <div class="d-flex justify-content-center mt-3">
-                                 <a href="{{ route('news.index') }}" type="submit" class="btn submit-btn-custom rounded-pill p-2 mb-3 d-flex d-md-none animate-on-scroll text-decoration-none">
-                                    <span class="submit-text me-2 ps-3">Xem chi tiết</span>
-                                    <div class="submit-icon submit-icon-custom">
-                                        <img class="arrow-icon-main"
-                                            src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-none d-md-block">
-                            <div class="row">
-                                <div class="col-12 col-md-6 col-lg-4 animate-on-scroll">
-                                    <x-card-news />
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-4 animate-on-scroll">
-                                    <x-card-news />
-                                </div>
-                                <div class="col-12 col-md-6 col-lg-4 animate-on-scroll">
-                                    <x-card-news />
+                            <div class="d-none d-md-block">
+                                <div class="row">
+                                    @foreach($latestNews as $news)
+                                        <div class="col-12 col-md-6 col-lg-4 animate-on-scroll">
+                                            <x-card-news :news="$news" />
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <!-- Hiển thị khi không có tin tức -->
+                            <div class="text-center py-5">
+                                <div class="text-muted">
+                                    <i class="fas fa-newspaper fa-3x mb-3"></i>
+                                    <h5>Chưa có tin tức nào</h5>
+                                    <p>Hãy quay lại sau để xem tin tức mới nhất</p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

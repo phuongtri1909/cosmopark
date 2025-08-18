@@ -28,7 +28,7 @@
 
     <x-intro-image />
 
-    <x-news-home />
+    <x-news-home :latestNews="$latestNews" />
 @endsection
 
 @push('styles')

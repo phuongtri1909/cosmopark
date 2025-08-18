@@ -19,8 +19,14 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+        // Load 3 tin tức mới nhất
+        $latestNews = Blog::with(['author', 'category'])
+            ->where('is_active', true)
+            ->latest()
+            ->take(3)
+            ->get();
 
-        return view('client.pages.home', []);
+        return view('client.pages.home', compact('latestNews'));
     }
 
     public function about()
