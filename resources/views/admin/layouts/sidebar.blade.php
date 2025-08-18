@@ -19,79 +19,7 @@
                         </a>
                     </li>
 
-                    <!-- Quản lý sản phẩm -->
-                    <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.brands.*', 'admin.categories.*', 'admin.products.*', 'admin.product-variants.*', 'admin.dress-styles.*']) ? 'open' : '' }}">
-                        <a href="#" class="submenu-toggle">
-                            <i class="fas fa-box"></i>
-                            <span>Quản lý sản phẩm</span>
-                            <i class="fas fa-chevron-down submenu-arrow"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li class="{{ Route::currentRouteNamed('admin.categories.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.categories.index') }}">
-                                    <i class="fas fa-list"></i>
-                                    <span>Danh mục</span>
-                                </a>
-                            </li>
-                            <li class="{{ Route::currentRouteNamed('admin.brands.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.brands.index') }}">
-                                    <i class="fas fa-tags"></i>
-                                    <span>Thương hiệu</span>
-                                </a>
-                            </li>
-                            <li class="{{ Route::currentRouteNamed('admin.dress-styles.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.dress-styles.index') }}">
-                                    <i class="fas fa-tshirt"></i>
-                                    <span>Kiểu dáng</span>
-                                </a>
-                            </li>
-                            <li
-                                class="{{ Route::currentRouteNamed('admin.products.*', 'admin.product-variants.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.products.index') }}">
-                                    <i class="fas fa-coffee"></i>
-                                    <span>Sản phẩm</span>
-                                </a>
-                            </li>
-                            {{-- <li class="{{ Route::currentRouteNamed('admin.product-variants.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.product-variants.index') }}">
-                                <i class="fas fa-layer-group"></i>
-                                <span>Biến thể sản phẩm</span>
-                            </a>
-                        </li> --}}
-                        </ul>
-                    </li>
 
-                    <!-- Quản lý bán hàng -->
-                    <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.orders.*', 'admin.promotions.*', 'admin.coupons.*']) ? 'open' : '' }}">
-                        <a href="#" class="submenu-toggle">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Quản lý bán hàng</span>
-                            <i class="fas fa-chevron-down submenu-arrow"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li class="{{ Route::currentRouteNamed('admin.orders.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.orders.index') }}">
-                                    <i class="fas fa-shopping-bag"></i>
-                                    <span>Đơn hàng</span>
-                                </a>
-                            </li>
-                            <li class="{{ Route::currentRouteNamed('admin.promotions.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.promotions.index') }}">
-                                    <i class="fas fa-percent"></i>
-                                    <span>Khuyến mãi</span>
-                                </a>
-                            </li>
-
-                            <li class="{{ Route::currentRouteNamed('admin.coupons.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.coupons.index') }}">
-                                    <i class="fa-solid fa-ticket"></i>
-                                    <span>Mã giảm giá</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
                     <!-- Quản lý nội dung -->
                     <li
@@ -117,61 +45,13 @@
                                     <span>Blogs</span>
                                 </a>
                             </li>
-                            {{-- <li class="{{ Route::currentRouteNamed('admin.banners.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.banners.index') }}">
-                                <i class="fas fa-images"></i>
-                                <span>Banner</span>
-                            </a>
-                        </li> --}}
 
-                            <li class="{{ Route::currentRouteNamed('admin.faqs.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.faqs.index') }}">
-                                    <i class="fas fa-question-circle"></i>
-                                    <span>Faqs</span>
-                                </a>
-                            </li>
 
-                            <li class="{{ Route::currentRouteNamed('admin.feature-sections.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.feature-sections.index') }}">
-                                    <i class="fa-regular fa-window-restore"></i>
-                                    <span>Feature</span>
-                                </a>
-                            </li>
 
                         </ul>
                     </li>
 
-                    <!-- Quản lý tương tác -->
-                    <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.contacts.*', 'admin.reviews.*']) ? 'open' : '' }}">
-                        <a href="#" class="submenu-toggle">
-                            <i class="fas fa-comments"></i>
-                            <span>Quản lý tương tác</span>
-                            <i class="fas fa-chevron-down submenu-arrow"></i>
-                        </a>
-                        <ul class="submenu">
-                            {{-- <li class="{{ Route::currentRouteNamed('admin.contacts.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.contacts.index') }}">
-                                <i class="fa-regular fa-id-badge"></i>
-                                <span>Liên hệ</span>
-                            </a>
-                        </li> --}}
 
-                            <li class="{{ Route::currentRouteNamed('admin.newsletter.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.newsletter.index') }}">
-                                    <i class="fas fa-envelope-open-text"></i>
-                                    <span>Đăng ký bản tin</span>
-                                </a>
-                            </li>
-
-                            <li class="{{ Route::currentRouteNamed('admin.reviews.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.reviews.index') }}">
-                                    <i class="fa-regular fa-star"></i>
-                                    <span>Đánh giá</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
 
                     <!-- Cấu hình hệ thống -->
                     <li
@@ -194,12 +74,7 @@
                                     <span>Logo Site</span>
                                 </a>
                             </li>
-                            <li class="{{ Route::currentRouteNamed('admin.statistics.users') ? 'active' : '' }}">
-                                <a href="{{ route('admin.statistics.users') }}">
-                                    <i class="fas fa-users"></i>
-                                    <span>Người dùng</span>
-                                </a>
-                            </li>
+                          
                             <li class="{{ Route::currentRouteNamed('admin.setting.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.setting.index') }}">
                                     <i class="fas fa-cog"></i>

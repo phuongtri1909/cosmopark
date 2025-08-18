@@ -17,15 +17,15 @@
     <meta property="og:url" content="{{ url()->full() }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:locale" content="vi_VN">
-    <meta property="og:image" content="{{ $logoPath }}">
-    <meta property="og:image:secure_url" content="{{ $logoPath }}">
+    <meta property="og:image" content="{{ asset('assets/images/dev/Thumbnail.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('assets/images/dev/Thumbnail.png') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="@yield('title', 'Home - Cosmopark')">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('title', 'Home - Cosmopark')">
     <meta name="twitter:description" content="@yield('description', '')">
-    <meta name="twitter:image" content="{{ $logoPath }}">
+    <meta name="twitter:image" content="{{ asset('assets/images/dev/Thumbnail.png') }}">
     <meta name="twitter:image:alt" content="@yield('title', 'Home - Cosmopark')">
     <link rel="icon" href="{{ $faviconPath }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -40,7 +40,7 @@
           "@context": "https://schema.org",
           "@type": "Organization",
           "url": "{{ url('/') }}",
-          "logo": "{{ $logoPath }}"
+          "logo": "{{ asset('assets/images/dev/Thumbnail.png') }}"
         }
     </script>
 

@@ -89,7 +89,7 @@ class AuthController extends Controller
             $user->ip_address = $request->ip();
             $user->save();
 
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } catch (Exception $e) {
             return redirect()->back()->withInput()->with('error', 'An error occurred during login. Please try again later.');
         }
@@ -97,11 +97,6 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-
-        // Lưu thông tin giỏ hàng trước khi đăng xuất
-        if (Auth::check()) {
-            $userId = Auth::id();
-        }
 
         Auth::logout();
 

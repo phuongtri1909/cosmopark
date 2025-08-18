@@ -40,7 +40,7 @@ Route::group(['as' => 'admin.'], function () {
 
     Route::group(['middleware' => ['auth', 'check.role:admin']], function () {
         Route::get('/', function () {
-            return redirect()->route('admin.statistics.index');
+            return view('admin.pages.dashboard');
         })->name('dashboard');
 
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
