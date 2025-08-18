@@ -1,15 +1,26 @@
+@props(['news'])
+
 <div class="card-tin-tc">
-    <img class="rectangle rounded-5" src="{{ asset('assets/images/dev/hero-slider-1.jpg') }}" />
+    <a href="{{ route('news.show', $news->slug) }}">
+        <img class="rectangle rounded-5"
+            src="{{ $news->image ? Storage::url($news->image) : asset('assets/images/dev/hero-slider-1.jpg') }}"
+            alt="{{ $news->getTranslation('title', 'vi') }}">
+    </a>
     <div class="card-news">
         <div class="div">
             <div class="bg-primary-1 rounded-5 py-2 px-3">
-                <div class="text-xs text-white">Giới thiệu vị trí</div>
+                <div class="text-xs text-white">
+                    {{ $news->category ? $news->category->name : 'Danh mục' }}
+                </div>
             </div>
             <span class="line"></span>
-            <div class="color-text-secondary text-xs-1">27 tháng 7, 2025</div>
+            <div class="color-text-secondary text-xs-1">
+                {{ $news->created_at->locale(app()->getLocale())->translatedFormat('d F Y') }}
+            </div>
         </div>
         <div class="card-news-2">
-            <p class="color-primary-8 text-lg-2 fw-bold">Bảo vệ môi trường không đánh đổi tăng trưởng kinh tế ở Tây Ninh
+            <p class="color-primary-8 text-lg-2 fw-bold">
+                {{ $news->title }}
             </p>
         </div>
     </div>

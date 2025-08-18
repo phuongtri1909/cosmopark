@@ -36,7 +36,7 @@
                             <label for="category_filter">Danh mục</label>
                             <select id="category_filter" name="category_id" class="filter-input">
                                 <option value="">Tất cả danh mục</option>
-                                @foreach ($categories as $category)
+                                  @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
                                         {{ request('category_id') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
@@ -158,9 +158,7 @@
                                             {{ $blog->title }}
                                         </td>
                                         <td>
-                                            @foreach ($blog->categories as $category)
-                                                <span class="category-badge">{{ $category->name }}</span>
-                                            @endforeach
+                                            <span class="category-badge">{{ $blog->category->name }}</span>
                                         </td>
                                         <td class="blog-date">
                                             {{ $blog->created_at->format('d/m/Y H:i') }}

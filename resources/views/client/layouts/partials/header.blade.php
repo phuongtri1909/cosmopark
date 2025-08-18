@@ -34,15 +34,16 @@
     <link rel="canonical" href="{{ url()->current() }}">
 
     <meta name="google-site-verification" content="" />
-
-    <script type="application/ld+json">
+    @verbatim
+        <script type="application/ld+json">
         {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "url": "{{ url('/') }}",
-          "logo": "{{ asset('assets/images/dev/Thumbnail.png') }}"
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "url": "{{ url('/') }}",
+            "logo": "{{ asset('assets/images/dev/Thumbnail.png') }}"
         }
-    </script>
+        </script>
+    @endverbatim
 
     @stack('meta')
 
@@ -81,11 +82,21 @@
                                 {{ __('Projects') }}
                             </a>
                             <ul class="dropdown-menu pe-4">
-                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK ECO INDUSTRIAL ZONE</a></li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK CONVENIENT</a></li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR PARK</a></li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SÂN GOLF, RESORT & VILLA</a></li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARK SMART AI CITY</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK
+                                        ECO INDUSTRIAL ZONE</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK
+                                        CONVENIENT</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                        href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR
+                                        PARK</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                        href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SÂN
+                                        GOLF, RESORT & VILLA</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARK
+                                        SMART AI CITY</a></li>
                             </ul>
                         </div>
                         <a href="#" class="text-sm fw-medium">{{ __('Infomation & Gallery') }}</a>
@@ -129,18 +140,29 @@
                     class="text-md fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a>
             </li>
             <li>
-                <button class="btn w-100 text-md fw-medium d-flex justify-content-between align-items-center text-white"
+                <button
+                    class="btn w-100 text-md fw-medium d-flex justify-content-between align-items-center text-white"
                     type="button" data-bs-toggle="collapse" data-bs-target="#mobileProjectsMenu"
                     aria-expanded="false" aria-controls="mobileProjectsMenu">
                     {{ __('Projects') }}
                     <i class="fas fa-chevron-down ms-2"></i>
                 </button>
                 <ul class="collapse ps-3" id="mobileProjectsMenu">
-                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK ECO INDUSTRIAL ZONE</a></li>
-                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK CONVENIENT</a></li>
-                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR PARK</a></li>
-                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SAN GOLF RESORT VILLA</a></li>
-                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARL SMART AI CITY</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium"
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK
+                            ECO INDUSTRIAL ZONE</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium"
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK
+                            CONVENIENT</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium"
+                            href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR PARK</a>
+                    </li>
+                    <li class="mb-0"><a class="text-md fw-medium"
+                            href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SAN GOLF RESORT
+                            VILLA</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium"
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARL SMART
+                            AI CITY</a></li>
 
                 </ul>
             </li>

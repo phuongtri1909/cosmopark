@@ -2,27 +2,35 @@
     <div class="p-100">
         <div class="card-news-read row gx-5 mt-2 mt-md-0">
             <div class="col-12 col-md-5">
-                <img class="rectangle rounded-4" src="{{ asset('assets/images/dev/hero-slider-1.jpg') }}" />
-
+                <img class="rectangle rounded-4"
+                    src="{{ $latestPost && $latestPost->image ? Storage::url($latestPost->image) : asset('assets/images/dev/hero-slider-1.jpg') }}" />
             </div>
             <div class="card-news col-12 col-md-7 py-5">
                 <div class="div">
                     <div class="bg-primary-1 rounded-5 py-2 px-3">
-                        <div class="text-xs text-white">Giới thiệu vị trí</div>
+                        <div class="text-xs text-white">
+                            {{ $latestPost && $latestPost->category ? $latestPost->category->name : 'Danh mục' }}
+                        </div>
                     </div>
                     <span class="line"></span>
-                    <div class="color-text-secondary text-xs-1">27 tháng 7, 2025</div>
+                    <div class="color-text-secondary text-xs-1">
+                        @if ($latestPost)
+                            {{ $latestPost->created_at->locale(app()->getLocale())->translatedFormat('d F Y') }}
+                        @endif
+                    </div>
                 </div>
                 <div class="card-news-2">
-                    <p class="color-primary-8 text-1lg-3 fw-bold">Bảo vệ môi trường không đánh đổi tăng trưởng kinh tế ở
-                        Tây Ninh
+                    <p class="color-primary-8 text-1lg-3 fw-bold">
+                        {{ $latestPost ? $latestPost->title : '' }}
                     </p>
                 </div>
                 <p class="text-sm-1 color-text-secondary">
-                    COSMOPARK SOLAR PARK là khu năng lượng sạch quy mô lớn, được trang bị hệ thống điện mặt trời tiên tiến. Khu vực này cung cấp điện tái tạo cho toàn bộ dự án, đồng th ...
+                    {{ cleanDescription($latestPost->content, 300) }}
                 </p>
-
-                <a href="#" class="fw-semibold text-decoration-none continue-reading">Tiếp tục đọc</a>
+                @if ($latestPost)
+                    <a href="{{ route('news.show', $latestPost->slug) }}"
+                        class="fw-semibold text-decoration-none continue-reading">Tiếp tục đọc</a>
+                @endif
             </div>
         </div>
     </div>
@@ -45,7 +53,7 @@
             margin-top: -50px;
         }
 
-        .card-news-read{
+        .card-news-read {
             min-height: 364px;
         }
 
@@ -77,7 +85,7 @@
             background: #c6c6c6;
         }
 
-        .continue-reading{
+        .continue-reading {
             color: var(--primary-color-8);
             border-bottom: 2px solid var(--color-border);
         }

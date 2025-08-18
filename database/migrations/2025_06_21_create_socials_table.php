@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('key')->nullable();
             $table->string('url');
-            $table->string('icon'); // FontAwesome class or custom SVG
+            $table->string('icon'); 
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);
             $table->timestamps();

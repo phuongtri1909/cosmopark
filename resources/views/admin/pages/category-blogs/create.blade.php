@@ -27,15 +27,29 @@
                 <form action="{{ route('admin.category-blogs.store') }}" method="POST" class="category-form">
                     @csrf
 
-                    <div class="form-group">
-                        <label for="name" class="form-label-custom">
-                            Tên danh mục <span class="required-mark">*</span>
-                        </label>
-                        <input type="text" class="custom-input {{ $errors->has('name') ? 'input-error' : '' }}"
-                            id="name" name="name" value="{{ old('name') }}">
-                        @error('name')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
+                    <div class="row">
+                        @foreach ($languages as $lang => $langName)
+                            <div class="col-md-6 {{ !$loop->first ? 'mt-4 mt-md-0' : '' }}">
+                                <div class="form-group">
+                                    <label for="name_{{ $lang }}">Tên danh mục ({{ $langName }}) <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="name[{{ $lang }}]" id="name_{{ $lang }}"
+                                        class="form-control {{ $errors->has("name.$lang") ? 'is-invalid' : '' }}"
+                                        value="{{ old("name.$lang", isset($categoryBlog) ? $categoryBlog->getTranslation('name', $lang) : '') }}">
+                                    @error("name.$lang")
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="description_{{ $lang }}">Mô tả ({{ $langName }})</label>
+                                    <textarea name="description[{{ $lang }}]" id="description_{{ $lang }}"
+                                        class="form-control {{ $errors->has("description.$lang") ? 'is-invalid' : '' }}" rows="3">{{ old("description.$lang", isset($categoryBlog) ? $categoryBlog->getTranslation('description', $lang) : '') }}</textarea>
+                                    @error("description.$lang")
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="form-group">
@@ -45,17 +59,6 @@
                         <input type="text" class="custom-input {{ $errors->has('slug') ? 'input-error' : '' }}"
                             id="slug" name="slug" value="{{ old('slug') }}">
                         @error('slug')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="description" class="form-label-custom">
-                            Mô tả
-                        </label>
-                        <textarea class="form-control {{ $errors->has('description') ? 'input-error' : '' }}"
-                            id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                        @error('description')
                             <div class="error-message">{{ $message }}</div>
                         @enderror
                     </div>
@@ -75,18 +78,21 @@
 @endsection
 
 @push('scripts')
-<script>
-    // Auto-generate slug from name
-    const nameInput = document.getElementById('name');
+    <script>
+        // Auto-generate slug from name
+        const nameViInput = document.getElementById('name_vi');
     const slugInput = document.getElementById('slug');
-    
-    nameInput.addEventListener('keyup', function() {
-        if (!slugInput.value) {
-            slugInput.value = createSlug(this.value);
-        }
-    });
+    const originalSlug = "{{ isset($categoryBlog) ? $categoryBlog->slug : '' }}";
 
-    // Function to create slug
+    if (nameViInput && slugInput) {
+        nameViInput.addEventListener('keyup', function() {
+            // Chỉ tự động tạo slug nếu slug chưa thay đổi thủ công
+            if (!slugInput.value || slugInput.value === originalSlug) {
+                slugInput.value = createSlug(this.value);
+            }
+        });
+    }
+
     function createSlug(text) {
         return text
             .toString()
@@ -98,5 +104,5 @@
             .replace(/[^\w\-]+/g, '')
             .replace(/\-\-+/g, '-');
     }
-</script>
+    </script>
 @endpush

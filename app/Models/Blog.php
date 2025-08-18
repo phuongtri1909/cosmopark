@@ -3,21 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Translatable\HasTranslations;
 
 class Blog extends Model
 {
-    use SoftDeletes;
+
+    use HasTranslations;
+
+    public $translatable = ['title', 'content'];
 
     protected $fillable = [
         'title',
         'slug',
         'content',
         'image',
-        'is_active', 
+        'category_blog_id',
+        'is_active',
         'is_featured',
         'author_id',
+        'author_name',
         'views'
     ];
 
@@ -26,9 +31,9 @@ class Blog extends Model
         'is_featured' => 'boolean',
     ];
 
-    public function categories()
+    public function category()
     {
-        return $this->belongsToMany(CategoryBlog::class, 'blog_category_blog', 'blog_id', 'category_blog_id');
+        return $this->belongsTo(CategoryBlog::class, 'category_blog_id');
     }
 
     public function author()
@@ -46,12 +51,12 @@ class Blog extends Model
         $excerpt = strip_tags($this->content);
         return strlen($excerpt) > 200 ? substr($excerpt, 0, 200) . '...' : $excerpt;
     }
-    
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
-    
+
     public function scopeFeatured($query)
     {
         return $query->where('is_featured', true);
@@ -65,5 +70,13 @@ class Blog extends Model
     public function incrementViews()
     {
         $this->increment('views');
+    }
+
+    public function getReadingTime()
+    {
+        $content = strip_tags($this->getTranslation('content', 'vi'));
+        $wordCount = str_word_count($content);
+        $readingTime = ceil($wordCount / 200); // 200 words per minute
+        return max(1, $readingTime); // Minimum 1 minute
     }
 }

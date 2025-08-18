@@ -10,7 +10,7 @@
     <title>@yield('title', 'Admin Dashboard') - {{ env('APP_NAME') }}</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/logo/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $faviconPath  }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

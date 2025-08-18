@@ -3,22 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 class CategoryBlog extends Model
 {
-    
+
+
+    use HasTranslations;
+
+    public $translatable = ['name', 'description'];
+
     protected $fillable = [
         'name',
         'slug',
         'description',
     ];
 
-    public function blogs()
+    public function blog()
     {
-        return $this->belongsToMany(Blog::class, 'blog_category_blog', 'category_blog_id', 'blog_id');
+        return $this->hasMany(Blog::class, 'category_blog_id');
     }
-    
+
     public function getRouteKeyName()
     {
         return 'slug';

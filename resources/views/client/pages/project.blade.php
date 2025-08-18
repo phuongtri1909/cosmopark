@@ -66,7 +66,7 @@
             $image = asset('assets/images/dev/image-2.jpg');
             $button = true;
         @endphp
-        @elseif($slug == 'cosmopark-smart-ai-city')
+    @elseif($slug == 'cosmopark-smart-ai-city')
         @php
             $reverseRow = false;
             $reverseCol = true;

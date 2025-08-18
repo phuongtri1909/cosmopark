@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use App\Models\Blog;
@@ -12,16 +13,24 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
+
+    protected $languages;
+
+    public function __construct()
+    {
+        $this->languages = ['vi' => 'Tiếng Việt', 'en' => 'English'];
+    }
+
     /**
      * Hiển thị danh sách bài viết
      */
     public function index(Request $request)
     {
-        $query = Blog::with(['author', 'categories']);
+        $query = Blog::with(['author', 'category']);
 
         // Filter theo danh mục
         if ($request->has('category_id') && !empty($request->category_id)) {
-            $query->whereHas('categories', function ($q) use ($request) {
+            $query->whereHas('category', function ($q) use ($request) {
                 $q->where('category_blogs.id', $request->category_id);
             });
         }
@@ -60,7 +69,8 @@ class BlogController extends Controller
     public function create()
     {
         $categories = CategoryBlog::orderBy('name')->get();
-        return view('admin.pages.blogs.create', compact('categories'));
+        $languages = $this->languages;
+        return view('admin.pages.blogs.create', compact('categories', 'languages'));
     }
 
     /**
@@ -68,30 +78,32 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'categories' => 'required|array',
-            'categories.*' => 'exists:category_blogs,id',
-            'avatar' => 'required|image|max:2048', // max 2MB
+        $rules = [
+            'category_blog_id' => 'required|exists:category_blogs,id',
+            'avatar' => 'required|image|max:2048',
             'is_active' => 'sometimes|boolean',
             'is_featured' => 'sometimes|boolean',
-        ],[
-            'title.required' => 'Tiêu đề là bắt buộc.',
-            'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
-            'content.required' => 'Nội dung là bắt buộc.',
-            'categories.required' => 'Vui lòng chọn ít nhất một danh mục.',
-            'categories.array' => 'Danh mục phải là một mảng.',
-            'categories.*.exists' => 'Danh mục không hợp lệ.',
+            'author_name' => 'nullable|string|max:255',
+        ];
+        foreach ($this->languages as $lang => $langName) {
+            $rules["title.$lang"] = 'required|string|max:255';
+            $rules["content.$lang"] = 'required|string';
+        }
+        $messages = [
+            'title.vi.required' => 'Tiêu đề (VI) là bắt buộc.',
+            'title.en.required' => 'Tiêu đề (EN) là bắt buộc.',
+            'content.vi.required' => 'Nội dung (VI) là bắt buộc.',
+            'content.en.required' => 'Nội dung (EN) là bắt buộc.',
+            'category_blog_id.required' => 'Vui lòng chọn danh mục.',
+            'category_blog_id.exists' => 'Danh mục không hợp lệ.',
             'avatar.required' => 'Hình ảnh đại diện là bắt buộc.',
             'avatar.image' => 'Hình ảnh đại diện phải là một tệp hình ảnh hợp lệ.',
             'avatar.max' => 'Kích thước hình ảnh đại diện không được vượt quá 2MB.',
-            'is_active.boolean' => 'Trạng thái hiển thị phải là đúng hoặc sai.',
-            'is_featured.boolean' => 'Trạng thái nổi bật phải là đúng hoặc sai.'
-        ]);
+        ];
+        $validated = $request->validate($rules, $messages);
 
         // Xử lý slug
-        $slug = Str::slug($validated['title']);
+        $slug = Str::slug($validated['title']['vi']);
         $originalSlug = $slug;
         $count = 1;
 
@@ -107,18 +119,16 @@ class BlogController extends Controller
 
         // Tạo bài viết mới
         $blog = Blog::create([
-            'title' => $validated['title'],
+            'title' => $request->title,
             'slug' => $slug,
-            'content' => $validated['content'],
+            'content' => $request->content,
             'image' => $imagePath,
-            'user_id' => Auth::id(),
+            'category_blog_id' => $request->category_blog_id,
             'is_active' => $request->has('is_active'),
             'is_featured' => $request->has('is_featured'),
-            'author_id' => Auth::id(),
+            'author_id' => auth()->id(),
+            'author_name' => $request->author_name,
         ]);
-
-        // Gán danh mục
-        $blog->categories()->sync($validated['categories']);
 
         if ($request->ajax()) {
             return response()->json([
@@ -138,9 +148,8 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $categories = CategoryBlog::orderBy('name')->get();
-        $selectedCategories = $blog->categories->pluck('id')->toArray();
-
-        return view('admin.pages.blogs.edit', compact('blog', 'categories', 'selectedCategories'));
+        $languages = $this->languages;
+        return view('admin.pages.blogs.edit', compact('blog', 'categories', 'languages'));
     }
 
     /**
@@ -148,68 +157,67 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'categories' => 'required|array',
-            'categories.*' => 'exists:category_blogs,id',
+        $languages = ['vi', 'en'];
+        $rules = [
+            'category_blog_id' => 'required|exists:category_blogs,id',
             'avatar' => 'sometimes|nullable|image|max:2048',
             'is_active' => 'sometimes|boolean',
             'is_featured' => 'sometimes|boolean',
             'remove_avatar' => 'sometimes|boolean',
-        ],[
-            'title.required' => 'Tiêu đề là bắt buộc.',
-            'title.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
-            'content.required' => 'Nội dung là bắt buộc.',
-            'categories.required' => 'Vui lòng chọn ít nhất một danh mục.',
-            'categories.array' => 'Danh mục phải là một mảng.',
-            'categories.*.exists' => 'Danh mục không hợp lệ.',
+            'author_name' => 'nullable|string|max:255',
+        ];
+        foreach ($languages as $lang) {
+            $rules["title.$lang"] = 'required|string|max:255';
+            $rules["content.$lang"] = 'required|string';
+        }
+        $messages = [
+            'title.vi.required' => 'Tiêu đề (VI) là bắt buộc.',
+            'title.en.required' => 'Tiêu đề (EN) là bắt buộc.',
+            'content.vi.required' => 'Nội dung (VI) là bắt buộc.',
+            'content.en.required' => 'Nội dung (EN) là bắt buộc.',
+            'category_blog_id.required' => 'Vui lòng chọn danh mục.',
+            'category_blog_id.exists' => 'Danh mục không hợp lệ.',
             'avatar.image' => 'Hình ảnh đại diện phải là một tệp hình ảnh hợp lệ.',
             'avatar.max' => 'Kích thước hình ảnh đại diện không được vượt quá 2MB.',
-            'is_active.boolean' => 'Trạng thái hiển thị phải là đúng hoặc sai.',
-            'is_featured.boolean' => 'Trạng thái nổi bật phải là đúng hoặc sai.'
-        ]);
+        ];
+        $validated = $request->validate($rules, $messages);
+
+        // Xử lý slug nếu tiêu đề tiếng Việt thay đổi
+        if ($request->title['vi'] !== $blog->getTranslation('title', 'vi')) {
+            $slug = Str::slug($request->title['vi']);
+            $originalSlug = $slug;
+            $count = 1;
+            while (Blog::where('slug', $slug)->where('id', '!=', $blog->id)->exists()) {
+                $slug = $originalSlug . '-' . $count++;
+            }
+            $blog->slug = $slug;
+        }
 
         // Xử lý hình ảnh
         $imagePath = $blog->image;
-
         if ($request->has('remove_avatar') && $request->remove_avatar == 1) {
-            // Xóa hình ảnh cũ nếu có
             if ($blog->image && Storage::disk('public')->exists($blog->image)) {
                 Storage::disk('public')->delete($blog->image);
             }
             $imagePath = null;
         }
-
         if ($request->hasFile('avatar')) {
-            // Xóa hình ảnh cũ nếu có
             if ($blog->image && Storage::disk('public')->exists($blog->image)) {
                 Storage::disk('public')->delete($blog->image);
             }
-
             $imagePath = $request->file('avatar')->store('blogs', 'public');
         }
 
-        // Cập nhật bài viết
         $blog->update([
-            'title' => $validated['title'],
-            'content' => $validated['content'],
+            'title' => $request->title,
+            'content' => $request->content,
             'image' => $imagePath,
+            'category_blog_id' => $request->category_blog_id,
             'is_active' => $request->has('is_active'),
             'is_featured' => $request->has('is_featured'),
-            'author_id' => Auth::id(),
+            'author_id' => auth()->id(),
+            'author_name' => $request->author_name,
         ]);
-
-        // Cập nhật danh mục
-        $blog->categories()->sync($validated['categories']);
-
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Bài viết đã được cập nhật thành công!',
-                'redirect' => route('admin.blogs.index')
-            ]);
-        }
 
         return redirect()->route('admin.blogs.index')
             ->with('success', 'Bài viết đã được cập nhật thành công!');

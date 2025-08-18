@@ -29,33 +29,41 @@
                     @csrf
 
                     <div class="form-tabs">
-                        <div class="form-group">
-                            <label for="title" class="form-label-custom">
-                                Tiêu đề <span class="required-mark">*</span>
-                            </label>
-                            <input type="text" class="custom-input {{ $errors->has('title') ? 'input-error' : '' }}"
-                                id="title" name="title" value="{{ old('title') }}">
-                            <div class="error-message" id="error-title">
-                                @error('title')
-                                    {{ $message }}
-                                @enderror
-                            </div>
+
+                        <div class="row">
+                            @foreach ($languages as $lang => $langName)
+                                <div class="col-md-6 {{ !$loop->first ? 'mt-4 mt-md-0' : '' }}">
+                                    <div class="form-group">
+                                        <label for="title_{{ $lang }}">Tiêu đề ({{ $langName }}) <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="title[{{ $lang }}]"
+                                            id="title_{{ $lang }}"
+                                            class="custom-input {{ $errors->has("title.$lang") ? 'input-error' : '' }}"
+                                            value="{{ old("title.$lang", isset($blog) ? $blog->getTranslation('title', $lang) : '') }}">
+                                        @error("title.$lang")
+                                            <div class="error-message">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
 
                         <div class="form-group">
-                            <label for="categories" class="form-label-custom">
+                            <label for="category_blog_id" class="form-label-custom">
                                 Danh mục <span class="required-mark">*</span>
                             </label>
-                            <select id="categories" name="categories[]"
-                                class="custom-select {{ $errors->has('categories') ? 'input-error' : '' }}" multiple>
+                            <select id="category_blog_id" name="category_blog_id"
+                                class="custom-input {{ $errors->has('category_blog_id') ? 'input-error' : '' }}">
+                                <option value="">-- Chọn danh mục --</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ in_array($category->id, old('categories', [])) ? 'selected' : '' }}>
-                                        {{ $category->name }}</option>
+                                        {{ old('category_blog_id', isset($blog) ? $blog->category_blog_id : '') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
-                            <div class="error-message" id="error-categories">
-                                @error('categories')
+                            <div class="error-message" id="error-category_blog_id">
+                                @error('category_blog_id')
                                     {{ $message }}
                                 @enderror
                             </div>
@@ -84,6 +92,12 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="author_name" class="form-label-custom">Tác giả</label>
+                            <input type="text" class="custom-input" id="author_name" name="author_name"
+                                value="{{ old('author_name', isset($blog) ? $blog->author_name : '') }}">
+                        </div>
+
                         <div class="form-check-group">
                             <div class="custom-checkbox">
                                 <input type="checkbox" id="is_active" name="is_active" value="1"
@@ -102,16 +116,22 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="content" class="form-label-custom">
-                                Nội dung <span class="required-mark">*</span>
-                            </label>
-                            <textarea id="content" name="content" class="editor">{{ old('content') }}</textarea>
-                            <div class="error-message" id="error-content">
-                                @error('content')
-                                    {{ $message }}
-                                @enderror
-                            </div>
+
+                        <div class="row">
+                            @foreach ($languages as $lang => $langName)
+                                <div class="col-md-12 {{ !$loop->first ? 'mt-4 mt-md-0' : '' }}">
+
+                                    <div class="form-group mt-2">
+                                        <label for="content_{{ $lang }}">Nội dung ({{ $langName }}) <span
+                                                class="text-danger">*</span></label>
+                                        <textarea name="content[{{ $lang }}]" id="content_{{ $lang }}"
+                                            class="editor {{ $errors->has("content.$lang") ? 'input-error' : '' }}" rows="6">{{ old("content.$lang", isset($blog) ? $blog->getTranslation('content', $lang) : '') }}</textarea>
+                                        @error("content.$lang")
+                                            <div class="error-message">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 
@@ -213,114 +233,116 @@
             });
 
             // Initialize CKEditor
-            CKEDITOR.replace('content', {
-                filebrowserUploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
-                filebrowserUploadMethod: 'form',
-                height: 400,
-                toolbarGroups: [{
-                        name: 'document',
-                        groups: ['mode', 'document', 'doctools']
-                    },
-                    {
-                        name: 'clipboard',
-                        groups: ['clipboard', 'undo']
-                    },
-                    {
-                        name: 'editing',
-                        groups: ['find', 'selection', 'spellchecker', 'editing']
-                    },
-                    {
-                        name: 'forms',
-                        groups: ['forms']
-                    },
-                    {
-                        name: 'basicstyles',
-                        groups: ['basicstyles', 'cleanup']
-                    },
-                    {
-                        name: 'paragraph',
-                        groups: ['list', 'indent', 'blocks', 'align', 'paragraph']
-                    },
-                    {
-                        name: 'links',
-                        groups: ['links']
-                    },
-                    {
-                        name: 'insert',
-                        groups: ['insert']
-                    },
-                    {
-                        name: 'styles',
-                        groups: ['styles']
-                    },
-                    {
-                        name: 'colors',
-                        groups: ['colors']
-                    },
-                    {
-                        name: 'tools',
-                        groups: ['tools']
-                    },
-                    {
-                        name: 'others',
-                        groups: ['others']
-                    }
-                ],
-                // Thêm tùy chọn cho kích thước, màu sắc và định dạng
-                fontSize_sizes: '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px',
-                font_names: 'Arial/Arial, Helvetica, sans-serif;Times New Roman/Times New Roman, Times, serif;Verdana/Verdana, Geneva, sans-serif;Roboto/Roboto, sans-serif;Open Sans/Open Sans, sans-serif;Lato/Lato, sans-serif;Montserrat/Montserrat, sans-serif;',
-                colorButton_colors: '000,800000,8B4513,2F4F4F,008080,000080,4B0082,696969,B22222,A52A2A,DAA520,006400,40E0D0,0000CD,800080,808080,F00,FF8C00,FFD700,008000,0FF,00F,EE82EE,A9A9A9,FFA07A,FFA500,FFFF00,00FF00,AFEEEE,ADD8E6,DDA0DD,D3D3D3,FFF0F5,FAEBD7,FFFFE0,F0FFF0,F0FFFF,F0F8FF,E6E6FA,FFF',
-                colorButton_enableMore: true,
-                colorButton_foreStyle: {
-                    element: 'span',
-                    styles: {
-                        'color': '#(color)'
-                    },
-                    overrides: [{
-                        element: 'font',
-                        attributes: {
-                            'color': null
+            @foreach ($languages as $lang => $langName)
+                CKEDITOR.replace('content_{{ $lang }}', {
+                    filebrowserUploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
+                    filebrowserUploadMethod: 'form',
+                    height: 400,
+                    toolbarGroups: [{
+                            name: 'document',
+                            groups: ['mode', 'document', 'doctools']
+                        },
+                        {
+                            name: 'clipboard',
+                            groups: ['clipboard', 'undo']
+                        },
+                        {
+                            name: 'editing',
+                            groups: ['find', 'selection', 'spellchecker', 'editing']
+                        },
+                        {
+                            name: 'forms',
+                            groups: ['forms']
+                        },
+                        {
+                            name: 'basicstyles',
+                            groups: ['basicstyles', 'cleanup']
+                        },
+                        {
+                            name: 'paragraph',
+                            groups: ['list', 'indent', 'blocks', 'align', 'paragraph']
+                        },
+                        {
+                            name: 'links',
+                            groups: ['links']
+                        },
+                        {
+                            name: 'insert',
+                            groups: ['insert']
+                        },
+                        {
+                            name: 'styles',
+                            groups: ['styles']
+                        },
+                        {
+                            name: 'colors',
+                            groups: ['colors']
+                        },
+                        {
+                            name: 'tools',
+                            groups: ['tools']
+                        },
+                        {
+                            name: 'others',
+                            groups: ['others']
                         }
-                    }]
-                },
-                colorButton_backStyle: {
-                    element: 'span',
-                    styles: {
-                        'background-color': '#(color)'
-                    }
-                },
-                // Cấu hình để thêm các plugin chèn ảnh nâng cao
-                extraPlugins: 'uploadimage,clipboard,pastetext,font,colorbutton,justify,image2',
-                uploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
+                    ],
+                    // Thêm tùy chọn cho kích thước, màu sắc và định dạng
+                    fontSize_sizes: '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px',
+                    font_names: 'Arial/Arial, Helvetica, sans-serif;Times New Roman/Times New Roman, Times, serif;Verdana/Verdana, Geneva, sans-serif;Roboto/Roboto, sans-serif;Open Sans/Open Sans, sans-serif;Lato/Lato, sans-serif;Montserrat/Montserrat, sans-serif;',
+                    colorButton_colors: '000,800000,8B4513,2F4F4F,008080,000080,4B0082,696969,B22222,A52A2A,DAA520,006400,40E0D0,0000CD,800080,808080,F00,FF8C00,FFD700,008000,0FF,00F,EE82EE,A9A9A9,FFA07A,FFA500,FFFF00,00FF00,AFEEEE,ADD8E6,DDA0DD,D3D3D3,FFF0F5,FAEBD7,FFFFE0,F0FFF0,F0FFFF,F0F8FF,E6E6FA,FFF',
+                    colorButton_enableMore: true,
+                    colorButton_foreStyle: {
+                        element: 'span',
+                        styles: {
+                            'color': '#(color)'
+                        },
+                        overrides: [{
+                            element: 'font',
+                            attributes: {
+                                'color': null
+                            }
+                        }]
+                    },
+                    colorButton_backStyle: {
+                        element: 'span',
+                        styles: {
+                            'background-color': '#(color)'
+                        }
+                    },
+                    // Cấu hình để thêm các plugin chèn ảnh nâng cao
+                    extraPlugins: 'uploadimage,clipboard,pastetext,font,colorbutton,justify,image2',
+                    uploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
 
-                // Hỗ trợ xử lý clipboard và paste ảnh
-                clipboard_handleImages: true,
-                pasteFilter: null,
-                pasteUploadFileApi: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
-                allowedContent: true,
+                    // Hỗ trợ xử lý clipboard và paste ảnh
+                    clipboard_handleImages: true,
+                    pasteFilter: null,
+                    pasteUploadFileApi: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
+                    allowedContent: true,
 
-                // Cấu hình xử lý hình ảnh
-                image_previewText: ' ',
-                image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
-                image2_disableResizer: false,
+                    // Cấu hình xử lý hình ảnh
+                    image_previewText: ' ',
+                    image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
+                    image2_disableResizer: false,
 
-                // Danh sách nút sẽ loại bỏ
-                removeButtons: 'About,Scayt,Anchor',
+                    // Danh sách nút sẽ loại bỏ
+                    removeButtons: 'About,Scayt,Anchor',
 
-                // Cấu hình chỉnh sửa hình ảnh nâng cao
-                image2_prefillDimensions: true,
-                image2_captionedClass: 'image-captioned',
+                    // Cấu hình chỉnh sửa hình ảnh nâng cao
+                    image2_prefillDimensions: true,
+                    image2_captionedClass: 'image-captioned',
 
-                // Kích thước mặc định cho ảnh đặt vào
-                imageUploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
-                imageUploadMethod: 'form',
-                filebrowserImageUploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}"
-            });
+                    // Kích thước mặc định cho ảnh đặt vào
+                    imageUploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}",
+                    imageUploadMethod: 'form',
+                    filebrowserImageUploadUrl: "{{ route('admin.blogs.upload.image', ['_token' => csrf_token()]) }}"
+                });
 
-            // CKEditor events để cập nhật dữ liệu khi submit form
-            CKEDITOR.instances.content.on('change', function() {
-                this.updateElement();
-            });
+
+                CKEDITOR.instances.content_{{ $lang }}.on('change', function() {
+                    this.updateElement();
+                });
+            @endforeach
 
             // Image upload preview
             $('#thumbnail-upload').change(function() {

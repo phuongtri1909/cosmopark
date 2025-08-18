@@ -22,7 +22,7 @@
                 <i class="fas fa-plus"></i> Thêm danh mục
             </a>
         </div>
-        
+
         <div class="card-content">
             @if($categories->isEmpty())
                 <div class="empty-state">
@@ -75,7 +75,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div class="pagination-wrapper">
                     <div class="pagination-info">
                         Hiển thị {{ $categories->firstItem() ?? 0 }} đến {{ $categories->lastItem() ?? 0 }} của {{ $categories->total() }} danh mục
@@ -103,7 +103,7 @@
         min-width: 24px;
         text-align: center;
     }
-    
+
     .category-blogs {
         text-align: center;
     }

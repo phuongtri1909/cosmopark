@@ -5,7 +5,7 @@
         <!-- Sidebar -->
         <div id="sidebar" class="sidebar">
             <div class="sidebar-header">
-                <img src="{{ asset('assets/images/logo/logo-color.png') }}" alt="logo" height="30">
+                <img src="{{  $logoPath }}" alt="logo" height="40">
                 <button id="close-sidebar" class="close-sidebar d-md-none">
                     <i class="fas fa-times"></i>
                 </button>
@@ -18,9 +18,6 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-
-
-
                     <!-- Quản lý nội dung -->
                     <li
                         class="has-submenu {{ Route::currentRouteNamed(['admin.blogs.*', 'admin.banners.*', 'admin.category-blogs.*', 'admin.feature-sections.*']) ? 'open' : '' }}">
