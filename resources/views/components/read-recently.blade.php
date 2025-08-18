@@ -1,35 +1,59 @@
+@props(['latestPost' => null])
+
 <div class="read-recently feature-gradient-bg feature-rounded-top">
     <div class="p-100">
         <div class="card-news-read row gx-5 mt-2 mt-md-0">
             <div class="col-12 col-md-5">
                 <img class="rectangle rounded-4"
-                    src="{{ $latestPost && $latestPost->image ? Storage::url($latestPost->image) : asset('assets/images/dev/hero-slider-1.jpg') }}" />
+                    src="{{ $latestPost && $latestPost->image ? asset('storage/' . $latestPost->image) : asset('assets/images/dev/hero-slider-1.jpg') }}" />
             </div>
             <div class="card-news col-12 col-md-7 py-5">
-                <div class="div">
-                    <div class="bg-primary-1 rounded-5 py-2 px-3">
-                        <div class="text-xs text-white">
-                            {{ $latestPost && $latestPost->category ? $latestPost->category->name : 'Danh mục' }}
+                @if($latestPost)
+                    <div class="div">
+                        <div class="bg-primary-1 rounded-5 py-2 px-3">
+                            <div class="text-xs text-white">
+                                {{ $latestPost->category ? $latestPost->category->name : 'Danh mục' }}
+                            </div>
+                        </div>
+                        <span class="line"></span>
+                        <div class="color-text-secondary text-xs-1">
+                            {{ $latestPost->created_at->locale(app()->getLocale())->translatedFormat('d F Y') }}
                         </div>
                     </div>
-                    <span class="line"></span>
-                    <div class="color-text-secondary text-xs-1">
-                        @if ($latestPost)
-                            {{ $latestPost->created_at->locale(app()->getLocale())->translatedFormat('d F Y') }}
-                        @endif
+                    <div class="card-news-2">
+                        <p class="color-primary-8 text-1lg-3 fw-bold">
+                            {{ $latestPost->title }}
+                        </p>
                     </div>
-                </div>
-                <div class="card-news-2">
-                    <p class="color-primary-8 text-1lg-3 fw-bold">
-                        {{ $latestPost ? $latestPost->title : '' }}
+                    <p class="text-sm-1 color-text-secondary">
+                        {{ cleanDescription($latestPost->content, 300) }}
                     </p>
-                </div>
-                <p class="text-sm-1 color-text-secondary">
-                    {{ cleanDescription($latestPost->content, 300) }}
-                </p>
-                @if ($latestPost)
                     <a href="{{ route('news.show', $latestPost->slug) }}"
                         class="fw-semibold text-decoration-none continue-reading">Tiếp tục đọc</a>
+                @else
+                    <!-- Fallback content when no posts -->
+                    <div class="div">
+                        <div class="bg-primary-1 rounded-5 py-2 px-3">
+                            <div class="text-xs text-white">
+                                Tin tức
+                            </div>
+                        </div>
+                        <span class="line"></span>
+                        <div class="color-text-secondary text-xs-1">
+                            Chưa có tin tức
+                        </div>
+                    </div>
+                    <div class="card-news-2">
+                        <p class="color-primary-8 text-1lg-3 fw-bold">
+                            Chưa có bài viết nào
+                        </p>
+                    </div>
+                    <p class="text-sm-1 color-text-secondary">
+                        Hãy quay lại sau để xem tin tức mới nhất từ Cosmopark
+                    </p>
+                    <div class="text-muted">
+                        <small>Chưa có bài viết để hiển thị</small>
+                    </div>
                 @endif
             </div>
         </div>
