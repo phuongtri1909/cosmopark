@@ -14,7 +14,6 @@ function animateCounter(el, target) {
     let decimal = (target + '').includes('.') ? 1 : 0;
     let displayTarget = target;
 
-    // Nếu có dấu ~, >, $ hoặc % thì giữ lại ký tự
     let prefix = '';
     let suffix = '';
     let text = el.textContent.trim();
@@ -50,6 +49,11 @@ function animateOnScroll() {
                     let target = parseFloat(el.getAttribute('data-target').replace(/[^\d\.]/g, ''));
                     animateCounter(el, target);
                 }
+
+                document.querySelectorAll('.line-2-intro-project[data-target]').forEach(el => {
+                    let target = parseFloat(el.getAttribute('data-target').replace(/[^\d\.]/g, ''));
+                    animateCounter(el, target);
+                });
             }
         }
     });

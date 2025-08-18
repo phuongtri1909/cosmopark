@@ -70,9 +70,24 @@
                 <div class="d-flex align-items-center">
                     <img src="{{ $logoPath }}" alt="Logo" style="margin-right: 20px;" height="30px">
                     <div class="header-nav d-none d-xl-flex">
-                        <a href="{{ route('home') }}" class="text-sm fw-medium {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }} </a>
-                        <a href="{{ route('about') }}" class="text-sm fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a>
-                        <a href="#" class="text-sm fw-medium">{{ __('Projects') }}</a>
+                        <a href="{{ route('home') }}"
+                            class="text-sm fw-medium {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }}
+                        </a>
+                        <a href="{{ route('about') }}"
+                            class="text-sm fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a>
+                        <div class="dropdown">
+                            <a href="#" class="text-sm fw-medium dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                {{ __('Projects') }}
+                            </a>
+                            <ul class="dropdown-menu pe-4">
+                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK ECO INDUSTRIAL ZONE</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK CONVENIENT</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR PARK</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SÂN GOLF, RESORT & VILLA</a></li>
+                                <li><a class="dropdown-item text-dark text-sm fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARK SMART AI CITY</a></li>
+                            </ul>
+                        </div>
                         <a href="#" class="text-sm fw-medium">{{ __('Infomation & Gallery') }}</a>
                         <a href="#" class="text-sm fw-medium">{{ __('Contact') }}</a>
                     </div>
@@ -107,9 +122,28 @@
         </div>
 
         <ul class="mobile-nav-list">
-            <li><a href="{{ route('home') }}" class="text-md fw-medium  {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }}</a></li>
-            <li><a href="{{ route('about') }}" class="text-md fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a></li>
-            <li><a href="#" class="text-md fw-medium">{{ __('Projects') }}</a></li>
+            <li><a href="{{ route('home') }}"
+                    class="text-md fw-medium {{ Route::currentRouteNamed('home') ? 'active' : '' }}">{{ __('home') }}</a>
+            </li>
+            <li><a href="{{ route('about') }}"
+                    class="text-md fw-medium {{ Route::currentRouteNamed('about') ? 'active' : '' }}">{{ __('About COSMOPark') }}</a>
+            </li>
+            <li>
+                <button class="btn w-100 text-md fw-medium d-flex justify-content-between align-items-center text-white"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#mobileProjectsMenu"
+                    aria-expanded="false" aria-controls="mobileProjectsMenu">
+                    {{ __('Projects') }}
+                    <i class="fas fa-chevron-down ms-2"></i>
+                </button>
+                <ul class="collapse ps-3" id="mobileProjectsMenu">
+                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK ECO INDUSTRIAL ZONE</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK CONVENIENT</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR PARK</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SAN GOLF RESORT VILLA</a></li>
+                    <li class="mb-0"><a class="text-md fw-medium" href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARL SMART AI CITY</a></li>
+
+                </ul>
+            </li>
             <li><a href="#" class="text-md fw-medium">{{ __('Infomation & Gallery') }}</a></li>
             <li><a href="#" class="text-md fw-medium">{{ __('Contact') }}</a></li>
         </ul>

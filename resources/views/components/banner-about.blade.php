@@ -4,7 +4,7 @@
             <div class="col-lg-12 pt-5 text-center text-md-start">
                 <h1 class="fw-bold color-primary-6 mt-4 mb-2 animate-on-scroll banner-title text-2xl-4">
                     COSMOPARK<br>
-                    <span class="text-success">THE FUTURE. HERE</span>
+                    <span class="color-primary-6">THE FUTURE. HERE</span>
                 </h1>
                 <p class="lead fw-normal mb-4 animate-on-scroll banner-desc text-sm-1 color-text-secondary mt-4"
                     style="max-width: 700px;">

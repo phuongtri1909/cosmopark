@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ReviewRatingController;
@@ -19,9 +20,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
+Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
+
 Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('/blogs/category/{slug}', [BlogController::class, 'category'])->name('blogs.category');
 Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
+
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', function () {
