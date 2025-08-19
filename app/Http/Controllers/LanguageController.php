@@ -29,6 +29,6 @@ class LanguageController extends Controller
      */
     public static function getCurrentLocale()
     {
-        return Session::get('locale', 'vi'); 
+        return Session::get('locale', 'vi');
     }
 }

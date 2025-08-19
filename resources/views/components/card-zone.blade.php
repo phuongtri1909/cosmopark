@@ -1,16 +1,20 @@
-<article class="card-zone animate-on-scroll">
+<article class="card-zone animate-on-scroll h-100">
     <!-- Image Section -->
     <section class="card-image animate-on-scroll">
-        <div class="bg animate-on-scroll" style="background-image: url('{{ asset('assets/images/dev/hero-slider-1.jpg') }}');"></div>
-        <button class="action-btn animate-on-scroll">
-            <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
-        </button>
+        <div class="position-relative">
+            <div class="bg animate-on-scroll" style="background-image: url('{{ $zone['image'] }}');">
+
+            </div>
+            <a href="{{ route('projects.show', ['slug' => $zone['slug']]) }}" class="action-btn animate-on-scroll">
+                <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
+            </a>
+        </div>
     </section>
 
     <!-- Content Section -->
     <section class="card-content animate-on-scroll">
-        <div>
-            <p class="fw-bold text-lg-2">COMSPARK ECO-INDUSTRIAL ZONE</p>
+        <div class="zone-name-wrapper">
+            <a href="{{ route('projects.show', ['slug' => $zone['slug']]) }}" class="fw-bold text-lg-2 text-decoration-none text-dark">{{ $zone['name'] }}</a>
         </div>
     </section>
 </article>
@@ -33,19 +37,20 @@
             .card-zone {
                 display: flex;
                 flex-direction: column;
-                gap: 16px;
                 background: white;
                 border-radius: 24px;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
                 padding: 12px 12px 32px;
                 width: 400px;
                 max-width: 100%;
+                height: 100%;
             }
 
             .card-image {
                 position: relative;
                 height: 300px;
                 overflow: visible;
+                flex-shrink: 0;
             }
 
             .card-image .bg {
@@ -62,8 +67,8 @@
 
             .action-btn {
                 position: absolute;
-                bottom: 0;
-                right: 15%;
+                bottom: -9%;
+                right: 13.5%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -100,8 +105,16 @@
             .card-content {
                 display: flex;
                 flex-direction: column;
-                gap: 24px;
+                flex: 1;
                 padding: 0 32px;
+                min-height: 80px;
+            }
+
+            .zone-name-wrapper {
+                display: flex;
+                align-items: center;
+                height: 100%;
+                min-height: 80px;
             }
 
             .card-content h1 {
@@ -117,6 +130,15 @@
             .action-btn.animate-on-scroll.animated { animation: popBtn 0.6s 0.5s both; }
             .card-content.animate-on-scroll.animated { animation: fadeInCard 0.7s 0.3s both; }
 
+            @media (min-width: 768px) {
+                .action-btn {
+
+
+                right: 15%;
+
+            }
+            }
+
             @media (max-width: 640px) {
                 .card-zone {
                     width: 350px;
@@ -131,14 +153,16 @@
                 }
 
                 .action-btn {
-
                     top: 202px;
-
                 }
 
                 .card-content {
                     padding: 0 20px;
-                    gap: 16px;
+                    min-height: 70px;
+                }
+
+                .zone-name-wrapper {
+                    min-height: 70px;
                 }
 
                 .card-content h1 {

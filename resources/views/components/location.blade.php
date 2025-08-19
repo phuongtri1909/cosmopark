@@ -1,5 +1,5 @@
 <div class="position-relative d-flex justify-content-center ">
-    <img class="d-none d-lg-block img-fluid animate-on-scroll" src="{{ asset('assets/images/dev/location-1.png') }}" alt="">
+    <img class="d-none d-lg-block img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location-1.png') }}" alt="">
     <img class="d-block d-lg-none w-100 animate-on-scroll" src="{{ asset('assets/images/dev/location-2.png') }}" alt="">
 
     <div class="content-location p-4 mt-3 mt-md-0 text-center text-md-end animate-on-scroll" style="max-width: 450px;">

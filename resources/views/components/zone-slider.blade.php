@@ -29,18 +29,12 @@
         <div class="view-zone-slider mt-5">
             <div class="swiper zone-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <x-card-zone />
-                    </div>
-                    <div class="swiper-slide">
-                        <x-card-zone />
-                    </div>
-                    <div class="swiper-slide">
-                        <x-card-zone />
-                    </div>
-                    <div class="swiper-slide">
-                        <x-card-zone />
-                    </div>
+
+                    @foreach ($zones as $zone)
+                        <div class="swiper-slide">
+                            <x-card-zone :zone="$zone" />
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -174,6 +168,13 @@
 
         .zone-swiper .swiper-slide {
             width: 320px;
+            height: auto;
+            display: flex;
+        }
+
+        .zone-swiper .swiper-slide .card-zone {
+            width: 100%;
+            height: 100%;
         }
 
         @media (min-width: 768px) {
