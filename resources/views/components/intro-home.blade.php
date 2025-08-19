@@ -40,32 +40,42 @@
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
                                 <span class="line-1 text-sm-1 color-text-secondary">Khu công nghiệp</span>
-                                <span class="line-2 text-2xl-4 fw-bold animate-on-scroll" data-target="322">322 <small
-                                        class="line-3 fw-semibold text-md-2">ha</small></span>
+                                <div class="d-flex align-items-baseline">
+                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="322">322 </span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">Khu ở xã hội</span>
-                                <span class="line-2 text-2xl-4 fw-bold animate-on-scroll" data-target="15">15 <small
-                                        class="line-3 fw-semibold text-md-2">ha</small></span>
+                                <span class="line-1 text-sm-1 color-text-secondary">Khu nhà ở xã hội</span>
+                                <div class="d-flex align-items-baseline">
+                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="15">15 </span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
                                 <span class="line-1 text-sm-1 color-text-secondary">Khu năng lượng mặt trời</span>
-                                <span class="line-2 text-2xl-4 fw-bold animate-on-scroll" data-target="500">500 <small
-                                        class="line-3 fw-semibold text-md-2">ha</small></span>
+                                <div class="d-flex align-items-baseline">
+                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="500">500 </span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
                                 <span class="line-1 text-sm-1 color-text-secondary">Sân Golf, Resort & Villa</span>
-                                <span class="line-2 text-2xl-4 fw-bold animate-on-scroll" data-target="120">&gt;120 <small
-                                        class="line-3 fw-semibold text-md-2">ha</small></span>
+                                <div class="d-flex align-items-baseline">
+                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="120">&gt;120 </span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
                                 <span class="line-1 text-sm-1 color-text-secondary">Khu đô thị thông minh</span>
-                                <span class="line-2 text-2xl-4 fw-bold animate-on-scroll" data-target="1000">&gt;1000 <small
-                                        class="line-3 fw-semibold text-md-2">ha</small></span>
+                                <div class="d-flex align-items-baseline">
+                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="1000">&gt;1000 </span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                </div>
                             </div>
                         </div>
                     </div>
