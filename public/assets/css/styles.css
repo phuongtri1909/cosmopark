@@ -499,7 +499,7 @@ html {
 .header-nav .dropdown-item:hover,
 .header-nav .dropdown-item:focus {
     background: #f2f6fa;
-    color: #394b9b;
+    color: var(----primary-color-4);
 }
 
 @keyframes dropdownFadeIn {
@@ -1095,4 +1095,10 @@ html {
 
 .password-toggle:hover {
     color: var(--primary-color-3);
+}
+
+.btn-contact:hover {
+    border-color: var(--primary-color-4) !important;
+    color: white;
+    background: linear-gradient(90deg, var(--primary-color-4) 0%, var(--primary-color-6) 100%) !important;
 }

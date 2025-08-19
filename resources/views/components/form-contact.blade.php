@@ -17,7 +17,7 @@
 
                         <div class="col-12 col-md-7">
                             <!-- Form -->
-                            <form id="contactForm" action="" method="POST">
+                            <form id="contactForm" action="{{ route('contact.submit') }}" method="POST">
                                 @csrf
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-6">
@@ -365,25 +365,25 @@
             const email = this.email.value.trim();
 
             if (!fullName) {
-                alert('{{ __("Please enter your full name") }}');
+                showToast('{{ __("Please enter your full name") }}', 'error');
                 return;
             }
 
             if (!phone) {
-                alert('{{ __("Please enter your phone number") }}');
+                showToast('{{ __("Please enter your phone number") }}', 'error');
                 return;
             }
 
             // Phone validation (Vietnamese format)
             const phoneRegex = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
             if (!phoneRegex.test(phone)) {
-                alert('{{ __("Phone number format is incorrect") }}');
+                showToast('{{ __("Phone number format is incorrect") }}', 'error');
                 return;
             }
 
             // Email validation if provided
             if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('{{ __("Email format is incorrect") }}');
+                showToast('{{ __("Email format is incorrect") }}', 'error');
                 return;
             }
 
@@ -395,20 +395,26 @@
                     body: formData,
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     }
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('{{ __("Thank you for registering! We will contact you soon.") }}');
+                        showToast('{{ __("Thank you for your message. We will get back to you soon.") }}', 'success');
                         this.reset();
+                        const modalEl = document.getElementById('contactModal');
+                        if (modalEl) {
+                            const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+                            modalInstance.hide();
+                        }
                     } else {
-                        alert('{{ __("An error occurred, please try again!") }}');
+                        showToast('{{ __("An error occurred, please try again!") }}', 'error');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('{{ __("An error occurred, please try again!") }}');
+                    showToast('{{ __("An error occurred, please try again!") }}', 'error');
                 });
         });
     </script>

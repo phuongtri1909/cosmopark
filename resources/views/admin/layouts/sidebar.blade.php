@@ -48,7 +48,12 @@
                         </ul>
                     </li>
 
-
+                    <li class="{{ Route::currentRouteNamed('admin.contacts.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.contacts.index') }}">
+                            <i class="fas fa-address-book"></i>
+                            <span>Liên hệ</span>
+                        </a>
+                    </li>
 
                     <!-- Cấu hình hệ thống -->
                     <li
@@ -77,6 +82,7 @@
                                     <span>Quản lý ngôn ngữ</span>
                                 </a>
                             </li>
+
                             <li class="{{ Route::currentRouteNamed('admin.setting.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.setting.index') }}">
                                     <i class="fas fa-cog"></i>

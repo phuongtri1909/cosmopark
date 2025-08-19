@@ -77,7 +77,7 @@
 
         .language-flag:hover {
             transform: scale(1.1);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .language-flag img {
@@ -131,15 +131,20 @@
                             </a>
                             <ul class="dropdown-menu pe-4">
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a>
+                                </li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a>
+                                </li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">{{ __('COSMO SOLAR PARK') }}</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">{{ __('COSMO SOLAR PARK') }}</a>
+                                </li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a>
+                                </li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a>
+                                </li>
                             </ul>
                         </div>
                         <a href="#" class="text-sm fw-medium">{{ __('Information & Gallery') }}</a>
@@ -155,19 +160,25 @@
                             $currentLocale = App\Http\Controllers\LanguageController::getCurrentLocale();
                         @endphp
 
-                        @if($currentLocale === 'vi')
-                            <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="{{ __('Switch to English') }}">
-                                <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag" class="flag-icon">
+                        @if ($currentLocale === 'vi')
+                            <a href="{{ route('language.switch', 'en') }}" class="language-flag"
+                                title="{{ __('Switch to English') }}">
+                                <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag"
+                                    class="flag-icon">
                             </a>
                         @else
-                            <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="{{ __('Chuyển sang tiếng Việt') }}">
-                                <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag" class="flag-icon">
+                            <a href="{{ route('language.switch', 'vi') }}" class="language-flag"
+                                title="{{ __('Chuyển sang tiếng Việt') }}">
+                                <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag"
+                                    class="flag-icon">
                             </a>
                         @endif
                     </div>
 
-                    <span class="me-4 text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">0968255399</span></span>
-                    <button class="btn btn-lg border rounded-5 bg-white text-md fw-medium">{{ __('Get information') }}</button>
+                    <span class="me-4 text-sm fw-medium ">{{ __('Call us') }}: <span
+                            class="phone-us">0968255399</span></span>
+                    <button class="btn btn-lg border rounded-5 bg-white text-md fw-medium btn-contact"
+                        data-bs-toggle="modal" data-bs-target="#contactModal">{{ __('Get information') }}</button>
                 </div>
 
                 <div class="d-xl-none">
@@ -178,6 +189,47 @@
             </div>
         </div>
     </header>
+
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('Get Information') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="contactForm" action="{{ route('contact.submit') }}" method="POST">
+                        @csrf
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <input type="text" name="full_name"
+                                    class="form-control contact-input rounded-pill"
+                                    placeholder="{{ __('Full Name') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" name="phone" class="form-control contact-input rounded-pill"
+                                    placeholder="{{ __('Phone Number') }}" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" name="email" class="form-control contact-input rounded-pill"
+                                placeholder="{{ __('Contact Email') }}">
+                        </div>
+                        <div class="text-center text-md-start">
+                            <button type="submit" class="btn submit-btn-custom rounded-pill p-2">
+                                <span class="submit-text me-2">{{ __('Confirm') }}</span>
+                                <div class="submit-icon">
+                                    <img class="arrow-icon-main"
+                                        src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Mobile Side Menu Overlay -->
     <div class="mobile-side-menu-overlay" id="mobileMenuOverlay"></div>
@@ -208,16 +260,20 @@
                 </button>
                 <ul class="collapse ps-3" id="mobileProjectsMenu">
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a></li>
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a>
+                    </li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a></li>
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a>
+                    </li>
                     <li class="mb-0"><a class="text-md fw-medium"
                             href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">{{ __('COSMO SOLAR PARK') }}</a>
                     </li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a></li>
+                            href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a>
+                    </li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a></li>
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a>
+                    </li>
 
                 </ul>
             </li>
@@ -233,12 +289,14 @@
                         $currentLocale = App\Http\Controllers\LanguageController::getCurrentLocale();
                     @endphp
 
-                    @if($currentLocale === 'vi')
-                        <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="{{ __('Switch to English') }}">
+                    @if ($currentLocale === 'vi')
+                        <a href="{{ route('language.switch', 'en') }}" class="language-flag"
+                            title="{{ __('Switch to English') }}">
                             <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag" class="flag-icon">
                         </a>
                     @else
-                        <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="{{ __('Chuyển sang tiếng Việt') }}">
+                        <a href="{{ route('language.switch', 'vi') }}" class="language-flag"
+                            title="{{ __('Chuyển sang tiếng Việt') }}">
                             <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag" class="flag-icon">
                         </a>
                     @endif
@@ -246,7 +304,7 @@
 
                 <span class="text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">0968255399</span></span>
             </div>
-            <button class="mobile-cta-button">
+            <button class="mobile-cta-button btn-contact" data-bs-toggle="modal" data-bs-target="#contactModal">
                 {{ __('Get information') }}
             </button>
         </div>

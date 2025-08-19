@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
 use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\ContactSubmissionController as AdminContactSubmissionController;
 
 Route::group(['as' => 'admin.'], function () {
     Route::get('/clear-cache', function () {
@@ -64,6 +65,11 @@ Route::group(['as' => 'admin.'], function () {
         Route::resource('banners', BannerController::class)->except(['show']);
 
         Route::resource('socials', SocialController::class)->except(['show']);
+
+        // Contacts management
+        Route::get('contacts', [AdminContactSubmissionController::class, 'index'])->name('contacts.index');
+        Route::get('contacts/{contact}', [AdminContactSubmissionController::class, 'show'])->name('contacts.show');
+        Route::delete('contacts/{contact}', [AdminContactSubmissionController::class, 'destroy'])->name('contacts.destroy');
 
 
         Route::post('ckeditor/upload', [CkeditorController::class, 'upload'])

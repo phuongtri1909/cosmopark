@@ -33,6 +33,7 @@ class SettingController extends Controller
             'encryption' => 'nullable|string',
             'from_address' => 'required|email',
             'from_name' => 'nullable|string',
+            'admin_email' => 'required|email',
         ]);
 
         $smtpSetting = SMTPSetting::first();

@@ -14,8 +14,7 @@
                             <img src="{{ asset('assets/images/logo/logo-color.png') }}" alt="Cosmopark Logo"
                                 class="footer-logo animate-on-scroll">
 
-                            <div
-                                class="footer-address animate-on-scroll d-flex align-items-start">
+                            <div class="footer-address animate-on-scroll d-flex align-items-start">
 
                                 <img class="me-2" src="{{ asset('assets/images/svg/map.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0">
@@ -27,11 +26,9 @@
 
                     <!-- Trang chủ Section -->
                     <div class="col-12 col-lg-6 col-xl-4">
-                        <div
-                            class="footer-address animate-on-scroll d-flex align-items-start">
+                        <div class="footer-address animate-on-scroll d-flex align-items-start">
                             <div class="me-4"></div>
-                            <div
-                                class="footer-menu animate-on-scroll d-flex flex-column ms-1">
+                            <div class="footer-menu animate-on-scroll d-flex flex-column ms-1">
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="{{ route('home') }}">{{ __('home') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
@@ -51,8 +48,7 @@
                     <div class="col-12 col-xl-4">
                         <div class="footer-company animate-on-scroll">
                             <h5 class="text-md-1 text-start mb-3 mb-md-4 fw-bold">Văn phòng kinh doanh TP.HCM</h5>
-                            <div
-                                class="footer-address animate-on-scroll d-flex align-items-start mb-3">
+                            <div class="footer-address animate-on-scroll d-flex align-items-start mb-3">
 
                                 <img class="me-2" src="{{ asset('assets/images/svg/map.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0">
@@ -61,8 +57,7 @@
                                     Minh, Việt Nam)
                                 </p>
                             </div>
-                            <div
-                                class="footer-address animate-on-scroll d-flex align-items-start mb-3">
+                            <div class="footer-address animate-on-scroll d-flex align-items-start mb-3">
 
                                 <img class="me-2" src="{{ asset('assets/images/svg/phone.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0 ">
@@ -70,8 +65,7 @@
                                         href="tel:0968255399">0968.255.399</a>
                                 </p>
                             </div>
-                            <div
-                                class="footer-address animate-on-scroll d-flex align-items-start mb-3">
+                            <div class="footer-address animate-on-scroll d-flex align-items-start mb-3">
 
                                 <img class="me-2" src="{{ asset('assets/images/svg/mail.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0 text-decoration-none">
@@ -82,15 +76,25 @@
                         </div>
                         <div class="footer-social animate-on-scroll text-start">
                             <div class="social-icons animate-on-scroll">
-                                <a href="#" class="social-icon bg-primary-4">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="social-icon bg-primary-4">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="social-icon bg-primary-4">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
+                                @forelse($socials as $social)
+                                    <a href="{{ $social->url }}" target="_blank" class="social-icon"
+                                        aria-label="{{ $social->name }}">
+                                        @if (strpos($social->icon, 'custom-') === 0)
+                                            <span class="{{ $social->icon }}"></span>
+                                        @else
+                                            <i class="{{ $social->icon }}"></i>
+                                        @endif
+                                    </a>
+                                @empty
+                                    <a href="https://facebook.com" target="_blank" class="social-icon"
+                                        aria-label="Facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="mailto:contact@pinknovel.com" target="_blank" class="social-icon"
+                                        aria-label="Email">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                @endforelse
                             </div>
                         </div>
                     </div>

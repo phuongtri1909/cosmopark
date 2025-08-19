@@ -12,6 +12,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ContactSubmissionController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ReviewRatingController;
@@ -26,6 +27,9 @@ Route::get('/news', [BlogController::class, 'index'])->name('news.index');
 Route::get('/news/category/{slug}', [BlogController::class, 'category'])->name('news.category');
 Route::get('/news/{slug}', [BlogController::class, 'show'])->name('news.show');
 Route::post('/news/filter', [BlogController::class, 'filter'])->name('news.filter');
+
+// Contact submissions
+Route::post('/contact/submit', [ContactSubmissionController::class, 'store'])->name('contact.submit');
 
 // Language switching
 Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'switchLanguage'])->name('language.switch');

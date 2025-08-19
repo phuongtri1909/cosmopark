@@ -20,6 +20,7 @@ class SMTPSetting extends Model
         'encryption',
         'from_address',
         'from_name',
+        'admin_email',
     ];
 
     protected $encryptable = [

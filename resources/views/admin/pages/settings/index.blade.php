@@ -98,6 +98,12 @@
                                     value="{{ $smtpSetting->from_name ?? '' }}">
                             </div>
 
+                            <div class="form-group">
+                                <label for="admin_email">Admin Email</label>
+                                <input type="email" id="admin_email" name="admin_email" class="form-control"
+                                    value="{{ $smtpSetting->admin_email ?? '' }}" required>
+                            </div>
+
                             <div class="form-actions">
                                 <button type="submit" class="action-button">
                                     <i class="fas fa-save"></i> Lưu cài đặt SMTP

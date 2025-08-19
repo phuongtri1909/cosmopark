@@ -5,6 +5,7 @@
 @include('components.toast')
 
 @yield('content')
+@include('components.contact_widget')
 @include('components.top_button')
 
 @include('components.form-contact')
