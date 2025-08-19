@@ -10,7 +10,7 @@
     <meta name="description" content="@yield('description', 'Cosmopark')">
     <meta name="keywords" content="@yield('keywords', 'Cosmopark,park')">
     <meta name="author" content="Cosmopark">
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="index, follow">
     <meta property="og:type" content="website">
     <meta property="og:title" content="@yield('title', 'Home - Cosmopark')">
     <meta property="og:description" content="@yield('description', '')">

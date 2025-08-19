@@ -19,7 +19,7 @@
 
                                 <img class="me-2" src="{{ asset('assets/images/svg/map.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0">
-                                    Xã Thạnh Sơn, xã Đức Huệ, thị xã Tây Ninh, Việt Nam
+                                    Ấp Thanh Sơn, xã Đức Huệ, Tỉnh Tây Ninh, Việt Nam
                                 </p>
                             </div>
                         </div>
