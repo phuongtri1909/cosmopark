@@ -131,24 +131,19 @@
                             </a>
                             <ul class="dropdown-menu pe-4">
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK
-                                        ECO INDUSTRIAL ZONE</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a></li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK
-                                        CONVENIENT</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a></li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR
-                                        PARK</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">{{ __('COSMO SOLAR PARK') }}</a></li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SÂN
-                                        GOLF, RESORT & VILLA</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a></li>
                                 <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARK
-                                        SMART AI CITY</a></li>
+                                        href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a></li>
                             </ul>
                         </div>
-                        <a href="#" class="text-sm fw-medium">{{ __('Infomation & Gallery') }}</a>
-                        <a href="#" class="text-sm fw-medium">{{ __('Contact') }}</a>
+                        <a href="#" class="text-sm fw-medium">{{ __('Information & Gallery') }}</a>
+                        <a href="#" class="text-sm fw-medium">{{ __('Contact-1') }}</a>
                     </div>
                 </div>
 
@@ -161,18 +156,18 @@
                         @endphp
 
                         @if($currentLocale === 'vi')
-                            <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="Switch to English">
+                            <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="{{ __('Switch to English') }}">
                                 <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag" class="flag-icon">
                             </a>
                         @else
-                            <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="Chuyển sang tiếng Việt">
+                            <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="{{ __('Chuyển sang tiếng Việt') }}">
                                 <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag" class="flag-icon">
                             </a>
                         @endif
                     </div>
 
-                    <span class="me-4 text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">01234567890</span></span>
-                    <button class="btn btn-lg border rounded-5 bg-white text-md fw-medium">Nhận thông tin</button>
+                    <span class="me-4 text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">0968255399</span></span>
+                    <button class="btn btn-lg border rounded-5 bg-white text-md fw-medium">{{ __('Get information') }}</button>
                 </div>
 
                 <div class="d-xl-none">
@@ -213,25 +208,21 @@
                 </button>
                 <ul class="collapse ps-3" id="mobileProjectsMenu">
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">COSMOPARK
-                            ECO INDUSTRIAL ZONE</a></li>
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a></li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">COSMOPARK
-                            CONVENIENT</a></li>
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a></li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">COSMO SOLAR PARK</a>
+                            href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">{{ __('COSMO SOLAR PARK') }}</a>
                     </li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">SAN GOLF RESORT
-                            VILLA</a></li>
+                            href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a></li>
                     <li class="mb-0"><a class="text-md fw-medium"
-                            href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">COSMOPARL SMART
-                            AI CITY</a></li>
+                            href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a></li>
 
                 </ul>
             </li>
-            <li><a href="#" class="text-md fw-medium">{{ __('Infomation & Gallery') }}</a></li>
-            <li><a href="#" class="text-md fw-medium">{{ __('Contact') }}</a></li>
+            <li><a href="#" class="text-md fw-medium">{{ __('Information & Gallery') }}</a></li>
+            <li><a href="#" class="text-md fw-medium">{{ __('Contact-1') }}</a></li>
         </ul>
 
         <div class="mobile-contact-section">
@@ -243,11 +234,11 @@
                     @endphp
 
                     @if($currentLocale === 'vi')
-                        <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="Switch to English">
+                        <a href="{{ route('language.switch', 'en') }}" class="language-flag" title="{{ __('Switch to English') }}">
                             <img src="{{ asset('assets/images/en.webp') }}" alt="English Flag" class="flag-icon">
                         </a>
                     @else
-                        <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="Chuyển sang tiếng Việt">
+                        <a href="{{ route('language.switch', 'vi') }}" class="language-flag" title="{{ __('Chuyển sang tiếng Việt') }}">
                             <img src="{{ asset('assets/images/vi.webp') }}" alt="Vietnamese Flag" class="flag-icon">
                         </a>
                     @endif
@@ -256,7 +247,7 @@
                 <span class="text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">0968255399</span></span>
             </div>
             <button class="mobile-cta-button">
-                Nhận thông tin
+                {{ __('Get information') }}
             </button>
         </div>
     </div>

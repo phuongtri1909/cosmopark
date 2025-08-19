@@ -8,11 +8,9 @@
                             <img src="{{ asset('assets/images/svg/vision.svg') }}" alt="Tầm nhìn" width="48"
                                 height="48">
                         </div>
-                        <h3 class="vision-title mb-3 text-white fw-bold text-xl-2">TẦM NHÌN</h3>
+                        <h3 class="vision-title mb-3 text-white fw-bold text-xl-2">{{ __('Vision') }}</h3>
                         <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
-                            Trở thành biểu tượng mới của khu công nghiệp – đô thị xanh tại Việt Nam, nơi kết nối hài hòa
-                            giữa sản xuất bền vững, phát triển đô thị hiện đại và môi trường sống thân thiện, hướng đến
-                            tiêu chuẩn quốc tế về phát triển bền vững.
+                            {{ __('vision_description') }}
                         </p>
                     </div>
                 </div>
@@ -24,12 +22,9 @@
                             <img src="{{ asset('assets/images/svg/mission.svg') }}" alt="Sứ mệnh" width="48"
                                 height="48">
                         </div>
-                        <h3 class="vision-title mb-3 text-white fw-bold text-xl-2">SỨ MỆNH</h3>
+                        <h3 class="vision-title mb-3 text-white fw-bold text-xl-2">{{ __('Mission') }}</h3>
                         <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
-                            COSMOPARK cam kết xây dựng một hệ sinh thái công nghiệp – đô thị bền vững, tích hợp sản xuất
-                            xanh, logistics hiện đại và không gian sống thân thiện với môi trường. Dự án hướng đến môi
-                            trường đầu tư minh bạch, hiệu quả và đóng góp vào sự phát triển của Tây Ninh và vùng kinh tế
-                            xuyên biên giới.
+                            {{ __('mission_description') }}
                         </p>
                     </div>
                 </div>

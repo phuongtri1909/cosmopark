@@ -9,14 +9,14 @@
                         <div class="row">
                             <div class="col-12 col-md-4">
                                 <div class="text-center text-md-start">
-                                    <x-badge-custom badge="Tin tức" />
-                                    <h2 class="news-home-title mb-0 animate-on-scroll">TIN TỨC MỚI NHẤT</h2>
+                                    <x-badge-custom badge="{{ __('News-1') }}" />
+                                    <h2 class="news-home-title mb-0 animate-on-scroll">{{ __('Latest News') }}</h2>
                                 </div>
                             </div>
                             <div class="col-12 col-md-8 d-flex align-items-end justify-content-end">
                                 <!-- Nút desktop -->
                                 <a href="{{ route('news.index') }}" type="submit" class="btn submit-btn-custom rounded-pill p-2 mb-3 d-none d-md-flex animate-on-scroll text-decoration-none">
-                                    <span class="submit-text me-2 ps-3">Xem chi tiết</span>
+                                    <span class="submit-text me-2 ps-3">{{ __('View details') }}</span>
                                     <div class="submit-icon submit-icon-custom">
                                         <img class="arrow-icon-main"
                                             src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
@@ -42,7 +42,7 @@
                                 <!-- Nút mobile -->
                                 <div class="d-flex justify-content-center mt-3">
                                      <a href="{{ route('news.index') }}" type="submit" class="btn submit-btn-custom rounded-pill p-2 mb-3 d-flex d-md-none animate-on-scroll text-decoration-none">
-                                        <span class="submit-text me-2 ps-3">Xem chi tiết</span>
+                                        <span class="submit-text me-2 ps-3">{{ __('View details') }}</span>
                                         <div class="submit-icon submit-icon-custom">
                                             <img class="arrow-icon-main"
                                                 src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
@@ -64,8 +64,8 @@
                             <div class="text-center py-5">
                                 <div class="text-muted">
                                     <i class="fas fa-newspaper fa-3x mb-3"></i>
-                                    <h5>Chưa có tin tức nào</h5>
-                                    <p>Hãy quay lại sau để xem tin tức mới nhất</p>
+                                    <h5>{{ __('No news available') }}</h5>
+                                    <p>{{ __('Come back later for latest news') }}</p>
                                 </div>
                             </div>
                         @endif

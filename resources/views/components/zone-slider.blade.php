@@ -7,20 +7,19 @@
             <div>
                 <div class="zone-badge animate-on-scroll">
                     <div class="badge-custom-zone badge rounded-pill mb-3 p-2 p-md-3 animate-on-scroll">
-                        Các phân khu
+                        {{ __('Sub Zones') }}
                     </div>
                 </div>
-                <p class="zone-title text-xl-2 fw-bold text-white mb-0 animate-on-scroll">COSMOPARK
-                    <br />THE FUTURE. HERE
+                <p class="zone-title text-xl-2 fw-bold text-white mb-0 animate-on-scroll">{{ __('COSMOPARK THE FUTURE. HERE') }}
                 </p>
             </div>
 
             <div class="zone-navigation d-flex justify-content-center align-items-center gap-2 mb-3 d-none d-md-flex animate-on-scroll">
                 <button class="btn-prev d-flex align-items-center justify-content-center animate-on-scroll">
-                    <img src="{{ asset('assets/images/svg/caret-left.svg') }}" alt="Previous">
+                    <img src="{{ asset('assets/images/svg/caret-left.svg') }}" alt="{{ __('Previous') }}">
                 </button>
                 <button class="btn-next d-flex align-items-center justify-content-center animate-on-scroll">
-                    <img src="{{ asset('assets/images/svg/caret-right.svg') }}" alt="Next">
+                    <img src="{{ asset('assets/images/svg/caret-right.svg') }}" alt="{{ __('Next') }}">
                 </button>
             </div>
 

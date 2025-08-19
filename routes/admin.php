@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\CategoryBlogController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
+use App\Http\Controllers\Admin\LanguageController;
 
 Route::group(['as' => 'admin.'], function () {
     Route::get('/clear-cache', function () {
@@ -47,6 +48,12 @@ Route::group(['as' => 'admin.'], function () {
 
         Route::get('logo-site', [LogoSiteController::class, 'edit'])->name('logo-site.edit');
         Route::put('logo-site', [LogoSiteController::class, 'update'])->name('logo-site.update');
+
+        // Language Management
+        Route::get('languages', [LanguageController::class, 'index'])->name('languages.index');
+        Route::get('languages/get', [LanguageController::class, 'getLanguageContent'])->name('languages.get');
+        Route::post('languages/update', [LanguageController::class, 'updateLanguageContent'])->name('languages.update');
+        Route::post('languages/create', [LanguageController::class, 'createLanguageFile'])->name('languages.create');
 
         Route::resource('category-blogs', CategoryBlogController::class)->except(['show']);
         Route::resource('blogs', BlogController::class)->except(['show']);

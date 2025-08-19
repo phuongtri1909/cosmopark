@@ -35,13 +35,13 @@
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="{{ route('home') }}">{{ __('home') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
-                                    href="">{{ __('About COSMOPark') }}</a>
+                                    href="{{ route('about') }}">{{ __('About COSMOPark') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="">{{ __('Projects') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="">{{ __('Infomation & Gallery') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
-                                    href="">{{ __('Contact') }}</a>
+                                    href="">{{ __('Contact-1') }}</a>
                             </div>
                         </div>
 
@@ -66,7 +66,7 @@
 
                                 <img class="me-2" src="{{ asset('assets/images/svg/phone.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0 ">
-                                    {{ __('contact') }}: <a class="text-decoration-none color-text-secondary"
+                                    {{ __('Contact-1') }}: <a class="text-decoration-none color-text-secondary"
                                         href="tel:0968255399">0968.255.399</a>
                                 </p>
                             </div>
@@ -76,7 +76,7 @@
                                 <img class="me-2" src="{{ asset('assets/images/svg/mail.svg') }}" alt="">
                                 <p class="color-text-secondary text-sm-1 text-start mb-0 text-decoration-none">
                                     Email: <a class="color-text-secondary"
-                                        href="mailto:info@cosmopark.com">info@cosmopark.com</a>
+                                        href="mailto:info@cosmopark.vn">info@cosmopark.vn</a>
                                 </p>
                             </div>
                         </div>

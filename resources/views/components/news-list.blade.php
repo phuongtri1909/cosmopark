@@ -17,14 +17,14 @@
                     <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <h3 class="no-results-title">Không tìm thấy bài viết nào</h3>
+            <h3 class="no-results-title">{{ __('No articles found') }}</h3>
             <p class="no-results-description">
-                Hãy thử tìm kiếm với từ khóa khác hoặc chọn danh mục khác
+                {{ __('Try searching with different keywords or select another category') }}
             </p>
             <div class="no-results-actions">
                 <button type="button" class="btn-reset-filter" onclick="resetFilters()">
                     <i class="fas fa-refresh me-2"></i>
-                    Xóa bộ lọc
+                    {{ __('Clear filters') }}
                 </button>
             </div>
         </div>

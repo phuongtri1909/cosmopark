@@ -3,25 +3,25 @@
     <img class="d-block d-lg-none w-100 animate-on-scroll" src="{{ asset('assets/images/dev/location-2.png') }}" alt="">
 
     <div class="content-location p-4 mt-3 mt-md-0 text-center text-md-end animate-on-scroll" style="max-width: 450px;">
-        <h5 class="fw-bold text-2xl-1 color-primary-4 animate-on-scroll">VỊ TRÍ CHIẾN LƯỢC</h5>
-        <span class="text-xs-1 color-text-secondary animate-on-scroll">Map sơ đồ vị trí, tuyến đường và các khu vực lân cận</span>
+        <h5 class="fw-bold text-2xl-1 color-primary-4 animate-on-scroll">{{ __('STRATEGIC LOCATION') }}</h5>
+        <span class="text-xs-1 color-text-secondary animate-on-scroll">{{ __('location_map_description') }}</span>
 
         <div class="bg-white rounded-4 box-shadow mt-3 p-3 animate-on-scroll">
             <div class="d-flex align-items-center mb-0 mb-lg-3 animate-on-scroll">
                 <img src="{{ asset('assets/images/svg/line-1.svg') }}" alt="" class="me-2">
-                <span class="text-sm-1 color-text-secondary">CAO TỐC HƯỚNG TÂY</span>
+                <span class="text-sm-1 color-text-secondary">{{ __('WESTERN EXPRESSWAY') }}</span>
             </div>
             <div class="d-flex align-items-center mb-0 mb-lg-3 animate-on-scroll">
                 <img src="{{ asset('assets/images/svg/line-2.svg') }}" alt="" class="me-2">
-                <span class="text-sm-1 color-text-secondary">CAO TỐC N2 (TP.HCM - TÂY NINH)</span>
+                <span class="text-sm-1 color-text-secondary">{{ __('EXPRESSWAY N2') }}</span>
             </div>
             <div class="d-flex align-items-center mb-0 mb-lg-3 animate-on-scroll">
                 <img src="{{ asset('assets/images/svg/line-3.svg') }}" alt="" class="me-2">
-                <span class="text-sm-1 color-text-secondary">TỈNH LỘ 818</span>
+                <span class="text-sm-1 color-text-secondary">{{ __('PROVINCIAL ROAD 818') }}</span>
             </div>
             <div class="d-flex align-items-center animate-on-scroll">
                 <img src="{{ asset('assets/images/svg/line-4.svg') }}" alt="" class="me-2">
-                <span class="text-sm-1 color-text-secondary">VÀNH ĐAI 4</span>
+                <span class="text-sm-1 color-text-secondary">{{ __('RING ROAD 4') }}</span>
             </div>
         </div>
     </div>

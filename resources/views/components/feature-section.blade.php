@@ -4,10 +4,8 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-1.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold color-primary-4 text-1lg">VỊ TRÍ CHIẾN LƯỢC</h5>
-                    <p class="color-primary-8 text-md">Tọa lạc tại vùng kinh tế trọng điểm, kết nối liên vùng thông qua hệ thống cao tốc, quốc lộ và
-                        đường vành đai thuận tiện đi đến Cảng Quốc tế Long An; Cửa khẩu Quốc tế Bình Hiệp; Sân bay Tân
-                        Sơn Nhất,… góp phần tối ưu hóa chuỗi cung ứng, logistics và hoạt động kinh tế mậu dịch.</p>
+                    <h5 class="fw-bold color-primary-4 text-1lg">{{ __('STRATEGIC LOCATION') }}</h5>
+                    <p class="color-primary-8 text-md">{{ __('strategic_location_desc') }}</p>
                 </div>
             </div>
         </div>
@@ -15,9 +13,8 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-2.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold text-white text-1lg">HẠ TẦNG ĐỒNG BỘ</h5>
-                    <p class="text-white text-md">Hệ thống cơ sở hạ tầng được quy hoạch hoàn chỉnh, với mạng lưới giao thông kết nối liên vùng hiện
-                        đại đang được đầu tư mở rộng và phát triển.</p>
+                    <h5 class="fw-bold text-white text-1lg">{{ __('SYNCHRONIZED INFRASTRUCTURE') }}</h5>
+                    <p class="text-white text-md">{{ __('infrastructure_description') }}</p>
                 </div>
             </div>
         </div>
@@ -25,9 +22,8 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-3.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold color-primary-4 text-1lg">ƯU ĐÃI & HỖ TRỢ TỪ CHÍNH PHỦ</h5>
-                    <p class="color-primary-8 text-md">Dự án được hưởng các chính sách ưu đãi về thuế cùng nhiều ưu đãi hấp dẫn khác, mang lại lợi ích
-                        tối đa cho các nhà đầu tư</p>
+                    <h5 class="fw-bold color-primary-4 text-1lg">{{ __('GOVERNMENT INCENTIVES') }}</h5>
+                    <p class="color-primary-8 text-md">{{ __('incentives_description') }}</p>
                 </div>
             </div>
         </div>
@@ -35,10 +31,8 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-4.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold text-white text-1lg">TIỆN ÍCH HOÀN CHỈNH</h5>
-                    <p class="text-white text-md">Khu vực được quy hoạch và phát triển bài bản với các tiện ích đa dạng như nhà ở xã hội, công
-                        viên, nhà hàng, khách sạn,... nhằm đáp ứng toàn diện nhu cầu làm việc, học tập và giải trí của
-                        dân cư.</p>
+                    <h5 class="fw-bold text-white text-1lg">{{ __('COMPLETE AMENITIES') }}</h5>
+                    <p class="text-white text-md">{{ __('amenities_description') }}</p>
                 </div>
             </div>
         </div>
@@ -46,10 +40,8 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-5.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold color-primary-4 text-1lg">PHÁT TRIỂN SINH THÁI BỀN VỮNG</h5>
-                    <p class="color-primary-8 text-md">Cosmopark khai thác năng lượng sạch từ Cosmo Solar Park, kết hợp với hệ thống xử lý nước thải
-                        hiện đại và áp dụng mô hình kinh tế tuần hoàn theo chuẩn EIP 2.0 của UNIDO và IFC – World Bank,
-                        nhằm kiến tạo khu công nghiệp – đô thị sinh thái hiện đại, hài hòa và bền vững.</p>
+                    <h5 class="fw-bold color-primary-4 text-1lg">{{ __('SUSTAINABLE ECOLOGICAL DEVELOPMENT') }}</h5>
+                    <p class="color-primary-8 text-md">{{ __('ecological_description') }}</p>
                 </div>
             </div>
         </div>

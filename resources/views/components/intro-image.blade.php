@@ -7,10 +7,7 @@
             COSMOPARK
         </h2>
         <p class="color-text-secondary text-sm-2 content animate-on-scroll">
-            Định hướng phát triển hệ sinh thái công nghiệp bền vững. Với mô hình
-            kinh tế tuần hoàn là trọng tâm, dự án áp
-            dụng chặt chẽ các tiêu chí EIP 2.0 của UNIDO & IFC World Bank. Điều này đảm bảo sự phù hợp và đóng góp hiệu
-            quả vào các mục tiêu phát triển bền vững của khu vực và toàn cầu.
+            {{ __('intro_image_description') }}
         </p>
     </div>
 </div>

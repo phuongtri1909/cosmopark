@@ -9,9 +9,9 @@
                             <!-- Header -->
                             <div class="mb-4 text-center text-md-start">
                                 <div class="contact-badge badge rounded-pill mb-3 animate-on-scroll">
-                                    Liên hệ
+                                    {{ __('Contact-1') }}
                                 </div>
-                                <h2 class="contact-title mb-0 animate-on-scroll">NHẬN THÔNG TIN</h2>
+                                <h2 class="contact-title mb-0 animate-on-scroll">{{ __('Get Information') }}</h2>
                             </div>
                         </div>
 
@@ -22,24 +22,24 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-md-6">
                                         <input type="text" name="full_name"
-                                            class="form-control contact-input rounded-pill animate-on-scroll" placeholder="Họ và tên"
+                                            class="form-control contact-input rounded-pill animate-on-scroll" placeholder="{{ __('Full Name') }}"
                                             required>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="tel" name="phone"
-                                            class="form-control contact-input rounded-pill animate-on-scroll" placeholder="Số điện thoại"
+                                            class="form-control contact-input rounded-pill animate-on-scroll" placeholder="{{ __('Phone Number') }}"
                                             required>
                                     </div>
                                 </div>
 
                                 <div class="mb-4">
                                     <input type="email" name="email" class="form-control contact-input rounded-pill animate-on-scroll"
-                                        placeholder="Email liên hệ">
+                                        placeholder="{{ __('Contact Email') }}">
                                 </div>
 
                                 <div class="text-center text-md-start">
                                     <button type="submit" class="btn submit-btn-custom rounded-pill p-2 animate-on-scroll">
-                                        <span class="submit-text me-2">Xác nhận</span>
+                                        <span class="submit-text me-2">{{ __('Confirm') }}</span>
                                         <div class="submit-icon">
                                             <img class="arrow-icon-main"
                                                 src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
@@ -365,25 +365,25 @@
             const email = this.email.value.trim();
 
             if (!fullName) {
-                alert('Vui lòng nhập họ và tên');
+                alert('{{ __("Please enter your full name") }}');
                 return;
             }
 
             if (!phone) {
-                alert('Vui lòng nhập số điện thoại');
+                alert('{{ __("Please enter your phone number") }}');
                 return;
             }
 
             // Phone validation (Vietnamese format)
             const phoneRegex = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
             if (!phoneRegex.test(phone)) {
-                alert('Số điện thoại không đúng định dạng');
+                alert('{{ __("Phone number format is incorrect") }}');
                 return;
             }
 
             // Email validation if provided
             if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('Email không đúng định dạng');
+                alert('{{ __("Email format is incorrect") }}');
                 return;
             }
 
@@ -400,15 +400,15 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
+                        alert('{{ __("Thank you for registering! We will contact you soon.") }}');
                         this.reset();
                     } else {
-                        alert('Có lỗi xảy ra, vui lòng thử lại!');
+                        alert('{{ __("An error occurred, please try again!") }}');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Có lỗi xảy ra, vui lòng thử lại!');
+                    alert('{{ __("An error occurred, please try again!") }}');
                 });
         });
     </script>

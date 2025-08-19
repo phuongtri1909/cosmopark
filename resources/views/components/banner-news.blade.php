@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12 pt-5 text-center text-md-start">
                 <h1 class="fw-bold color-primary-4 mt-4 mb-2 animate-on-scroll banner-title text-2xl-4">
-                    TIN TỨC
+                    {{ __('News') }}
                 </h1>
 
             </div>

@@ -31,4 +31,5 @@ class LanguageController extends Controller
     {
         return Session::get('locale', 'vi');
     }
+    
 }

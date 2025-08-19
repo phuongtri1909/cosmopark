@@ -5,7 +5,7 @@
         <!-- Header Section -->
         <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
             <h2 class="text-xl-3 color-primary-4 fw-bold mb-3 mb-md-0">
-                TIN TỨC MỚI NHẤT
+                {{ __('Latest News') }}
             </h2>
 
             <!-- Search Section - Full width on mobile -->
@@ -15,7 +15,7 @@
                         <img src="{{ asset('assets/images/svg/search.svg') }}" alt="Search" width="16">
                     </span>
                     <input type="text" id="newsSearchInput" class="form-control rounded-pill ps-5"
-                           placeholder="Tìm kiếm tin tức..." value="{{ request('search') }}">
+                           placeholder="{{ __('Search news...') }}" value="{{ request('search') }}">
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="d-flex align-items-center gap-2 flex-wrap">
                 <button type="button" class="btn-category-news color-primary-8 rounded-5 text-md px-3 py-2 animate-on-scroll active"
                         data-category="all">
-                    Tất cả
+                    {{ __('All') }}
                 </button>
                 @foreach($categories as $category)
                     <button type="button" class="btn-category-news color-primary-8 rounded-5 text-md px-3 py-2 animate-on-scroll"
@@ -45,7 +45,7 @@
         <!-- Loading spinner -->
         <div id="loadingSpinner" class="text-center py-5" style="display: none;">
             <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Đang tải...</span>
+                <span class="visually-hidden">{{ __('Loading...') }}</span>
             </div>
         </div>
     </div>
@@ -241,7 +241,7 @@
                     .catch(error => {
                         hideLoading();
                         console.error('Error:', error);
-                        showError('Có lỗi xảy ra khi tải dữ liệu');
+                        showError('{{ __("An error occurred while loading data") }}');
                     });
                 }
 
@@ -314,7 +314,7 @@
                     .catch(error => {
                         hideLoading();
                         console.error('Error:', error);
-                        showError('Có lỗi xảy ra khi tải trang');
+                        showError('{{ __("An error occurred while loading page") }}');
                     });
                 }
 
@@ -333,13 +333,13 @@
                 // Show error message
                 function showError(message) {
                     newsListContainer.innerHTML = `
-                        <div class="col-12 text-center py-5">
-                            <div class="text-danger">
-                                <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
-                                <h5>Lỗi</h5>
-                                <p>${message}</p>
-                            </div>
+                                            <div class="col-12 text-center py-5">
+                        <div class="text-danger">
+                            <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                            <h5>{{ __('Error') }}</h5>
+                            <p>${message}</p>
                         </div>
+                    </div>
                     `;
                 }
             });

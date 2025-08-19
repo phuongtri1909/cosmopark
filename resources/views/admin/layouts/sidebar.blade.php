@@ -52,7 +52,7 @@
 
                     <!-- Cấu hình hệ thống -->
                     <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.socials.*', 'admin.logo-site.*']) || request()->is('admin/users*') || request()->is('admin/settings*') || request()->is('admin/setting-order*') ? 'open' : '' }}">
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.socials.*', 'admin.logo-site.*', 'admin.languages.*']) || request()->is('admin/users*') || request()->is('admin/settings*') || request()->is('admin/setting-order*') ? 'open' : '' }}">
                         <a href="#" class="submenu-toggle">
                             <i class="fas fa-cogs"></i>
                             <span>Cấu hình hệ thống</span>
@@ -71,7 +71,12 @@
                                     <span>Logo Site</span>
                                 </a>
                             </li>
-
+                            <li class="{{ Route::currentRouteNamed('admin.languages.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.languages.index') }}">
+                                    <i class="fas fa-language"></i>
+                                    <span>Quản lý ngôn ngữ</span>
+                                </a>
+                            </li>
                             <li class="{{ Route::currentRouteNamed('admin.setting.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.setting.index') }}">
                                     <i class="fas fa-cog"></i>

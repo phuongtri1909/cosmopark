@@ -12,7 +12,7 @@
                     <div class="div">
                         <div class="bg-primary-1 rounded-5 py-2 px-3">
                             <div class="text-xs text-white">
-                                {{ $latestPost->category ? $latestPost->category->name : 'Danh mục' }}
+                                {{ $latestPost->category ? $latestPost->category->name : __('Category') }}
                             </div>
                         </div>
                         <span class="line"></span>
@@ -29,30 +29,30 @@
                         {{ cleanDescription($latestPost->content, 300) }}
                     </p>
                     <a href="{{ route('news.show', $latestPost->slug) }}"
-                        class="fw-semibold text-decoration-none continue-reading">Tiếp tục đọc</a>
+                        class="fw-semibold text-decoration-none continue-reading">{{ __('Continue reading') }}</a>
                 @else
                     <!-- Fallback content when no posts -->
                     <div class="div">
                         <div class="bg-primary-1 rounded-5 py-2 px-3">
                             <div class="text-xs text-white">
-                                Tin tức
+                                {{ __('News-1') }}
                             </div>
                         </div>
                         <span class="line"></span>
                         <div class="color-text-secondary text-xs-1">
-                            Chưa có tin tức
+                            {{ __('No news yet') }}
                         </div>
                     </div>
                     <div class="card-news-2">
                         <p class="color-primary-8 text-1lg-3 fw-bold">
-                            Chưa có bài viết nào
+                            {{ __('No articles available') }}
                         </p>
                     </div>
                     <p class="text-sm-1 color-text-secondary">
-                        Hãy quay lại sau để xem tin tức mới nhất từ Cosmopark
+                        {{ __('Come back later for latest news from Cosmopark') }}
                     </p>
                     <div class="text-muted">
-                        <small>Chưa có bài viết để hiển thị</small>
+                        <small>{{ __('No articles to display') }}</small>
                     </div>
                 @endif
             </div>

@@ -8,23 +8,19 @@
                         <div class="row">
                             <div class="col-12 col-md-4">
                                 <div class="mb-4 text-center text-md-start">
-                                    <x-badge-custom badge="Giới thiệu chung" />
-                                    <h2 class="feature-title animate-on-scroll mb-0">COSMOPARK THE FUTURE. HERE</h2>
+                                    <x-badge-custom badge="{{ __('General Introduction') }}" />
+                                    <h2 class="feature-title animate-on-scroll mb-0">{{ __('COSMOPARK THE FUTURE. HERE') }}</h2>
                                 </div>
                             </div>
                             <div class="col-12 col-md-8">
                                 <p class="text-center text-md-start text-sm-1 color-text-secondary">
-                                    COSMOPARK là dự án được đầu tư bởi Tập đoàn Hoàng Gia Việt Nam, với quy hoạch
-                                    tổng thể
-                                    như một tổ hợp khu công nghiệp và đô thị xanh, tuân thủ các tiêu chuẩn sinh
-                                    thái, tích
-                                    hợp sản xuất bền vững, logistics và không gian sống thân thiện với môi trường
+                                    {{ __('COSMOPARK is a project invested by Hoang Gia Vietnam Group, with overall planning as a green industrial and urban complex, complying with ecological standards, integrating sustainable production, logistics and environmentally friendly living spaces') }}
                                 </p>
 
                                 <div class="d-flex justify-content-center justify-content-md-start">
                                     <a href="{{ route('about') }}" type="submit"
                                         class="btn submit-btn-custom animate-on-scroll rounded-pill p-2 text-decoration-none">
-                                        <span class="submit-text me-2 ps-3">Xem chi tiết</span>
+                                        <span class="submit-text me-2 ps-3">{{ __('View details') }}</span>
                                         <div class="submit-icon submit-icon-custom">
                                             <img class="arrow-icon-main"
                                                 src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
@@ -39,42 +35,42 @@
                         <div class="row gy-5 justify-content-center intro-feature-row">
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">Khu công nghiệp</span>
+                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Industrial Zone') }}</span>
                                 <div class="d-flex align-items-baseline">
                                     <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="322">322 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
                                 </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">Khu nhà ở xã hội</span>
+                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Social Housing Area') }}</span>
                                 <div class="d-flex align-items-baseline">
                                     <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="15">15 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
                                 </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">Khu năng lượng mặt trời</span>
+                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Solar Energy Zone') }}</span>
                                 <div class="d-flex align-items-baseline">
                                     <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="500">500 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
                                 </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">Sân Golf, Resort & Villa</span>
+                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Golf Course, Resort & Villa') }}</span>
                                 <div class="d-flex align-items-baseline">
                                     <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="120">&gt;120 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
                                 </div>
                             </div>
                             <div
                                 class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">Khu đô thị thông minh</span>
+                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Smart City Zone') }}</span>
                                 <div class="d-flex align-items-baseline">
                                     <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="1000">&gt;1000 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">ha</span>
+                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
                                 </div>
                             </div>
                         </div>

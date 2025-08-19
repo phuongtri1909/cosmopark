@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="mb-4 text-center text-md-start">
-                        <x-badge-custom badge="Phát triển công nghiệp bền vững" />
-                        <h2 class="feature-title animate-on-scroll mb-0 fw-bold">NGÀNH CÔNG NGHIỆP ƯU TIÊN</h2>
+                        <x-badge-custom badge="{{ __('Sustainable Industrial Development') }}" />
+                        <h2 class="feature-title animate-on-scroll mb-0 fw-bold">{{ __('PRIORITY INDUSTRIES') }}</h2>
                     </div>
                 </div>
 
@@ -15,8 +15,7 @@
                             <div class="overlap-group animate-on-scroll">
 
                                 <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">THIẾT BỊ ĐIỆN - ĐIỆN
-                                    TỬ</p>
+                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('ELECTRICAL ELECTRONIC EQUIPMENT') }}</p>
 
 
                                 <div class="icon-branch bg-primary-6 rounded-circle">
@@ -28,7 +27,7 @@
                             <div class="overlap-group animate-on-scroll">
 
                                 <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">DƯỢC PHẨM</p>
+                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('PHARMACEUTICALS') }}</p>
 
                                 <div class="icon-branch bg-primary-6 rounded-circle">
                                     <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-2.svg') }}" />
@@ -39,7 +38,7 @@
                             <div class="overlap-group animate-on-scroll">
 
                                 <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">NĂNG LƯỢNG</p>
+                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('ENERGY') }}</p>
 
                                 <div class="icon-branch bg-primary-6 rounded-circle">
                                     <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-3.svg') }}" />
@@ -50,7 +49,7 @@
                             <div class="overlap-group animate-on-scroll">
 
                                 <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">VÀ CÁC NGÀNH KHÁC</p>
+                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('AND OTHER INDUSTRIES') }}</p>
 
                                 <div class="icon-branch bg-primary-6 rounded-circle">
                                     <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-4.svg') }}" />
@@ -87,7 +86,7 @@
             }
 
             .branch .overlap-group:hover {
-               
+
                 transform: translateY(-6px) scale(1.03);
                 transition: all 0.35s cubic-bezier(.39, .575, .565, 1);
                 z-index: 2;
@@ -138,13 +137,17 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: max-content;
+                width: 80%;
+                max-width: 250px;
                 margin: 0;
                 z-index: 2;
                 text-align: center;
                 pointer-events: none;
                 opacity: 0;
                 transition: opacity 0.6s cubic-bezier(.39, .575, .565, 1);
+                word-wrap: break-word;
+                white-space: normal;
+                line-height: 1.2;
             }
 
             .branch .overlap-group.animated .text-wrapper {

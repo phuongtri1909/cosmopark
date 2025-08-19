@@ -12,19 +12,11 @@
                 class="col-12 col-lg-6 order-1 order-lg-3 d-flex flex-column justify-content-center text-center text-md-start">
                 <!-- Thông tin vị trí -->
                 <div class="location-badge animate-on-scroll">
-                    <x-badge-custom badge="Giới thiệu vị trí" />
+                    <x-badge-custom badge="{{ __('Location Introduction') }}" />
                 </div>
-                <p class="location-title text-2xl-1 fw-bold text-dark animate-on-scroll">TÂY NINH <br />VÙNG KINH TẾ TRỌNG ĐIỂM MỚI</p>
+                <p class="location-title text-2xl-1 fw-bold text-dark animate-on-scroll">{{ __('TAY NINH NEW KEY ECONOMIC REGION') }}</p>
                 <p class="text-sm-1 color-text-secondary animate-on-scroll">
-                    Thuộc top 10 tỉnh có quy mô kinh tế lớn nhất cả nước, là trung tâm phát triển kinh tế liên vùng và
-                    cửa ngõ giao thương quan trọng, kết nối TP. Hồ Chí Minh với Đồng bằng sông Cửu Long và
-                    Campuchia.<br />Sở hữu
-                    hơn 10 trục động lực phát triển được quy hoạch bài bản, Tây Ninh không chỉ thuận lợi cho giao thương
-                    nội
-                    địa mà còn giữ vị trí chiến lược trong kết nối khu vực. Với hạ tầng liên vùng đang phát triển, tỉnh
-                    đang từng
-                    bước khẳng định vai trò trung tâm mới về công nghiệp, logistics và đô thị bền vững tại miền Nam Việt
-                    Nam.
+                    {{ __('tay_ninh_description') }}
                 </p>
             </div>
         </div>
@@ -34,45 +26,45 @@
                 <div class="col-4 text-center">
                     <div class="d-inline-flex align-items-center position-relative">
                         <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="3.2">3,2</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">Triệu</div>
+                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Million') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">Dân số</div>
+                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Population') }}</div>
                 </div>
                 <div class="col-4 text-center">
                     <div class="d-inline-flex align-items-center position-relative">
                         <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="13.5">~$13,5</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">Tỷ</div>
+                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">Quy mô kinh tế</div>
+                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Economic Scale') }}</div>
                 </div>
                 <div class="col-4 text-center">
                     <div class="d-inline-flex align-items-center position-relative">
                         <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="9.63">9,63%</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">Tỷ lệ tăng trưởng QRDP</div>
+                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('GRDP Growth Rate') }}</div>
                 </div>
 
 
                 <div class="col-4 text-center">
                     <div class="d-inline-flex align-items-center position-relative">
                         <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="120">120</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">Triệu</div>
+                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Million') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">GRDP bình quân đầu người</div>
+                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('GRDP per capita') }}</div>
                 </div>
                 <div class="col-4 text-center">
                     <div class="d-inline-flex align-items-center position-relative">
                         <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="24">$24+</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">Tỷ</div>
+                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">FDI</div>
+                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('FDI') }}</div>
                 </div>
                 <div class="col-4 text-center">
                     <div class="d-inline-flex align-items-center position-relative">
                         <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="13.9">$13.9+</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">Tỷ</div>
+                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">Kim ngạch xuất nhập khẩu</div>
+                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Import Export Turnover') }}</div>
                 </div>
             </div>
         </div>

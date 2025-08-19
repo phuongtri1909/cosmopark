@@ -29,7 +29,7 @@
                 @if ($button)
                     <a href="https://royallongangolfandcountryclub.com/en/home/" target="_blank" type="submit"
                         class="btn submit-btn-custom animate-on-scroll rounded-pill p-2 mt-3 text-decoration-none d-inline-flex">
-                        <span class="submit-text me-2 ps-3">Đặt sân ngay</span>
+                        <span class="submit-text me-2 ps-3">{{ __('Book now') }}</span>
                         <div class="submit-icon submit-icon-custom">
                             <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
                         </div>

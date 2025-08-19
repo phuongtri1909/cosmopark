@@ -8,9 +8,7 @@
                 </h1>
                 <p class="lead fw-normal mb-4 animate-on-scroll banner-desc text-sm-1 color-text-secondary mt-4"
                     style="max-width: 700px;">
-                    COSMOPARK là dự án được đầu tư bởi Tập đoàn Hoàng Gia Việt Nam, với quy hoạch tổng thể như một tổ
-                    hợp khu công nghiệp và đô thị xanh, tuân thủ các tiêu chuẩn sinh thái, tích hợp sản xuất bền vững,
-                    logistics và không gian sống thân thiện với môi trường.
+                    {{ __('banner_about_description') }}
                 </p>
             </div>
             <div class="col-lg-12">
@@ -23,14 +21,14 @@
                             <div class="row g-3 justify-content-end mt-0">
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-2 text-white mb-1">Khu công nghiệp</p>
+                                        <p class="text-sm-1 text-white mb-1">{{ __('Industrial Zone') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="322">322<small
                                                 class="fs-6 fw-normal">ha</small></div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-2 text-white mb-1">Khu nhà ở xã hội</p>
+                                        <p class="text-sm-1 text-white mb-1">{{ __('Social Housing Area') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="15">15<small
                                                 class="fs-6 fw-normal">ha</small></div>
                                     </div>
@@ -40,21 +38,21 @@
                             <div class="row g-3 mt-0">
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-2 text-white mb-1">Khu năng lượng</p>
+                                        <p class="text-sm-1 text-white mb-1">{{ __('Energy Zone') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="500">500<small
                                                 class="fs-6 fw-normal">ha</small></div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-2 text-white mb-1">Sân Golf, resort & villa</p>
+                                        <p class="text-sm-1 text-white mb-1">{{ __('Golf Course, Resort & Villa') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="120">
                                             &gt;120<small class="fs-6 fw-normal">ha</small></div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-2 text-white mb-1">Đô thị thông minh</p>
+                                        <p class="text-sm-1 text-white mb-1">{{ __('Smart City') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="1000">
                                             &gt;1000<small class="fs-6 fw-normal">ha</small></div>
                                     </div>
