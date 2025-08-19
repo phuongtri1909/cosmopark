@@ -253,7 +253,7 @@
                     @endif
                 </div>
 
-                <span class="text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">01234567890</span></span>
+                <span class="text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">0968255399</span></span>
             </div>
             <button class="mobile-cta-button">
                 Nhận thông tin

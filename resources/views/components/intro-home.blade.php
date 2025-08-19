@@ -22,14 +22,14 @@
                                 </p>
 
                                 <div class="d-flex justify-content-center justify-content-md-start">
-                                    <button type="submit"
-                                        class="btn submit-btn-custom animate-on-scroll rounded-pill p-2">
+                                    <a href="{{ route('about') }}" type="submit"
+                                        class="btn submit-btn-custom animate-on-scroll rounded-pill p-2 text-decoration-none">
                                         <span class="submit-text me-2 ps-3">Xem chi tiết</span>
                                         <div class="submit-icon submit-icon-custom">
                                             <img class="arrow-icon-main"
                                                 src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
                                         </div>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

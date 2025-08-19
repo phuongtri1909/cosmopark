@@ -27,7 +27,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'check.role' => \App\Http\Middleware\CheckRole::class,
         ]);
 
-        // Add SetLocale middleware to web group
         $middleware->web([
             \App\Http\Middleware\SetLocale::class,
         ]);
