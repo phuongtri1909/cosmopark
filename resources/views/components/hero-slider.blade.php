@@ -1,8 +1,4 @@
-@php
-    use App\Models\BannerHome;
-    $bannerHomes = BannerHome::active()->ordered()->get();
-@endphp
-
+@props(['bannerHomes'])
 <div class="hero-slider animate__animated animate__fadeIn">
     @if($bannerHomes->count() > 0)
         <div class="swiper hero-swiper">

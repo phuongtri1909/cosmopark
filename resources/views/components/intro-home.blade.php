@@ -9,12 +9,22 @@
                             <div class="col-12 col-md-4">
                                 <div class="mb-4 text-center text-md-start">
                                     <x-badge-custom badge="{{ __('General Introduction') }}" />
-                                    <h2 class="feature-title animate-on-scroll mb-0">{!! __('COSMOPARK THE FUTURE. HERE') !!}</h2>
+                                    <h2 class="feature-title animate-on-scroll mb-0">
+                                        @if($generalIntroduction)
+                                            {!! $generalIntroduction->title !!}
+                                        @else
+                                            {{ __('COSMOPARK THE FUTURE. HERE') }}
+                                        @endif
+                                    </h2>
                                 </div>
                             </div>
                             <div class="col-12 col-md-8">
                                 <p class="text-center text-md-start text-sm-1 color-text-secondary">
-                                    {{ __('COSMOPARK is a project invested by Hoang Gia Vietnam Group, with overall planning as a green industrial and urban complex, complying with ecological standards, integrating sustainable production, logistics and environmentally friendly living spaces') }}
+                                    @if($generalIntroduction)
+                                        {{ $generalIntroduction->content }}
+                                    @else
+                                        {{ __('COSMOPARK is a project invested by Hoang Gia Vietnam Group, with overall planning as a green industrial and urban complex, complying with ecological standards, integrating sustainable production, logistics and environmentally friendly living spaces') }}
+                                    @endif
                                 </p>
 
                                 <div class="d-flex justify-content-center justify-content-md-start">
@@ -33,46 +43,54 @@
 
                     <div class="col-12 mt-4 text-center">
                         <div class="row gy-5 justify-content-center intro-feature-row">
-                            <div
-                                class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Industrial Zone') }}</span>
-                                <div class="d-flex align-items-baseline">
-                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="322">322 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                            @if($introFeatures && $introFeatures->count() > 0)
+                                @foreach($introFeatures as $feature)
+                                    <div class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
+                                        <span class="line-1 text-sm-1 color-text-secondary">{{ $feature->name }}</span>
+                                        <div class="d-flex align-items-baseline">
+                                            <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="{{ $feature->value }}">{{ $feature->value }}</span>
+                                            <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ $feature->unit }}</span>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <!-- Fallback features -->
+                                <div class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
+                                    <span class="line-1 text-sm-1 color-text-secondary">{{ __('Industrial Zone') }}</span>
+                                    <div class="d-flex align-items-baseline">
+                                        <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="322">322 </span>
+                                        <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Social Housing Area') }}</span>
-                                <div class="d-flex align-items-baseline">
-                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="15">15 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                <div class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
+                                    <span class="line-1 text-sm-1 color-text-secondary">{{ __('Social Housing Area') }}</span>
+                                    <div class="d-flex align-items-baseline">
+                                        <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="15">15 </span>
+                                        <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Solar Energy Zone') }}</span>
-                                <div class="d-flex align-items-baseline">
-                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="500">500 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                <div class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
+                                    <span class="line-1 text-sm-1 color-text-secondary">{{ __('Solar Energy Zone') }}</span>
+                                    <div class="d-flex align-items-baseline">
+                                        <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="500">500 </span>
+                                        <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Golf Course, Resort & Villa') }}</span>
-                                <div class="d-flex align-items-baseline">
-                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="120">&gt;120 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                <div class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
+                                    <span class="line-1 text-sm-1 color-text-secondary">{{ __('Golf Course, Resort & Villa') }}</span>
+                                    <div class="d-flex align-items-baseline">
+                                        <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="120">&gt;120 </span>
+                                        <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div
-                                class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
-                                <span class="line-1 text-sm-1 color-text-secondary">{{ __('Smart City Zone') }}</span>
-                                <div class="d-flex align-items-baseline">
-                                    <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="1000">&gt;1000 </span>
-                                    <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                <div class="col-6 d-flex flex-column align-items-center intro-feature-col animate-on-scroll">
+                                    <span class="line-1 text-sm-1 color-text-secondary">{{ __('Smart City Zone') }}</span>
+                                    <div class="d-flex align-items-baseline">
+                                        <span class="line-2 text-2xl-4 fw-bold animate-on-scroll me-2" data-target="1000">&gt;1000 </span>
+                                        <span class="line-3 fw-semibold text-md-2 color-primary-6">{{ __('ha') }}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>

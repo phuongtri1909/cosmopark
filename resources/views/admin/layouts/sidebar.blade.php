@@ -20,7 +20,7 @@
                     </li>
 
                     <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.banner-homes.*']) ? 'open' : '' }}">
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.banner-homes.*', 'admin.general-introductions.*', 'admin.intro-features.*']) ? 'open' : '' }}">
                         <a href="#" class="submenu-toggle">
                             <i class="fas fa-home"></i>
                             <span>Quản lý trang chủ</span>
@@ -31,6 +31,12 @@
                                 <a href="{{ route('admin.banner-homes.index') }}">
                                     <i class="fa-solid fa-home"></i>
                                     <span>Banner Trang Chủ</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::currentRouteNamed(['admin.general-introductions.*', 'admin.intro-features.*']) ? 'active' : '' }}">
+                                <a href="{{ route('admin.general-introductions.index') }}">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Giới Thiệu Chung</span>
                                 </a>
                             </li>
                         </ul>

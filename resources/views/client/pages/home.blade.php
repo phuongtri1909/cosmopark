@@ -5,9 +5,9 @@
 
 @section('content')
 
-    <x-hero-slider />
+    <x-hero-slider :bannerHomes="$bannerHomes" />
 
-    <x-intro-home />
+    <x-intro-home :generalIntroduction="$generalIntroduction" :introFeatures="$introFeatures" />
 
     <x-intro-location />
 

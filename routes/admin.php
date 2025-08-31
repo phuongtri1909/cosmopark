@@ -31,6 +31,8 @@ use App\Http\Controllers\Admin\FranchiseContactController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ContactSubmissionController as AdminContactSubmissionController;
 use App\Http\Controllers\Admin\BannerHomeController;
+use App\Http\Controllers\Admin\GeneralIntroductionController;
+use App\Http\Controllers\Admin\IntroFeatureController;
 
 Route::group(['as' => 'admin.'], function () {
     Route::get('/clear-cache', function () {
@@ -84,6 +86,16 @@ Route::group(['as' => 'admin.'], function () {
 
         // Banner Homes Management
         Route::resource('banner-homes', BannerHomeController::class);
+
+        // General Introduction Management
+        Route::get('general-introductions', [GeneralIntroductionController::class, 'index'])->name('general-introductions.index');
+        Route::get('general-introductions/create', [GeneralIntroductionController::class, 'create'])->name('general-introductions.create');
+        Route::post('general-introductions', [GeneralIntroductionController::class, 'store'])->name('general-introductions.store');
+        Route::get('general-introductions/{generalIntroduction}/edit', [GeneralIntroductionController::class, 'edit'])->name('general-introductions.edit');
+        Route::put('general-introductions/{generalIntroduction}', [GeneralIntroductionController::class, 'update'])->name('general-introductions.update');
+
+        // Intro Features Management
+        Route::resource('intro-features', IntroFeatureController::class);
 
     });
 
