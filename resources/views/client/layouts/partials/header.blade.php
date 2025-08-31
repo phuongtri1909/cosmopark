@@ -147,6 +147,7 @@
                                 </li>
                             </ul>
                         </div>
+                        <a href="{{ route('news.index') }}" class="text-sm fw-medium">{{ __('News-1') }}</a>
                         <a href="#" class="text-sm fw-medium">{{ __('Information & Gallery') }}</a>
                         <a href="#" class="text-sm fw-medium">{{ __('Contact-1') }}</a>
                     </div>
@@ -277,6 +278,7 @@
 
                 </ul>
             </li>
+            <li><a href="{{ route('news.index') }}" class="text-md fw-medium">{{ __('News-1') }}</a></li>
             <li><a href="#" class="text-md fw-medium">{{ __('Information & Gallery') }}</a></li>
             <li><a href="#" class="text-md fw-medium">{{ __('Contact-1') }}</a></li>
         </ul>
