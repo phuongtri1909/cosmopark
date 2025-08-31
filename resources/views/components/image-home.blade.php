@@ -13,7 +13,7 @@
                 <div class="rounded-4 position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end align-items-center"
                     style="background:{{ $overlay }};">
                     <h2 class="text-white fw-bold text-center text-md-start text-1lg-3 pb-3 animate-on-scroll" style="line-height:1.2;">
-                        {{ __('image_home_title') }}
+                        {!! __('image_home_title') !!}
                     </h2>
                 </div>
             </div>

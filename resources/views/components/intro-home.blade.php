@@ -9,7 +9,7 @@
                             <div class="col-12 col-md-4">
                                 <div class="mb-4 text-center text-md-start">
                                     <x-badge-custom badge="{{ __('General Introduction') }}" />
-                                    <h2 class="feature-title animate-on-scroll mb-0">{{ __('COSMOPARK THE FUTURE. HERE') }}</h2>
+                                    <h2 class="feature-title animate-on-scroll mb-0">{!! __('COSMOPARK THE FUTURE. HERE') !!}</h2>
                                 </div>
                             </div>
                             <div class="col-12 col-md-8">

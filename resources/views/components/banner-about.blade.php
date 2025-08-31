@@ -3,8 +3,7 @@
         <div class="row">
             <div class="col-lg-12 pt-5 text-center text-md-start">
                 <h1 class="fw-bold color-primary-6 mt-4 mb-2 animate-on-scroll banner-title text-2xl-4">
-                    COSMOPARK<br>
-                    <span class="color-primary-6">THE FUTURE. HERE</span>
+                    {!! __('COSMOPARK THE FUTURE. HERE') !!}
                 </h1>
                 <p class="lead fw-normal mb-4 animate-on-scroll banner-desc text-sm-1 color-text-secondary mt-4"
                     style="max-width: 700px;">
@@ -21,14 +20,14 @@
                             <div class="row g-3 justify-content-end mt-0">
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-1 text-white mb-1">{{ __('Industrial Zone') }}</p>
+                                        <p class="text-xs-1 text-white mb-1">{{ __('Industrial Zone') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="322">322<small
                                                 class="fs-6 fw-normal">ha</small></div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-1 text-white mb-1">{{ __('Social Housing Area') }}</p>
+                                        <p class="text-xs-1 text-white mb-1">{{ __('Social Housing Area') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="15">15<small
                                                 class="fs-6 fw-normal">ha</small></div>
                                     </div>
@@ -38,21 +37,21 @@
                             <div class="row g-3 mt-0">
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-1 text-white mb-1">{{ __('Energy Zone') }}</p>
+                                        <p class="text-xs-1 text-white mb-1">{{ __('Energy Zone') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="500">500<small
                                                 class="fs-6 fw-normal">ha</small></div>
                                     </div>
                                 </div>
                                 <div class="col-6 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-1 text-white mb-1">{{ __('Golf Course, Resort & Villa') }}</p>
+                                        <p class="text-xs-1 text-white mb-1">{{ __('Golf Course, Resort & Villa') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="120">
                                             &gt;120<small class="fs-6 fw-normal">ha</small></div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-4 animate-on-scroll stat-card">
                                     <div class="rounded-4 p-3 pb-4 text-center shadow stat-box">
-                                        <p class="text-sm-1 text-white mb-1">{{ __('Smart City') }}</p>
+                                        <p class="text-xs-1 text-white mb-1">{{ __('Smart City') }}</p>
                                         <div class="display-5 fw-bold text-white stat-value" data-target="1000">
                                             &gt;1000<small class="fs-6 fw-normal">ha</small></div>
                                     </div>

@@ -86,9 +86,26 @@
             line-height: var(--line-height);
         }
 
+        /* Mobile Slider Styles */
+        .news-swiper {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
         .news-swiper .swiper-slide {
             display: flex;
             justify-content: center;
+            width: 85% !important;
+            margin-right: 16px;
+        }
+
+        .news-swiper .swiper-slide:last-child {
+            margin-right: 0;
+        }
+
+        /* Peek effect - show 1/4 of next slide */
+        .news-swiper .swiper-wrapper {
+            padding-right: 25%;
         }
 
         @keyframes fadeInNewsSection {
@@ -143,10 +160,22 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth < 768) {
-                new Swiper('.news-swiper', {
-                    slidesPerView: 1,
+                const newsSwiper = new Swiper('.news-swiper', {
+                    slidesPerView: 'auto',
                     spaceBetween: 16,
-
+                    centeredSlides: false,
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    speed: 800,
+                    effect: 'slide',
+                    grabCursor: true,
+                    touchRatio: 1,
+                    touchAngle: 45,
+                    resistance: true,
+                    resistanceRatio: 0.85,
                 });
             }
         });

@@ -3579,8 +3579,7 @@ function jt({ swiper: i, on: e, extendParams: t }) {
     t({
         expoEffect: {
             imageScale: 1.125,
-            imageOffset: 1.25,
-            scale: 1.25,
+            imageOffset: 1.15,
             rotate: 0,
             grayscale: !0,
         },
@@ -3591,7 +3590,7 @@ function jt({ swiper: i, on: e, extendParams: t }) {
                 d = i.isHorizontal();
             let f = 0.5;
             const c = i.params.expoEffect,
-                p = Math.max(1.25, c.imageOffset);
+                p = Math.max(1.15, c.imageOffset);
             if (o > 1.5) {
                 const x = (p - 1) / 2 / p;
                 f = Math.max(x, 0.5 - (o - 1.5));
@@ -3680,10 +3679,10 @@ const V = new G(".swiper", {
         modules: [jt],
         effect: "expo",
         slidesPerView: 1.5,
+        loop: true,
         expoEffect: {
             imageScale: 1.125,
-            imageOffset: 1.25,
-            scale: 1.25,
+            imageOffset: 1.15,
             rotate: 0,
             grayscale: !0,
         },

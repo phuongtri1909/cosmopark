@@ -296,72 +296,19 @@
 
 .swiper-horizontal {
     width: 100%;
-    aspect-ratio: 16 / 9;
-    margin: auto 0
+    aspect-ratio: 16 / 8;
+    margin: auto 0;
+    max-height: 500px;
 }
 
-.swiper-vertical {
-    height: 100%;
-    aspect-ratio: 9 / 16
-}
-
-.expo-content {
-    padding: 16px;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 1.1;
-    text-wrap-style: balance;
-    display: flex;
-    align-items: end;
-    box-sizing: border-box;
-    color: #fff;
-    font-size: 5.6vw;
-    visibility: hidden
-}
-
-@media (min-width: 640px) {
-    .expo-content {
-        padding: 32px
+@media (min-width: 768px) {
+    .swiper-horizontal {
+        max-height: 600px;
     }
 }
 
-.swiper-vertical .expo-content {
-    font-size: 4.5vh
-}
 
-/* Animation keyframes */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px);}
-    to { opacity: 1; transform: none;}
-}
-@keyframes fadeIn {
-    from { opacity: 0;}
-    to { opacity: 1;}
-}
 
-/* Slide animation */
-}
-.media-project .swiper-slide.animated,
-.media-project .swiper-slide.swiper-slide-active {
-    opacity: 1;
-    transform: none;
-    animation: fadeInUp 0.8s both;
-}
 
-/* Button animation */
-.media-project .btn-category {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: all 0.5s cubic-bezier(.39, .575, .565, 1);
-}
-.media-project .btn-category.animated {
-    opacity: 1;
-    transform: none;
-    animation: fadeIn 0.7s both;
-}
 
-/* Stagger effect for buttons */
-.media-project .btn-category.animated:nth-child(1) { animation-delay: 0.1s;}
-.media-project .btn-category.animated:nth-child(2) { animation-delay: 0.2s;}
-.media-project .btn-category.animated:nth-child(3) { animation-delay: 0.3s;}
-.media-project .btn-category.animated:nth-child(4) { animation-delay: 0.4s;}
+

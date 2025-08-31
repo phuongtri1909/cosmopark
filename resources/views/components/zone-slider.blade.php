@@ -10,7 +10,7 @@
                         {{ __('Sub Zones') }}
                     </div>
                 </div>
-                <p class="zone-title text-xl-2 fw-bold text-white mb-0 animate-on-scroll">{{ __('COSMOPARK THE FUTURE. HERE') }}
+                <p class="zone-title text-xl-2 fw-bold text-white mb-0 animate-on-scroll">{!! __('COSMOPARK THE FUTURE. HERE') !!}
                 </p>
             </div>
 

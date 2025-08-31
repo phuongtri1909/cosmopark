@@ -4,7 +4,7 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-1.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold color-primary-4 text-1lg">{{ __('STRATEGIC LOCATION') }}</h5>
+                    <h5 class="fw-bold color-primary-4 text-1lg">{!! __('STRATEGIC LOCATION') !!}</h5>
                     <p class="color-primary-8 text-md">{{ __('strategic_location_desc') }}</p>
                 </div>
             </div>
@@ -13,7 +13,7 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-2.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold text-white text-1lg">{{ __('SYNCHRONIZED INFRASTRUCTURE') }}</h5>
+                    <h5 class="fw-bold text-white text-1lg">{!! __('SYNCHRONIZED INFRASTRUCTURE') !!}</h5>
                     <p class="text-white text-md">{{ __('infrastructure_description') }}</p>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-3.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold color-primary-4 text-1lg">{{ __('GOVERNMENT INCENTIVES') }}</h5>
+                    <h5 class="fw-bold color-primary-4 text-1lg">{!! __('GOVERNMENT INCENTIVES') !!}</h5>
                     <p class="color-primary-8 text-md">{{ __('incentives_description') }}</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-4.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold text-white text-1lg">{{ __('COMPLETE AMENITIES') }}</h5>
+                    <h5 class="fw-bold text-white text-1lg">{!! __('COMPLETE AMENITIES') !!}</h5>
                     <p class="text-white text-md">{{ __('amenities_description') }}</p>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="feature-card animate-on-scroll"
                 style="background: linear-gradient(180deg, #FFF 0%, rgba(255,255,255,0.00) 100%), url('{{ asset('assets/images/dev/feature-5.png') }}') center/cover no-repeat;">
                 <div class="feature-card-body">
-                    <h5 class="fw-bold color-primary-4 text-1lg">{{ __('SUSTAINABLE ECOLOGICAL DEVELOPMENT') }}</h5>
+                    <h5 class="fw-bold color-primary-4 text-1lg">{!! __('SUSTAINABLE ECOLOGICAL DEVELOPMENT') !!}</h5>
                     <p class="color-primary-8 text-md">{{ __('ecological_description') }}</p>
                 </div>
             </div>

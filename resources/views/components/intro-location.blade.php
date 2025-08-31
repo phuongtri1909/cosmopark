@@ -14,7 +14,7 @@
                 <div class="location-badge animate-on-scroll">
                     <x-badge-custom badge="{{ __('Location Introduction') }}" />
                 </div>
-                <p class="location-title text-2xl-1 fw-bold text-dark animate-on-scroll">{{ __('TAY NINH NEW KEY ECONOMIC REGION') }}</p>
+                <p class="location-title text-2xl-1 fw-bold text-dark animate-on-scroll">{!! __('TAY NINH NEW KEY ECONOMIC REGION') !!}</p>
                 <p class="text-sm-1 color-text-secondary animate-on-scroll">
                     {{ __('tay_ninh_description') }}
                 </p>

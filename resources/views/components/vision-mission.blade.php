@@ -2,31 +2,33 @@
     <div class="p-100">
         <div class="row g-4">
             <div class="col-12 col-md-6">
-                <div class="vision-card animate-on-scroll h-100 d-flex flex-column justify-content-between">
+                <div class="vision-card animate-on-scroll h-100">
                     <div>
                         <div class="vision-icon mb-3 rounded-pill bg-white p-2 d-inline-block">
                             <img src="{{ asset('assets/images/svg/vision.svg') }}" alt="Tầm nhìn" width="48"
                                 height="48">
                         </div>
-                        <h3 class="vision-title mb-3 text-white fw-bold text-xl-2">{{ __('Vision') }}</h3>
-                        <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
-                            {{ __('vision_description') }}
-                        </p>
+
                     </div>
+                    <h3 class="vision-title text-white fw-bold text-xl-2 mt-0 mt-md-5">{{ __('Vision') }}</h3>
+                    <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
+                        {{ __('vision_description') }}
+                    </p>
                 </div>
             </div>
             <div class="col-12 col-md-6">
-                <div class="vision-card animate-on-scroll h-100 d-flex flex-column justify-content-between">
+                <div class="vision-card animate-on-scroll h-100">
                     <div>
                         <div class="vision-icon mb-3 rounded-pill bg-white p-2 d-inline-block">
                             <img src="{{ asset('assets/images/svg/mission.svg') }}" alt="Sứ mệnh" width="48"
                                 height="48">
                         </div>
-                        <h3 class="vision-title mb-3 text-white fw-bold text-xl-2">{{ __('Mission') }}</h3>
-                        <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
-                            {{ __('mission_description') }}
-                        </p>
+
                     </div>
+                    <h3 class="vision-title mt-0 mt-md-5 text-white fw-bold text-xl-2">{{ __('Mission') }}</h3>
+                    <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
+                        {{ __('mission_description') }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -63,7 +65,7 @@
             transition: all 0.7s cubic-bezier(.39, .575, .565, 1);
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: space-between;
         }
 
         .vision-card.animated {
