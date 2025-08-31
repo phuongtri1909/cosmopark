@@ -18,6 +18,24 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    <li
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.banner-homes.*']) ? 'open' : '' }}">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-home"></i>
+                            <span>Quản lý trang chủ</span>
+                            <i class="fas fa-chevron-down submenu-arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            <li class="{{ Route::currentRouteNamed('admin.banner-homes.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.banner-homes.index') }}">
+                                    <i class="fa-solid fa-home"></i>
+                                    <span>Banner Trang Chủ</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- Quản lý nội dung -->
                     <li
                         class="has-submenu {{ Route::currentRouteNamed(['admin.blogs.*', 'admin.banners.*', 'admin.category-blogs.*', 'admin.feature-sections.*']) ? 'open' : '' }}">
@@ -42,9 +60,6 @@
                                     <span>Blogs</span>
                                 </a>
                             </li>
-
-
-
                         </ul>
                     </li>
 

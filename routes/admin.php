@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ContactSubmissionController as AdminContactSubmissionController;
+use App\Http\Controllers\Admin\BannerHomeController;
 
 Route::group(['as' => 'admin.'], function () {
     Route::get('/clear-cache', function () {
@@ -80,6 +81,9 @@ Route::group(['as' => 'admin.'], function () {
         Route::put('setting/smtp', [SettingController::class, 'updateSMTP'])->name('setting.update.smtp');
         Route::put('setting/google', [SettingController::class, 'updateGoogle'])->name('setting.update.google');
         Route::put('setting/paypal', [SettingController::class, 'updatePaypal'])->name('setting.update.paypal');
+
+        // Banner Homes Management
+        Route::resource('banner-homes', BannerHomeController::class);
 
     });
 

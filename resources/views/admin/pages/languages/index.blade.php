@@ -10,7 +10,6 @@
             </div>
             <div class="card-content">
                 <div class="row">
-                    <!-- Language Selection -->
                     <div class="col-md-3 mb-4">
                         <div class="content-card">
                             <div class="card-top p-3">
@@ -27,7 +26,6 @@
                         </div>
                     </div>
 
-                    <!-- Editor Section -->
                     <div class="col-md-9 mb-4">
                         <div class="content-card">
                             <div class="card-top p-3 d-flex justify-content-between align-items-center">
@@ -162,7 +160,6 @@ $(document).ready(function() {
     let currentLanguage = 'vi';
     let originalKeys = [];
 
-    // Initialize JSON Editor
     editor = new JSONEditor(document.getElementById('jsonEditor'), {
         mode: 'tree',
         modes: ['tree', 'code'],
@@ -174,7 +171,6 @@ $(document).ready(function() {
         }
     });
 
-    // Load language content
     function loadLanguageContent(language) {
         showLoading();
 
@@ -194,7 +190,6 @@ $(document).ready(function() {
                         
                         hideLoading();
                         
-                        // Disable key editing after a short delay
                         setTimeout(() => {
                             disableKeyEditing();
                             validateContent();
@@ -216,7 +211,6 @@ $(document).ready(function() {
         });
     }
 
-    // Extract all keys from JSON object
     function extractKeys(obj, prefix = '') {
         let keys = [];
         for (let key in obj) {
@@ -232,10 +226,7 @@ $(document).ready(function() {
         return keys;
     }
 
-    // Disable key editing in tree mode
     function disableKeyEditing() {
-        // This is a workaround since JSONEditor doesn't have direct API for this
-        // We'll validate on save instead
         setTimeout(() => {
             const treeContainer = document.querySelector('.jsoneditor-tree');
             if (treeContainer) {
@@ -249,13 +240,11 @@ $(document).ready(function() {
         }, 100);
     }
 
-    // Validate content
     function validateContent() {
         try {
             const currentData = editor.get();
             const currentKeys = extractKeys(currentData);
             
-            // Check for missing keys
             const missingKeys = originalKeys.filter(key => !currentKeys.includes(key));
             const newKeys = currentKeys.filter(key => !originalKeys.includes(key));
             
@@ -295,7 +284,6 @@ $(document).ready(function() {
             
             $('#validationResult').html(validationHtml);
             
-            // Enable/disable save button based on validation
             if (missingKeys.length > 0) {
                 $('#saveBtn').prop('disabled', true).addClass('btn-outline-danger').removeClass('btn-outline-success');
             } else {
@@ -318,7 +306,6 @@ $(document).ready(function() {
             const content = editor.get();
             const jsonString = JSON.stringify(content, null, 2);
             
-            // Final validation before save
             const currentKeys = extractKeys(content);
             const missingKeys = originalKeys.filter(key => !currentKeys.includes(key));
             
@@ -359,7 +346,6 @@ $(document).ready(function() {
         }
     }
 
-    // Reset content
     function resetContent() {
         if (confirm('Bạn có chắc muốn khôi phục nội dung gốc?')) {
             try {
@@ -374,16 +360,13 @@ $(document).ready(function() {
         }
     }
 
-    // Show loading modal
     function showLoading() {
         $('#loadingModal').modal('show');
     }
 
-    // Hide loading modal
     function hideLoading() {
         try {
             $('#loadingModal').modal('hide');
-            // Force hide if modal doesn't hide properly
             setTimeout(() => {
                 if ($('#loadingModal').hasClass('show')) {
                     $('#loadingModal').removeClass('show').hide();
@@ -393,14 +376,12 @@ $(document).ready(function() {
             }, 100);
         } catch (e) {
             console.error('Error hiding loading modal:', e);
-            // Fallback: force hide
             $('#loadingModal').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
         }
     }
 
-    // Event listeners
     $('#languageSelect').change(function() {
         const language = $(this).val();
         loadLanguageContent(language);
@@ -418,7 +399,6 @@ $(document).ready(function() {
         validateContent();
     });
 
-    // Load initial content
     loadLanguageContent('vi');
 });
 </script>

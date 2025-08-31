@@ -3,23 +3,21 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
-use App\Models\Banner;
+use App\Models\BannerHome;
 use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
-class BannerController extends Controller
+class BannerHomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $banners = Banner::orderBy('sort_order', 'asc')
+        $bannerHomes = BannerHome::orderBy('sort_order', 'asc')
             ->paginate(10);
             
-        return view('admin.pages.banners.index', compact('banners'));
+        return view('admin.pages.banner-homes.index', compact('bannerHomes'));
     }
 
     /**
@@ -27,7 +25,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.banners.create');
+        return view('admin.pages.banner-homes.create');
     }
 
     /**
@@ -36,10 +34,7 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'link' => 'nullable|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             'sort_order' => 'nullable|integer|min:0',
             'is_active' => 'sometimes|boolean',
         ],[
@@ -53,18 +48,19 @@ class BannerController extends Controller
             if ($request->hasFile('image')) {
                 $imagePath = ImageHelper::optimizeAndSave(
                     $request->file('image'),
-                    'banners',
+                    'banner-homes',
                     1200,
+                    95
                 );
             }
             
             $validated['image'] = $imagePath;
             $validated['is_active'] = $request->has('is_active');
             
-            Banner::create($validated);
+            BannerHome::create($validated);
             
-            return redirect()->route('admin.banners.index')
-                ->with('success', 'Banner đã được tạo thành công.');
+            return redirect()->route('admin.banner-homes.index')
+                ->with('success', 'Banner trang chủ đã được tạo thành công.');
         } catch (\Exception $e) {
             if ($imagePath) {
                 ImageHelper::delete($imagePath);
@@ -79,7 +75,7 @@ class BannerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Banner $banner)
+    public function show(BannerHome $bannerHome)
     {
         //
     }
@@ -87,21 +83,18 @@ class BannerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Banner $banner)
+    public function edit(BannerHome $bannerHome)
     {
-        return view('admin.pages.banners.edit', compact('banner'));
+        return view('admin.pages.banner-homes.edit', compact('bannerHome'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
+    public function update(Request $request, BannerHome $bannerHome)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'link' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'sort_order' => 'nullable|integer|min:0',
             'is_active' => 'sometimes|boolean',
         ],[
@@ -111,12 +104,13 @@ class BannerController extends Controller
         
         try {
             if ($request->hasFile('image')) {
-                $oldImagePath = $banner->image;
+                $oldImagePath = $bannerHome->image;
                 
                 $imagePath = ImageHelper::optimizeAndSave(
                     $request->file('image'),
-                    'banners',
-                    1200
+                    'banner-homes',
+                    1200,
+                    90 
                 );
                 
                 $validated['image'] = $imagePath;
@@ -124,14 +118,14 @@ class BannerController extends Controller
             
             $validated['is_active'] = $request->has('is_active');
             
-            $banner->update($validated);
+            $bannerHome->update($validated);
             
             if (isset($oldImagePath)) {
                 ImageHelper::delete($oldImagePath);
             }
             
-            return redirect()->route('admin.banners.index')
-                ->with('success', 'Banner đã được cập nhật thành công.');
+            return redirect()->route('admin.banner-homes.index')
+                ->with('success', 'Banner trang chủ đã được cập nhật thành công.');
         } catch (\Exception $e) {
             if (isset($imagePath)) {
                 ImageHelper::delete($imagePath);
@@ -146,22 +140,22 @@ class BannerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Banner $banner)
+    public function destroy(BannerHome $bannerHome)
     {
         try {
-            $oldImagePath = $banner->image;
+            $oldImagePath = $bannerHome->image;
             
-            $banner->delete();
+            $bannerHome->delete();
             
             if ($oldImagePath) {
                 ImageHelper::delete($oldImagePath);
             }
             
-            return redirect()->route('admin.banners.index')
-                ->with('success', 'Banner đã được xóa thành công.');
+            return redirect()->route('admin.banner-homes.index')
+                ->with('success', 'Banner trang chủ đã được xóa thành công.');
         } catch (\Exception $e) {
-            return redirect()->route('admin.banners.index')
+            return redirect()->route('admin.banner-homes.index')
                 ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
     }
-}
+} 

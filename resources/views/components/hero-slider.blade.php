@@ -1,17 +1,25 @@
+@php
+    use App\Models\BannerHome;
+    $bannerHomes = BannerHome::active()->ordered()->get();
+@endphp
+
 <div class="hero-slider animate__animated animate__fadeIn">
-    <div class="swiper hero-swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="{{ asset('assets/images/dev/hero-slider.jpg') }}" alt="Hero 1" />
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('assets/images/dev/hero-slider-1.jpg') }}" alt="Hero 2" />
-            </div>
-            <div class="swiper-slide">
-                <img src="{{ asset('assets/images/dev/hero-slider-2.webp') }}" alt="Hero 3" />
+    @if($bannerHomes->count() > 0)
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                @foreach($bannerHomes as $bannerHome)
+                    <div class="swiper-slide">
+                        <img src="{{ $bannerHome->image_url }}" alt="Banner trang chủ {{ $loop->iteration }}" />
+                    </div>
+                @endforeach
             </div>
         </div>
-    </div>
+    @else
+        <!-- Fallback khi không có banner -->
+        <div class="hero-slider-fallback">
+            <img src="{{ asset('assets/images/dev/hero-slider.jpg') }}" alt="Hero Default" />
+        </div>
+    @endif
 </div>
 
 @push('styles')
@@ -84,6 +92,20 @@
             background: #eaeaea;
         }
 
+        /* Fallback styles */
+        .hero-slider-fallback {
+            height: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-slider-fallback img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
         @media (max-width: 768px) {
 
             .hero-slider .hero-swiper,
@@ -102,6 +124,11 @@
             .hero-slider {
                 margin-bottom: -85px;
             }
+
+            .hero-slider-fallback {
+                height: 50vh;
+                min-height: 400px;
+            }
         }
     </style>
 @endpush
@@ -109,14 +136,16 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            new Swiper('.hero-swiper', {
-                loop: true,
-                autoplay: {
-                    delay: 3500,
-                    disableOnInteraction: false,
-                },
-                allowTouchMove: false,
-            });
+            @if($bannerHomes->count() > 1)
+                new Swiper('.hero-swiper', {
+                    loop: true,
+                    autoplay: {
+                        delay: 3500,
+                        disableOnInteraction: false,
+                    },
+                    allowTouchMove: false,
+                });
+            @endif
         });
     </script>
 @endpush
