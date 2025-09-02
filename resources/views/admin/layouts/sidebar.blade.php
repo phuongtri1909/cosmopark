@@ -20,7 +20,7 @@
                     </li>
 
                     <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.banner-homes.*', 'admin.general-introductions.*', 'admin.intro-features.*', 'admin.intro-locations.*']) ? 'open' : '' }}">
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.banner-homes.*', 'admin.image-homes.*', 'admin.general-introductions.*', 'admin.intro-features.*', 'admin.intro-locations.*', 'admin.slide-locations.*', 'admin.intro-images.*']) ? 'open' : '' }}">
                         <a href="#" class="submenu-toggle">
                             <i class="fas fa-home"></i>
                             <span>Quản lý trang chủ</span>
@@ -43,6 +43,24 @@
                                 <a href="{{ route('admin.intro-locations.index') }}">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <span>Giới Thiệu Vị Trí</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::currentRouteNamed('admin.slide-locations.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.slide-locations.index') }}">
+                                    <i class="fas fa-images"></i>
+                                    <span>Slide Vị Trí</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::currentRouteNamed('admin.image-homes.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.image-homes.index') }}">
+                                    <i class="fas fa-images"></i>
+                                    <span>Hình Ảnh Trang Chủ</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::currentRouteNamed('admin.intro-images.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.intro-images.index') }}">
+                                    <i class="fas fa-image"></i>
+                                    <span>Ảnh Giới Thiệu</span>
                                 </a>
                             </li>
                         </ul>

@@ -16,6 +16,7 @@ use App\Http\Controllers\ContactSubmissionController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ReviewRatingController;
+use App\Http\Controllers\ImageHomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -34,6 +35,8 @@ Route::post('/contact/submit', [ContactSubmissionController::class, 'store'])->n
 // Language switching
 Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'switchLanguage'])->name('language.switch');
 
+// Image Homes for AJAX
+Route::get('/image-homes', [ImageHomeController::class, 'getImageHomes'])->name('image-homes.get');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', function () {

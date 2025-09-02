@@ -24,11 +24,14 @@ use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\BannerHomeController;
+use App\Http\Controllers\Admin\ImageHomeController;
 use App\Http\Controllers\Admin\DressStyleController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\CategoryBlogController;
 use App\Http\Controllers\Admin\IntroFeatureController;
 use App\Http\Controllers\Admin\IntroLocationController;
+use App\Http\Controllers\Admin\SlideLocationController;
+use App\Http\Controllers\Admin\IntroImageController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
@@ -98,6 +101,10 @@ Route::group(['as' => 'admin.'], function () {
         // Intro Features Management
         Route::resource('intro-features', IntroFeatureController::class)->except(['show']);
         Route::resource('intro-locations', IntroLocationController::class)->except(['show']);
+        Route::resource('slide-locations', SlideLocationController::class)->except(['show']);
+        Route::resource('intro-images', IntroImageController::class)->except(['show']);
+        // Image Homes Management
+        Route::resource('image-homes', ImageHomeController::class);
     });
 
     Route::group(['middleware' => 'guest'], function () {

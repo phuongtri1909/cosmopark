@@ -2,15 +2,26 @@
     <!-- Slider Container -->
     <div class="location-slider-container">
         <div class="location-slider">
-            <div class="location-slide active" data-slide="1">
-                <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 1">
-            </div>
-            <div class="location-slide" data-slide="2">
-                <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 2">
-            </div>
-            <div class="location-slide" data-slide="3">
-                <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 3">
-            </div>
+            @if($slideLocations && $slideLocations->count() > 0)
+                @foreach($slideLocations as $index => $slide)
+                    <div class="location-slide {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index + 1 }}">
+                        <img class="img-fluid animate-on-scroll w-100" 
+                             src="{{ $slide->image_url }}" 
+                             alt="Location {{ $index + 1 }}">
+                    </div>
+                @endforeach
+            @else
+                <!-- Fallback images -->
+                <div class="location-slide active" data-slide="1">
+                    <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 1">
+                </div>
+                <div class="location-slide" data-slide="2">
+                    <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 2">
+                </div>
+                <div class="location-slide" data-slide="3">
+                    <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 3">
+                </div>
+            @endif
         </div>
 
         <!-- Desktop Navigation Buttons -->
@@ -29,9 +40,17 @@
 
         <!-- Mobile Pagination Dots -->
         <div class="slider-pagination mobile-only">
-            <span class="pagination-dot active" data-slide="1" onclick="goToSlide(1)"></span>
-            <span class="pagination-dot" data-slide="2" onclick="goToSlide(2)"></span>
-            <span class="pagination-dot" data-slide="3" onclick="goToSlide(3)"></span>
+            @if($slideLocations && $slideLocations->count() > 0)
+                @foreach($slideLocations as $index => $slide)
+                    <span class="pagination-dot {{ $index === 0 ? 'active' : '' }}" 
+                          data-slide="{{ $index + 1 }}" 
+                          onclick="goToSlide({{ $index + 1 }})"></span>
+                @endforeach
+            @else
+                <span class="pagination-dot active" data-slide="1" onclick="goToSlide(1)"></span>
+                <span class="pagination-dot" data-slide="2" onclick="goToSlide(2)"></span>
+                <span class="pagination-dot" data-slide="3" onclick="goToSlide(3)"></span>
+            @endif
         </div>
     </div>
 
@@ -278,7 +297,7 @@
 @push('scripts')
     <script>
         let currentSlide = 1;
-        const totalSlides = 3;
+        const totalSlides = {{ $slideLocations && $slideLocations->count() > 0 ? $slideLocations->count() : 3 }};
 
         function changeSlide(direction) {
             currentSlide += direction;

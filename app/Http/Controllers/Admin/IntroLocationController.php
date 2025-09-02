@@ -80,8 +80,8 @@ class IntroLocationController extends Controller
                 $imagePath = ImageHelper::optimizeAndSave(
                     $request->file('image'),
                     'intro-locations',
-                    80,
-                    'webp'
+                    null,
+                    95
                 );
             }
             
@@ -180,8 +180,8 @@ class IntroLocationController extends Controller
                 $imagePath = ImageHelper::optimizeAndSave(
                     $request->file('image'),
                     'intro-locations',
-                    80,
-                    'webp'
+                    null,
+                    80
                 );
                 
                 $validated['image'] = $imagePath;
