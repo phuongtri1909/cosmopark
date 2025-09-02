@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             BannerHomeSeeder::class,
             GeneralIntroductionSeeder::class,
             IntroFeatureSeeder::class,
+            IntroLocationSeeder::class,
         ]);
     }
 }

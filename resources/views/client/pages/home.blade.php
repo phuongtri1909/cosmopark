@@ -9,7 +9,7 @@
 
     <x-intro-home :generalIntroduction="$generalIntroduction" :introFeatures="$introFeatures" />
 
-    <x-intro-location />
+            <x-intro-location :introLocation="$introLocation" />
 
     <x-location />
 

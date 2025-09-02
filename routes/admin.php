@@ -18,21 +18,22 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CkeditorController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LogoSiteController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\StatisticController;
+use App\Http\Controllers\Admin\BannerHomeController;
 use App\Http\Controllers\Admin\DressStyleController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\CategoryBlogController;
+use App\Http\Controllers\Admin\IntroFeatureController;
+use App\Http\Controllers\Admin\IntroLocationController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
-use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\ContactSubmissionController as AdminContactSubmissionController;
-use App\Http\Controllers\Admin\BannerHomeController;
 use App\Http\Controllers\Admin\GeneralIntroductionController;
-use App\Http\Controllers\Admin\IntroFeatureController;
+use App\Http\Controllers\Admin\ContactSubmissionController as AdminContactSubmissionController;
 
 Route::group(['as' => 'admin.'], function () {
     Route::get('/clear-cache', function () {
@@ -95,8 +96,8 @@ Route::group(['as' => 'admin.'], function () {
         Route::put('general-introductions/{generalIntroduction}', [GeneralIntroductionController::class, 'update'])->name('general-introductions.update');
 
         // Intro Features Management
-        Route::resource('intro-features', IntroFeatureController::class);
-
+        Route::resource('intro-features', IntroFeatureController::class)->except(['show']);
+        Route::resource('intro-locations', IntroLocationController::class)->except(['show']);
     });
 
     Route::group(['middleware' => 'guest'], function () {

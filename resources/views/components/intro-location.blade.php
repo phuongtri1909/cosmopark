@@ -5,7 +5,9 @@
         <div class="row">
             <div class="col-12 col-lg-5 order-2 order-lg-1 d-flex align-items-center justify-content-center">
                 <!-- Ảnh -->
-                <img class="img-fluid rounded-4 animate-on-scroll" src="{{ asset('assets/images/dev/intro-location.jpg') }}" />
+                <img class="img-fluid rounded-4 animate-on-scroll" 
+                     src="{{ $introLocation && $introLocation->image ? asset('storage/' . $introLocation->image) : asset('assets/images/dev/intro-location.jpg') }}" 
+                     alt="Intro Location" />
             </div>
             <div class="col-0 col-lg-1 d-none d-lg-block order-3 order-lg-2"></div>
             <div
@@ -14,58 +16,74 @@
                 <div class="location-badge animate-on-scroll">
                     <x-badge-custom badge="{{ __('Location Introduction') }}" />
                 </div>
-                <p class="location-title text-2xl-1 fw-bold text-dark animate-on-scroll">{!! __('TAY NINH NEW KEY ECONOMIC REGION') !!}</p>
+                <p class="location-title text-2xl-1 fw-bold text-dark animate-on-scroll">
+                    {!! $introLocation ? $introLocation->getTranslation('title', app()->getLocale()) : __('TAY NINH NEW KEY ECONOMIC REGION') !!}
+                </p>
                 <p class="text-sm-1 color-text-secondary animate-on-scroll">
-                    {{ __('tay_ninh_description') }}
+                    {{ $introLocation ? $introLocation->getTranslation('description', app()->getLocale()) : __('tay_ninh_description') }}
                 </p>
             </div>
         </div>
         <!-- Số liệu thống kê -->
         <div class="location-stats mt-5 ">
             <div class="row">
-                <div class="col-4 text-center">
-                    <div class="d-inline-flex align-items-center position-relative">
-                        <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="3.2">3,2</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Million') }}</div>
+                @if ($introLocation && $introLocation->stats()->count() > 0)
+                    @foreach ($introLocation->stats()->ordered()->get() as $stat)
+                        <div class="col-4 text-center">
+                            <div class="d-inline-flex align-items-center position-relative">
+                                <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" 
+                                     data-target="{{ $stat->getTranslation('value', app()->getLocale()) }}">{{ $stat->getTranslation('value', app()->getLocale()) }}</div>
+                                @if ($stat->getTranslation('unit', app()->getLocale()))
+                                    <div class="location-stat-unit text-xs-4 color-primary-4">{{ $stat->getTranslation('unit', app()->getLocale()) }}</div>
+                                @endif
+                            </div>
+                            <div class="location-stat-label text-sm-2 color-text-secondary">{{ $stat->getTranslation('label', app()->getLocale()) }}</div>
+                        </div>
+                    @endforeach
+                @else
+                    <!-- Fallback khi không có dữ liệu -->
+                    <div class="col-4 text-center">
+                        <div class="d-inline-flex align-items-center position-relative">
+                            <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="3.2">3,2</div>
+                            <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Million') }}</div>
+                        </div>
+                        <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Population') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Population') }}</div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-inline-flex align-items-center position-relative">
-                        <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="13.5">~$13,5</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
+                    <div class="col-4 text-center">
+                        <div class="d-inline-flex align-items-center position-relative">
+                            <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="13.5">~$13,5</div>
+                            <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
+                        </div>
+                        <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Economic Scale') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Economic Scale') }}</div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-inline-flex align-items-center position-relative">
-                        <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="9.63">9,63%</div>
+                    <div class="col-4 text-center">
+                        <div class="d-inline-flex align-items-center position-relative">
+                            <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="9.63">9,63%</div>
+                        </div>
+                        <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('GRDP Growth Rate') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('GRDP Growth Rate') }}</div>
-                </div>
-
-
-                <div class="col-4 text-center">
-                    <div class="d-inline-flex align-items-center position-relative">
-                        <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="120">120</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Million') }}</div>
+                    <div class="col-4 text-center">
+                        <div class="d-inline-flex align-items-center position-relative">
+                            <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="120">120</div>
+                            <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Million') }}</div>
+                        </div>
+                        <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('GRDP per capita') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('GRDP per capita') }}</div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-inline-flex align-items-center position-relative">
-                        <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="24">$24+</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
+                    <div class="col-4 text-center">
+                        <div class="d-inline-flex align-items-center position-relative">
+                            <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="24">$24+</div>
+                            <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
+                        </div>
+                        <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('FDI') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('FDI') }}</div>
-                </div>
-                <div class="col-4 text-center">
-                    <div class="d-inline-flex align-items-center position-relative">
-                        <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="13.9">$13.9+</div>
-                        <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
+                    <div class="col-4 text-center">
+                        <div class="d-inline-flex align-items-center position-relative">
+                            <div class="location-stat-value text-1lg-8 color-primary-4 fw-bold animate-on-scroll" data-target="13.9">$13.9+</div>
+                            <div class="location-stat-unit text-xs-4 color-primary-4">{{ __('Billion') }}</div>
+                        </div>
+                        <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Import Export Turnover') }}</div>
                     </div>
-                    <div class="location-stat-label text-sm-2 color-text-secondary">{{ __('Import Export Turnover') }}</div>
-                </div>
+                @endif
             </div>
         </div>
     </div>

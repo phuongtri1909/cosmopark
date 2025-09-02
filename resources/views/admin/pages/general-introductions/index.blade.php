@@ -16,7 +16,7 @@
         <div class="card-top">
             <div class="card-title">
                 <i class="fas fa-info-circle icon-title"></i>
-                <h5>Thông tin giới thiệu chung</h5>
+                <h5>Thông tin giới thiệu chung (dùng chung với banner trang giới thiệu)</h5>
             </div>
             @if($generalIntroduction)
                 <a href="{{ route('admin.general-introductions.edit', $generalIntroduction) }}" class="action-button btn-sm btn-primary">

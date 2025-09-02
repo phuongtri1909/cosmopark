@@ -15,6 +15,7 @@ use App\Models\FeatureSection;
 use App\Models\ProductVariant;
 use App\Models\GeneralIntroduction;
 use App\Models\IntroFeature;
+use App\Models\IntroLocation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -34,9 +35,10 @@ class HomeController extends Controller
         // Load general introduction and features
         $generalIntroduction = GeneralIntroduction::getActive();
         $introFeatures = IntroFeature::active()->ordered()->get();
+        $introLocation = IntroLocation::getActive();
 
 
-        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'generalIntroduction', 'introFeatures'));
+        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'generalIntroduction', 'introFeatures', 'introLocation'));
     }
 
     public function about()
