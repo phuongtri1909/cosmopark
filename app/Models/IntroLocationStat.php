@@ -14,6 +14,9 @@ class IntroLocationStat extends Model
 
     protected $fillable = [
         'intro_location_id',
+        'label',
+        'value',
+        'unit',
         'sort_order'
     ];
 

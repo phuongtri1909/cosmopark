@@ -1,6 +1,6 @@
 @extends('admin.layouts.sidebar')
 
-@section('title', 'Thêm ảnh giới thiệu')
+@section('title', 'Thêm Tầm nhìn & Sứ mệnh')
 
 @section('main-content')
     <div class="category-container">
@@ -8,7 +8,7 @@
         <div class="content-breadcrumb">
             <ol class="breadcrumb-list">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.intro-images.index') }}">Ảnh giới thiệu</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.vision-missions.index') }}">Tầm nhìn & Sứ mệnh</a></li>
                 <li class="breadcrumb-item current">Thêm mới</li>
             </ol>
         </div>
@@ -17,35 +17,25 @@
             <div class="card-top">
                 <div class="card-title">
                     <i class="fas fa-plus icon-title"></i>
-                    <h5>Thêm ảnh giới thiệu mới</h5>
+                    <h5>Thêm Tầm nhìn & Sứ mệnh mới</h5>
                 </div>
             </div>
 
             <div class="form-body">
                 @include('components.alert', ['alertType' => 'alert'])
 
-                <form action="{{ route('admin.intro-images.store') }}" method="POST" class="intro-image-form"
-                    enctype="multipart/form-data">
+                <form action="{{ route('admin.vision-missions.store') }}" method="POST" class="vision-mission-form">
                     @csrf
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="image" class="form-label">Ảnh giới thiệu <span class="required">*</span></label>
-                            <div class="image-upload-container">
-                                <div class="image-upload-preview" id="image-preview">
-                                    <div class="upload-placeholder">
-                                        <i class="fas fa-cloud-upload-alt"></i>
-                                        <span class="upload-text">Chọn ảnh</span>
-                                    </div>
-                                </div>
-                                <input type="file" name="image" id="image-upload" class="image-upload-input"
-                                    accept="image/*" required>
-                            </div>
-                            <div class="form-hint">
-                                <i class="fas fa-info-circle"></i>
-                                <span>Kích thước đề xuất: 1200x800px.</span>
-                            </div>
-                            @error('image')
+                            <label for="type" class="form-label">Loại <span class="required">*</span></label>
+                            <select name="type" id="type" class="form-control" required>
+                                <option value="">Chọn loại</option>
+                                <option value="vision" {{ old('type') === 'vision' ? 'selected' : '' }}>Tầm nhìn</option>
+                                <option value="mission" {{ old('type') === 'mission' ? 'selected' : '' }}>Sứ mệnh</option>
+                            </select>
+                            @error('type')
                                 <div class="error-message">{{ $message }}</div>
                             @enderror
                         </div>
@@ -112,12 +102,12 @@
                         <div class="form-check">
                             <input type="checkbox" name="is_active" id="is_active" class="form-check-input"
                                 {{ old('is_active') ? 'checked' : '' }}>
-                            <label for="is_active" class="form-check-label">Hiển thị ảnh giới thiệu</label>
+                            <label for="is_active" class="form-check-label">Hiển thị</label>
                         </div>
                     </div>
 
                     <div class="form-actions">
-                        <a href="{{ route('admin.intro-images.index') }}" class="back-button">
+                        <a href="{{ route('admin.vision-missions.index') }}" class="back-button">
                             <i class="fas fa-times"></i> Hủy
                         </a>
                         <button type="submit" class="save-button">
@@ -152,70 +142,5 @@
             margin-bottom: 10px;
             font-size: 14px;
         }
-
-        .image-upload-container {
-            margin-bottom: 10px;
-        }
-
-        .image-upload-preview {
-            width: 100%;
-            height: 200px;
-            border: 2px dashed #ddd;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .image-upload-preview:hover {
-            border-color: #007bff;
-        }
-
-        .upload-placeholder {
-            text-align: center;
-            color: #666;
-        }
-
-        .upload-placeholder i {
-            font-size: 48px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .image-upload-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .image-upload-input {
-            display: none;
-        }
     </style>
-@endpush
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            // Image upload preview
-            $('#image-upload').change(function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#image-preview').html(`<img src="${e.target.result}" alt="Preview">`);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-
-            // Click to select image
-            $('#image-preview').click(function() {
-                $('#image-upload').click();
-            });
-        });
-    </script>
 @endpush 

@@ -9,17 +9,36 @@
 @section('content')
     <x-banner-about :generalIntroduction="$generalIntroduction" :introFeatures="$introFeatures" />
 
-    <x-vision-mission />
+    <x-vision-mission :visionMission="$visionMission" />
 
-    <x-feature-section />
+    <x-feature-section :features="$features" />
 
-    <x-image-home :main="asset('assets/images/dev/image-1.jpg')" :images="[
-        asset('assets/images/dev/image-about-1.jpg'),
-        asset('assets/images/dev/image-about-2.jpg'),
-        asset('assets/images/dev/image-about-3.jpg'),
-        asset('assets/images/dev/image-about-4.jpg'),
-    ]"
-        overlay="linear-gradient(0deg, rgba(55, 129, 75, 0.25) 0%, rgba(55, 129, 75, 0.25) 100%)" />
+    @if($imageHomes->count() > 0)
+        @php
+            $firstImageHome = $imageHomes->first();
+            $subImages = $firstImageHome->subImages->map(function($subImage) {
+                return $subImage->sub_image_url;
+            })->toArray();
+        @endphp
+        
+        <x-image-home
+            :main="$firstImageHome->main_image_url"
+            :images="$subImages"
+            :overlay="'rgba(24,36,64,0.35)'"
+            :useAjax="true"
+        />
+    @else
+        <x-image-home
+            :main="asset('assets/images/dev/image-1.jpg')"
+            :images="[
+                asset('assets/images/dev/image-2.jpg'),
+                asset('assets/images/dev/image-3.jpg'),
+                asset('assets/images/dev/image-4.jpg'),
+                asset('assets/images/dev/image-5.jpg')
+            ]"
+            overlay="rgba(24,36,64,0.35)"
+        />
+    @endif
 
     @php
         $zones = [
@@ -52,11 +71,13 @@
     @endphp
 
     <x-zone-slider :zones="$zones" />
-    <x-intro-image />
+
+    <x-intro-image :introImage="$introImage" />
 
 
-    <x-location />
-    <x-branch />
+    <x-location :slideLocations="$slideLocations" />
+    
+    <x-branch :industries="$industries" />
 @endsection
 
 @push('scripts')

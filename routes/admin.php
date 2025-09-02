@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\BannerHomeController;
 use App\Http\Controllers\Admin\ImageHomeController;
+use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\DressStyleController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\CategoryBlogController;
@@ -32,6 +33,8 @@ use App\Http\Controllers\Admin\IntroFeatureController;
 use App\Http\Controllers\Admin\IntroLocationController;
 use App\Http\Controllers\Admin\SlideLocationController;
 use App\Http\Controllers\Admin\IntroImageController;
+use App\Http\Controllers\Admin\VisionMissionController;
+use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
@@ -77,6 +80,7 @@ Route::group(['as' => 'admin.'], function () {
         Route::get('contacts', [AdminContactSubmissionController::class, 'index'])->name('contacts.index');
         Route::get('contacts/{contact}', [AdminContactSubmissionController::class, 'show'])->name('contacts.show');
         Route::delete('contacts/{contact}', [AdminContactSubmissionController::class, 'destroy'])->name('contacts.destroy');
+        Route::post('contacts/export', [AdminContactSubmissionController::class, 'export'])->name('contacts.export');
 
 
         Route::post('ckeditor/upload', [CkeditorController::class, 'upload'])
@@ -101,10 +105,15 @@ Route::group(['as' => 'admin.'], function () {
         // Intro Features Management
         Route::resource('intro-features', IntroFeatureController::class)->except(['show']);
         Route::resource('intro-locations', IntroLocationController::class)->except(['show']);
-        Route::resource('slide-locations', SlideLocationController::class)->except(['show']);
         Route::resource('intro-images', IntroImageController::class)->except(['show']);
+        Route::resource('vision-missions', VisionMissionController::class)->except(['show']);
+        Route::resource('industries', IndustryController::class)->except(['show']);
+        Route::resource('slide-locations', SlideLocationController::class)->except(['show']);
         // Image Homes Management
-        Route::resource('image-homes', ImageHomeController::class);
+        Route::resource('image-homes', ImageHomeController::class)->except(['show']);
+
+        // Features Management
+        Route::resource('features', FeatureController::class)->except(['show']);
     });
 
     Route::group(['middleware' => 'guest'], function () {

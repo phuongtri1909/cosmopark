@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="form-actions">
-                        <a href="{{ route('admin.intro-images.index') }}" class="cancel-button">
+                        <a href="{{ route('admin.intro-images.index') }}" class="back-button">
                             <i class="fas fa-times"></i> Hủy
                         </a>
                         <button type="submit" class="save-button">

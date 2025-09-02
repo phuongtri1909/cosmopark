@@ -1,10 +1,10 @@
 @props(['align' => 'text-center text-md-start', 'introImage', 'images' => null])
 
-<div class="intro-image-wrapper" 
-     @if($images) data-images="{{ json_encode($images) }}" @endif
-     @if($introImage) data-current-image="{{ $introImage->image_url }}" data-current-title="{{ $introImage->title }}" data-current-description="{{ $introImage->description }}" @endif>
-    @if($introImage)
-        <img class="img-intro animate-on-scroll" src="{{ $introImage->image_url }}" alt="{{ $introImage->getTranslation('title', app()->getLocale()) }}">
+<div class="intro-image-wrapper" @if ($images) data-images="{{ json_encode($images) }}" @endif
+    @if ($introImage) data-current-image="{{ $introImage->image_url }}" data-current-title="{{ $introImage->title }}" data-current-description="{{ $introImage->description }}" @endif>
+    @if ($introImage)
+        <img class="img-intro animate-on-scroll" src="{{ $introImage->image_url }}"
+            alt="{{ $introImage->getTranslation('title', app()->getLocale()) }}">
         <div class="content-intro-image {{ $align }}">
             <h2 class="text-xl-3 color-primary-4 fw-bold animate-on-scroll">
                 {!! $introImage->title !!}
@@ -144,6 +144,7 @@
                     opacity: 1;
                     transform: scale(1);
                 }
+
                 to {
                     opacity: 0;
                     transform: scale(1.05);
@@ -155,6 +156,7 @@
                     opacity: 0;
                     transform: scale(0.95);
                 }
+
                 to {
                     opacity: 1;
                     transform: scale(1);
@@ -166,6 +168,7 @@
                     opacity: 1;
                     transform: translateY(0);
                 }
+
                 to {
                     opacity: 0;
                     transform: translateY(-20px);
@@ -177,6 +180,7 @@
                     opacity: 0;
                     transform: translateY(20px);
                 }
+
                 to {
                     opacity: 1;
                     transform: translateY(0);
@@ -224,36 +228,25 @@
                 const titleElement = contentElement?.querySelector('h2');
                 const descriptionElement = contentElement?.querySelector('.content');
 
-                // Function to change image with smooth transition
                 function changeImageWithAnimation(newImageSrc, newTitle, newDescription) {
-                    console.log('Changing image to:', newImageSrc);
                     if (!imgElement || !contentElement) {
-                        console.log('Elements not found');
                         return;
                     }
 
-                    // Start fade out animation
-                    console.log('Starting fade out animation');
                     imgElement.classList.add('transitioning-out');
                     contentElement.classList.add('transitioning-out');
 
-                    // Wait for fade out to complete
                     setTimeout(() => {
-                        // Change image source
                         imgElement.src = newImageSrc;
-                        
-                        // Change content
+
                         if (titleElement) titleElement.innerHTML = newTitle;
                         if (descriptionElement) descriptionElement.innerHTML = newDescription;
 
-                        // Start fade in animation
-                        console.log('Starting fade in animation');
                         imgElement.classList.remove('transitioning-out');
                         imgElement.classList.add('transitioning-in');
                         contentElement.classList.remove('transitioning-out');
                         contentElement.classList.add('transitioning-in');
 
-                        // Remove animation classes after completion
                         setTimeout(() => {
                             imgElement.classList.remove('transitioning-in');
                             contentElement.classList.remove('transitioning-in');
@@ -261,17 +254,13 @@
                     }, 600);
                 }
 
-                // Get images data from server if available
                 let currentImageIndex = 0;
-                let images = [
-                    {
-                        src: imgElement?.src || '',
-                        title: titleElement?.innerHTML || '',
-                        description: descriptionElement?.innerHTML || ''
-                    }
-                ];
+                let images = [{
+                    src: imgElement?.src || '',
+                    title: titleElement?.innerHTML || '',
+                    description: descriptionElement?.innerHTML || ''
+                }];
 
-                // Try to get images from data attribute
                 try {
                     const imagesData = introImageWrapper.dataset.images;
                     if (imagesData) {
@@ -284,13 +273,12 @@
                     console.log('No images data from server');
                 }
 
-                // Function to rotate images automatically
                 function rotateImages() {
                     if (images.length <= 1) return;
-                    
+
                     currentImageIndex = (currentImageIndex + 1) % images.length;
                     const nextImage = images[currentImageIndex];
-                    
+
                     changeImageWithAnimation(
                         nextImage.src,
                         nextImage.title,
@@ -298,35 +286,30 @@
                     );
                 }
 
-                // Start auto-rotation if there are multiple images
                 if (images.length > 1) {
                     setInterval(rotateImages, 8000);
                 } else {
-                    // Use demo images for auto-rotation
                     images = demoImages;
-                    setInterval(rotateImages, 5000); // Change every 5 seconds for demo
+                    setInterval(rotateImages, 5000); 
                 }
 
-                // Add demo images for testing
-                const demoImages = [
-                    {
-                        src: imgElement?.src || '{{ asset("assets/images/dev/image-6.jpg") }}',
+                const demoImages = [{
+                        src: imgElement?.src || '{{ asset('assets/images/dev/image-6.jpg') }}',
                         title: 'COSMOPARK',
                         description: 'Dự án phát triển bền vững'
                     },
                     {
-                        src: '{{ asset("assets/images/dev/image-1.jpg") }}',
+                        src: '{{ asset('assets/images/dev/image-1.jpg') }}',
                         title: 'COSMOPARK',
                         description: 'Không gian sống hiện đại'
                     },
                     {
-                        src: '{{ asset("assets/images/dev/image-2.jpg") }}',
+                        src: '{{ asset('assets/images/dev/image-2.jpg') }}',
                         title: 'COSMOPARK',
                         description: 'Tiện ích đẳng cấp'
                     }
                 ];
 
-                // Add test button for demo
                 const testButton = document.createElement('button');
                 testButton.innerHTML = 'Test Animation';
                 testButton.style.cssText = `
@@ -352,7 +335,6 @@
                 };
                 document.body.appendChild(testButton);
 
-                // Expose function globally for external use
                 window.changeIntroImage = changeImageWithAnimation;
             });
         </script>

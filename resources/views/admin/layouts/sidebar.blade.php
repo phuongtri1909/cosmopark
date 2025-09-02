@@ -66,6 +66,59 @@
                         </ul>
                     </li>
 
+                    <li
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.vision-missions.*', 'admin.features.*', 'admin.industries.*']) ? 'open' : '' }}">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-info-circle"></i>
+                            <span>QL Về Chúng Tôi</span>
+                            <i class="fas fa-chevron-down submenu-arrow"></i>
+                        </a>
+                        <ul class="submenu">
+                            
+                            <li class="{{ Route::currentRouteNamed('admin.vision-missions.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.vision-missions.index') }}">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Tầm Nhìn & Sứ Mệnh</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ Route::currentRouteNamed('admin.features.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.features.index') }}">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Feature Section</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::currentRouteNamed('admin.image-homes.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.image-homes.index') }}">
+                                    <i class="fas fa-images"></i>
+                                    <span>Hình Ảnh Trang About</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ Route::currentRouteNamed('admin.intro-images.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.intro-images.index') }}">
+                                    <i class="fas fa-image"></i>
+                                    <span>Ảnh Giới Thiệu</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ Route::currentRouteNamed('admin.slide-locations.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.slide-locations.index') }}">
+                                    <i class="fas fa-images"></i>
+                                    <span>Slide Vị Trí</span>
+                                </a>
+                            </li>
+
+                            <li class="{{ Route::currentRouteNamed('admin.industries.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.industries.index') }}">
+                                    <i class="fas fa-industry"></i>
+                                    <span>Ngành Công Nghiệp</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                     <!-- Quản lý nội dung -->
                     <li
                         class="has-submenu {{ Route::currentRouteNamed(['admin.blogs.*', 'admin.banners.*', 'admin.category-blogs.*', 'admin.feature-sections.*']) ? 'open' : '' }}">

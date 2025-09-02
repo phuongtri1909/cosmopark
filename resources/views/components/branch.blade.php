@@ -11,55 +11,20 @@
 
                 <div class="col-12 mt-5 text-center">
                     <div class="row g-5 g-md-3">
-                        <div class="col-12 col-lg-6 col-xl-3">
-                            <div class="overlap-group animate-on-scroll">
-
-                                <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('ELECTRICAL ELECTRONIC EQUIPMENT') }}</p>
-
-
-                                <div class="icon-branch bg-primary-6 rounded-circle">
-                                    <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-1.svg') }}" />
+                        @foreach($industries as $industry)
+                            <div class="col-12 col-lg-6 col-xl-3">
+                                <div class="overlap-group animate-on-scroll">
+                                    <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
+                                    <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ $industry->name }}</p>
+                                    <div class="icon-branch bg-primary-6 rounded-circle">
+                                        <img class="icon-THIT-b-IN" src="{{ Storage::url($industry->icon) }}" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-lg-6 col-xl-3">
-                            <div class="overlap-group animate-on-scroll">
-
-                                <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('PHARMACEUTICALS') }}</p>
-
-                                <div class="icon-branch bg-primary-6 rounded-circle">
-                                    <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-2.svg') }}" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6 col-xl-3">
-                            <div class="overlap-group animate-on-scroll">
-
-                                <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('ENERGY') }}</p>
-
-                                <div class="icon-branch bg-primary-6 rounded-circle">
-                                    <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-3.svg') }}" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6 col-xl-3">
-                            <div class="overlap-group animate-on-scroll">
-
-                                <img class="subtract w-100" src="{{ asset('assets/images/svg/branch.svg') }}" />
-                                <p class="text-wrapper text-md-1 color-primary-8 fw-semibold">{{ __('AND OTHER INDUSTRIES') }}</p>
-
-                                <div class="icon-branch bg-primary-6 rounded-circle">
-                                    <img class="icon-THIT-b-IN" src="{{ asset('assets/images/svg/branch-4.svg') }}" />
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

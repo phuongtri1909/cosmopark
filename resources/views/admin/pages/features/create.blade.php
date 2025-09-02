@@ -1,6 +1,6 @@
 @extends('admin.layouts.sidebar')
 
-@section('title', 'Thêm ảnh giới thiệu')
+@section('title', 'Thêm Feature mới')
 
 @section('main-content')
     <div class="category-container">
@@ -8,7 +8,7 @@
         <div class="content-breadcrumb">
             <ol class="breadcrumb-list">
                 <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.intro-images.index') }}">Ảnh giới thiệu</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.features.index') }}">Features</a></li>
                 <li class="breadcrumb-item current">Thêm mới</li>
             </ol>
         </div>
@@ -17,51 +17,27 @@
             <div class="card-top">
                 <div class="card-title">
                     <i class="fas fa-plus icon-title"></i>
-                    <h5>Thêm ảnh giới thiệu mới</h5>
+                    <h5>Thêm Feature mới</h5>
                 </div>
             </div>
 
             <div class="form-body">
                 @include('components.alert', ['alertType' => 'alert'])
 
-                <form action="{{ route('admin.intro-images.store') }}" method="POST" class="intro-image-form"
-                    enctype="multipart/form-data">
+                <form action="{{ route('admin.features.store') }}" method="POST" enctype="multipart/form-data" class="feature-form">
                     @csrf
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="image" class="form-label">Ảnh giới thiệu <span class="required">*</span></label>
-                            <div class="image-upload-container">
-                                <div class="image-upload-preview" id="image-preview">
-                                    <div class="upload-placeholder">
-                                        <i class="fas fa-cloud-upload-alt"></i>
-                                        <span class="upload-text">Chọn ảnh</span>
-                                    </div>
-                                </div>
-                                <input type="file" name="image" id="image-upload" class="image-upload-input"
-                                    accept="image/*" required>
+                    <div class="form-group">
+                        <label for="image" class="form-label">Ảnh Feature <span class="required">*</span></label>
+                        <div class="image-upload-wrapper">
+                            <input type="file" name="image" id="image-upload" class="form-control" accept="image/*" required>
+                            <div class="image-preview mt-2" id="image-preview" style="display: none;">
+                                <img id="preview-img" src="" alt="Preview" class="img-thumbnail" style="max-width: 200px;">
                             </div>
-                            <div class="form-hint">
-                                <i class="fas fa-info-circle"></i>
-                                <span>Kích thước đề xuất: 1200x800px.</span>
-                            </div>
-                            @error('image')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
                         </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="sort_order" class="form-label">Thứ tự</label>
-                            <input type="number" name="sort_order" id="sort_order" class="form-control"
-                                value="{{ old('sort_order', 0) }}" min="0">
-                            <div class="form-hint">
-                                <i class="fas fa-info-circle"></i>
-                                <span>Số càng nhỏ càng hiển thị trước.</span>
-                            </div>
-                            @error('sort_order')
-                                <div class="error-message">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        @error('image')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -108,16 +84,31 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" name="is_active" id="is_active" class="form-check-input"
-                                {{ old('is_active') ? 'checked' : '' }}>
-                            <label for="is_active" class="form-check-label">Hiển thị ảnh giới thiệu</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="sort_order" class="form-label">Thứ tự</label>
+                            <input type="number" name="sort_order" id="sort_order" class="form-control"
+                                value="{{ old('sort_order', 0) }}" min="0">
+                            <div class="form-hint">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Số càng nhỏ càng hiển thị trước.</span>
+                            </div>
+                            @error('sort_order')
+                                <div class="error-message">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <div class="form-check">
+                                <input type="checkbox" name="is_active" id="is_active" class="form-check-input"
+                                    {{ old('is_active') ? 'checked' : '' }}>
+                                <label for="is_active" class="form-check-label">Hiển thị</label>
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-actions">
-                        <a href="{{ route('admin.intro-images.index') }}" class="back-button">
+                        <a href="{{ route('admin.features.index') }}" class="back-button">
                             <i class="fas fa-times"></i> Hủy
                         </a>
                         <button type="submit" class="save-button">
@@ -153,46 +144,16 @@
             font-size: 14px;
         }
 
-        .image-upload-container {
-            margin-bottom: 10px;
-        }
-
-        .image-upload-preview {
-            width: 100%;
-            height: 200px;
+        .image-upload-wrapper {
             border: 2px dashed #ddd;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .image-upload-preview:hover {
-            border-color: #007bff;
-        }
-
-        .upload-placeholder {
+            padding: 20px;
             text-align: center;
-            color: #666;
+            background: #f8f9fa;
         }
 
-        .upload-placeholder i {
-            font-size: 48px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .image-upload-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .image-upload-input {
-            display: none;
+        .image-preview {
+            text-align: center;
         }
     </style>
 @endpush
@@ -202,19 +163,14 @@
         $(document).ready(function() {
             // Image upload preview
             $('#image-upload').change(function() {
-                const file = this.files[0];
-                if (file) {
+                if (this.files && this.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        $('#image-preview').html(`<img src="${e.target.result}" alt="Preview">`);
+                        $('#preview-img').attr('src', e.target.result);
+                        $('#image-preview').show();
                     };
-                    reader.readAsDataURL(file);
+                    reader.readAsDataURL(this.files[0]);
                 }
-            });
-
-            // Click to select image
-            $('#image-preview').click(function() {
-                $('#image-upload').click();
             });
         });
     </script>

@@ -1,3 +1,5 @@
+@props(['visionMission' => null])
+
 <div class="vision-mission feature-gradient-bg feature-rounded-top">
     <div class="p-100">
         <div class="row g-4">
@@ -8,11 +10,20 @@
                             <img src="{{ asset('assets/images/svg/vision.svg') }}" alt="Tầm nhìn" width="48"
                                 height="48">
                         </div>
-
                     </div>
-                    <h3 class="vision-title text-white fw-bold text-xl-2 mt-0 mt-md-5">{{ __('Vision') }}</h3>
+                    <h3 class="vision-title text-white fw-bold text-xl-2 mt-0 mt-md-5">
+                        @if($visionMission && isset($visionMission['vision']))
+                            {{ $visionMission['vision']->getTranslation('title', app()->getLocale()) }}
+                        @else
+                            {{ __('Vision') }}
+                        @endif
+                    </h3>
                     <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
-                        {{ __('vision_description') }}
+                        @if($visionMission && isset($visionMission['vision']))
+                            {{ $visionMission['vision']->getTranslation('description', app()->getLocale()) }}
+                        @else
+                            {{ __('vision_description') }}
+                        @endif
                     </p>
                 </div>
             </div>
@@ -23,11 +34,20 @@
                             <img src="{{ asset('assets/images/svg/mission.svg') }}" alt="Sứ mệnh" width="48"
                                 height="48">
                         </div>
-
                     </div>
-                    <h3 class="vision-title mt-0 mt-md-5 text-white fw-bold text-xl-2">{{ __('Mission') }}</h3>
+                    <h3 class="vision-title mt-0 mt-md-5 text-white fw-bold text-xl-2">
+                        @if($visionMission && isset($visionMission['mission']))
+                            {{ $visionMission['mission']->getTranslation('title', app()->getLocale()) }}
+                        @else
+                            {{ __('Mission') }}
+                        @endif
+                    </h3>
                     <p class="vision-desc text-white mb-0 text-sm-2 color-primary-10">
-                        {{ __('mission_description') }}
+                        @if($visionMission && isset($visionMission['mission']))
+                            {{ $visionMission['mission']->getTranslation('description', app()->getLocale()) }}
+                        @else
+                            {{ __('mission_description') }}
+                        @endif
                     </p>
                 </div>
             </div>

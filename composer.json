@@ -17,6 +17,7 @@
         "laravel/socialite": "^5.20",
         "laravel/tinker": "^2.10.1",
         "paypal/rest-api-sdk-php": "^1.6",
+        "phpoffice/phpspreadsheet": "^5.0",
         "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {

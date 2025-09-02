@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Faq;
 use App\Models\Blog;
 use App\Models\Brand;
+use App\Models\Feature;
 use App\Models\Product;
-use App\Models\BannerHome;
+use App\Models\Industry;
 use App\Models\ImageHome;
+use App\Models\BannerHome;
 use App\Models\DressStyle;
+use App\Models\IntroImage;
 use App\Models\ProductView;
+use App\Models\IntroFeature;
 use App\Models\ReviewRating;
 use Illuminate\Http\Request;
+use App\Models\IntroLocation;
+use App\Models\SlideLocation;
+use App\Models\VisionMission;
 use App\Models\FeatureSection;
 use App\Models\ProductVariant;
 use App\Models\GeneralIntroduction;
-use App\Models\IntroFeature;
-use App\Models\IntroLocation;
-use App\Models\SlideLocation;
-use App\Models\IntroImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -45,16 +48,27 @@ class HomeController extends Controller
         $generalIntroduction = GeneralIntroduction::getActive();
         $introFeatures = IntroFeature::active()->ordered()->get();
         $introLocation = IntroLocation::getActive();
-        $slideLocations = SlideLocation::getActiveSlides();
         $introImage = IntroImage::getActive();
+        $visionMission = VisionMission::getActiveVisionMission();
+        $slideLocations = SlideLocation::getActiveSlides();
 
-        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'imageHomes', 'generalIntroduction', 'introFeatures', 'introLocation', 'slideLocations', 'introImage'));
+        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'imageHomes', 'generalIntroduction', 'introFeatures', 'introLocation', 'slideLocations', 'introImage', 'visionMission'));
     }
 
     public function about()
     {
         $introFeatures = IntroFeature::active()->ordered()->get();
         $generalIntroduction = GeneralIntroduction::getActive();
-        return view('client.pages.about', compact('introFeatures', 'generalIntroduction'));
+        $visionMission = VisionMission::getActiveVisionMission();
+        $features = Feature::getActiveFeatures();
+        
+        $imageHomes = ImageHome::with('subImages')
+            ->active()
+            ->ordered()
+            ->get();
+        $introImage = IntroImage::getActive();
+        $slideLocations = SlideLocation::getActiveSlides();
+        $industries = Industry::active()->ordered()->get();
+        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'slideLocations', 'features', 'imageHomes', 'industries'));
     }
 }
