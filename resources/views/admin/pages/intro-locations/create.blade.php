@@ -119,67 +119,42 @@
                         <div class="stats-section">
                             <h5 class="mb-3">Thống kê</h5>
                             
-                            <!-- Tiếng Việt -->
-                            <div class="language-stats mb-4">
-                                <h6 class="text-primary">Tiếng Việt</h6>
-                                <div id="stats_vi_container">
-                                    <div class="stat-item mb-3" data-index="0">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input type="text" class="custom-input" name="stats[vi][0][label]" 
-                                                       placeholder="Nhãn (VD: Dân số)" maxlength="100" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="custom-input" name="stats[vi][0][value]" 
-                                                       placeholder="Giá trị (VD: 3,2)" maxlength="50" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="custom-input" name="stats[vi][0][unit]" 
-                                                       placeholder="Đơn vị (VD: Triệu)" maxlength="20">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" class="btn btn-danger btn-sm remove-stat" data-lang="vi">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
+                            <div id="stats_container">
+                                <div class="stat-item mb-4" data-index="0">
+                                    <div class="stat-header">
+                                        <h6 class="text-muted">Thống kê #1</h6>
+                                        <button type="button" class="btn btn-danger btn-sm remove-stat">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label class="form-label-custom">Nhãn / Label</label>
+                                            <input type="text" class="custom-input" name="stats[0][label][vi]" 
+                                                   placeholder="Nhãn (VD: Dân số)" maxlength="100" required>
+                                            <input type="text" class="custom-input mt-2" name="stats[0][label][en]" 
+                                                   placeholder="Label (e.g., Population)" maxlength="100" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label-custom">Giá trị / Value</label>
+                                            <input type="text" class="custom-input" name="stats[0][value][vi]" 
+                                                   placeholder="Giá trị (VD: 3,2)" maxlength="50" required>
+                                            <input type="text" class="custom-input mt-2" name="stats[0][value][en]" 
+                                                   placeholder="Value (e.g., 3.2)" maxlength="50" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label-custom">Đơn vị / Unit</label>
+                                            <input type="text" class="custom-input" name="stats[0][unit][vi]" 
+                                                   placeholder="Đơn vị (VD: Triệu)" maxlength="20">
+                                            <input type="text" class="custom-input mt-2" name="stats[0][unit][en]" 
+                                                   placeholder="Unit (e.g., Million)" maxlength="20">
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-success btn-sm add-stat" data-lang="vi">
-                                    <i class="fas fa-plus"></i> Thêm thống kê
-                                </button>
                             </div>
-
-                            <!-- English -->
-                            <div class="language-stats">
-                                <h6 class="text-primary">English</h6>
-                                <div id="stats_en_container">
-                                    <div class="stat-item mb-3" data-index="0">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input type="text" class="custom-input" name="stats[en][0][label]" 
-                                                       placeholder="Label (e.g., Population)" maxlength="100" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="custom-input" name="stats[en][0][value]" 
-                                                       placeholder="Value (e.g., 3.2)" maxlength="50" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="custom-input" name="stats[en][0][unit]" 
-                                                       placeholder="Unit (e.g., Million)" maxlength="20">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" class="btn btn-danger btn-sm remove-stat" data-lang="en">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-success btn-sm add-stat" data-lang="en">
-                                    <i class="fas fa-plus"></i> Add Statistic
-                                </button>
-                            </div>
+                            <button type="button" class="btn btn-success btn-sm add-stat">
+                                <i class="fas fa-plus"></i> Thêm thống kê
+                            </button>
                         </div>
                     </div>
 
@@ -199,50 +174,58 @@
 
 @push('scripts')
 <script>
-let statIndexes = { vi: 1, en: 1 };
+let statIndex = 1;
 
 $(document).ready(function() {
     // Thêm thống kê mới
     $('.add-stat').click(function() {
-        const lang = $(this).data('lang');
-        const index = statIndexes[lang]++;
+        const index = statIndex++;
         
         const newStat = `
-            <div class="stat-item mb-3" data-index="${index}">
+            <div class="stat-item mb-4" data-index="${index}">
+                <div class="stat-header">
+                    <h6 class="text-muted">Thống kê #${index + 1}</h6>
+                    <button type="button" class="btn btn-danger btn-sm remove-stat">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="text" class="custom-input" name="stats[${lang}][${index}][label]" 
-                               placeholder="${lang === 'vi' ? 'Nhãn' : 'Label'}" maxlength="100" required>
+                        <label class="form-label-custom">Nhãn / Label</label>
+                        <input type="text" class="custom-input" name="stats[${index}][label][vi]" 
+                               placeholder="Nhãn (VD: Dân số)" maxlength="100" required>
+                        <input type="text" class="custom-input mt-2" name="stats[${index}][label][en]" 
+                               placeholder="Label (e.g., Population)" maxlength="100" required>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" class="custom-input" name="stats[${lang}][${index}][value]" 
-                               placeholder="${lang === 'vi' ? 'Giá trị' : 'Value'}" maxlength="50" required>
+                    <div class="col-md-4">
+                        <label class="form-label-custom">Giá trị / Value</label>
+                        <input type="text" class="custom-input" name="stats[${index}][value][vi]" 
+                               placeholder="Giá trị (VD: 3,2)" maxlength="50" required>
+                        <input type="text" class="custom-input mt-2" name="stats[${index}][value][en]" 
+                               placeholder="Value (e.g., 3.2)" maxlength="50" required>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" class="custom-input" name="stats[${lang}][${index}][unit]" 
-                               placeholder="${lang === 'vi' ? 'Đơn vị' : 'Unit'}" maxlength="20">
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-danger btn-sm remove-stat" data-lang="${lang}">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                    <div class="col-md-4">
+                        <label class="form-label-custom">Đơn vị / Unit</label>
+                        <input type="text" class="custom-input" name="stats[${index}][unit][vi]" 
+                               placeholder="Đơn vị (VD: Triệu)" maxlength="20">
+                        <input type="text" class="custom-input mt-2" name="stats[${index}][unit][en]" 
+                               placeholder="Unit (e.g., Million)" maxlength="20">
                     </div>
                 </div>
             </div>
         `;
         
-        $(`#stats_${lang}_container`).append(newStat);
+        $('#stats_container').append(newStat);
     });
 
     // Xóa thống kê
     $(document).on('click', '.remove-stat', function() {
-        const lang = $(this).data('lang');
         const statItem = $(this).closest('.stat-item');
         
-        if ($(`#stats_${lang}_container .stat-item`).length > 1) {
+        if ($('#stats_container .stat-item').length > 1) {
             statItem.remove();
         } else {
-            alert('Phải có ít nhất 1 thống kê cho mỗi ngôn ngữ!');
+            alert('Phải có ít nhất 1 thống kê!');
         }
     });
 
@@ -306,18 +289,26 @@ $(document).ready(function() {
     margin-bottom: 20px;
 }
 
-.language-stats {
+.stat-item {
     background: white;
-    padding: 15px;
-    border-radius: 6px;
+    padding: 20px;
+    border-radius: 8px;
     border: 1px solid #dee2e6;
+    margin-bottom: 20px;
 }
 
-.stat-item {
-    background: #f8f9fa;
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px solid #e9ecef;
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.stat-header h6 {
+    margin: 0;
+    color: #6c757d;
 }
 
 .intro-location-image-upload-container {

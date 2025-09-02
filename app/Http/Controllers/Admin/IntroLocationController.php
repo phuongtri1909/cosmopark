@@ -9,6 +9,7 @@ use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class IntroLocationController extends Controller
 {
@@ -45,15 +46,25 @@ class IntroLocationController extends Controller
         $rules = [
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'sometimes|boolean',
+            'is_active' => 'sometimes|accepted',
         ];
         
         foreach ($this->languages as $lang => $langName) {
             $rules["title.$lang"] = 'required|string|max:255';
             $rules["description.$lang"] = 'required|string|max:1000';
-            $rules["stats.*.label.$lang"] = 'required|string|max:100';
-            $rules["stats.*.value.$lang"] = 'required|string|max:50';
-            $rules["stats.*.unit.$lang"] = 'nullable|string|max:20';
+        }
+        
+        // Stats validation - check if stats exist
+        if ($request->has('stats') && is_array($request->stats)) {
+            foreach ($request->stats as $index => $stat) {
+                if (isset($stat['label']) && isset($stat['value'])) {
+                    foreach ($this->languages as $lang => $langName) {
+                        $rules["stats.$index.label.$lang"] = 'required|string|max:100';
+                        $rules["stats.$index.value.$lang"] = 'required|string|max:50';
+                        $rules["stats.$index.unit.$lang"] = 'nullable|string|max:20';
+                    }
+                }
+            }
         }
         
         $messages = [
@@ -65,16 +76,39 @@ class IntroLocationController extends Controller
             'title.en.required' => 'Tiêu đề (EN) là bắt buộc.',
             'description.vi.required' => 'Mô tả (VI) là bắt buộc.',
             'description.en.required' => 'Mô tả (EN) là bắt buộc.',
-            'stats.*.label.vi.required' => 'Nhãn (VI) là bắt buộc.',
-            'stats.*.label.en.required' => 'Label (EN) là bắt buộc.',
-            'stats.*.value.vi.required' => 'Giá trị (VI) là bắt buộc.',
-            'stats.*.value.en.required' => 'Value (EN) là bắt buộc.',
         ];
         
-        $validated = $request->validate($rules, $messages);
+        // Stats validation messages
+        foreach ($this->languages as $lang => $langName) {
+            $messages["stats.*.label.$lang.required"] = "Nhãn ($langName) là bắt buộc.";
+            $messages["stats.*.value.$lang.required"] = "Giá trị ($langName) là bắt buộc.";
+        }
+        
+        try {
+            $validated = $request->validate($rules, $messages);
+            Log::info('Validation passed, validated data:', $validated);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed:', [
+                'errors' => $e->errors(),
+                'request_data' => $request->all()
+            ]);
+            throw $e;
+        }
         
         try {
             DB::beginTransaction();
+            
+            // Debug logging
+            Log::info('IntroLocation create request data:', [
+                'title' => $request->title,
+                'description' => $request->description,
+                'stats' => $request->stats ?? 'no stats',
+                'has_image' => $request->hasFile('image'),
+                'is_active' => $request->has('is_active'),
+                'sort_order' => $request->sort_order
+            ]);
+            
+            Log::info('Request all data:', $request->all());
             
             if ($request->hasFile('image')) {
                 $imagePath = ImageHelper::optimizeAndSave(
@@ -85,27 +119,42 @@ class IntroLocationController extends Controller
                 );
             }
             
-            $validated['is_active'] = $request->has('is_active');
-            $validated['image'] = $imagePath ?? null;
+            $isActive = $request->has('is_active');
+            $imagePath = $imagePath ?? null;
+            $sortOrder = $request->sort_order ?? 0;
             
             $introLocation = IntroLocation::create([
                 'title' => $request->title,
                 'description' => $request->description,
-                'image' => $validated['image'],
-                'sort_order' => $request->sort_order ?? 0,
-                'is_active' => $validated['is_active'],
+                'image' => $imagePath,
+                'sort_order' => $sortOrder,
+                'is_active' => $isActive,
             ]);
             
             // Create stats
-            if (isset($request->stats)) {
+            if (isset($request->stats) && is_array($request->stats)) {
+                Log::info('Creating stats:', $request->stats);
+                
                 foreach ($request->stats as $index => $stat) {
-                    IntroLocationStat::create([
-                        'intro_location_id' => $introLocation->id,
-                        'label' => $stat['label'],
-                        'value' => $stat['value'],
-                        'unit' => $stat['unit'] ?? null,
-                        'sort_order' => $index
-                    ]);
+                    if (isset($stat['label']) && isset($stat['value'])) {
+                        // Create multi-language stat
+                        $statData = [
+                            'intro_location_id' => $introLocation->id,
+                            'sort_order' => $index
+                        ];
+                        
+                        // Add translations for each language
+                        foreach ($this->languages as $lang => $langName) {
+                            if (isset($stat['label'][$lang])) {
+                                $statData['label'][$lang] = $stat['label'][$lang];
+                                $statData['value'][$lang] = $stat['value'][$lang];
+                                $statData['unit'][$lang] = $stat['unit'][$lang] ?? null;
+                            }
+                        }
+                        
+                        Log::info('Creating stat:', $statData);
+                        IntroLocationStat::create($statData);
+                    }
                 }
             }
             
@@ -115,6 +164,10 @@ class IntroLocationController extends Controller
                 ->with('success', 'Thông tin vị trí đã được tạo thành công.');
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Error creating IntroLocation:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
@@ -142,15 +195,25 @@ class IntroLocationController extends Controller
         $rules = [
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'sometimes|boolean',
+            'is_active' => 'sometimes|accepted',
         ];
         
         foreach ($this->languages as $lang => $langName) {
             $rules["title.$lang"] = 'required|string|max:255';
             $rules["description.$lang"] = 'required|string|max:1000';
-            $rules["stats.*.label.$lang"] = 'required|string|max:100';
-            $rules["stats.*.value.$lang"] = 'required|string|max:50';
-            $rules["stats.*.unit.$lang"] = 'nullable|string|max:20';
+        }
+        
+        // Stats validation - check if stats exist
+        if ($request->has('stats') && is_array($request->stats)) {
+            foreach ($request->stats as $index => $stat) {
+                if (isset($stat['label']) && isset($stat['value'])) {
+                    foreach ($this->languages as $lang => $langName) {
+                        $rules["stats.$index.label.$lang"] = 'required|string|max:100';
+                        $rules["stats.$index.value.$lang"] = 'required|string|max:50';
+                        $rules["stats.$index.unit.$lang"] = 'nullable|string|max:20';
+                    }
+                }
+            }
         }
         
         $messages = [
@@ -161,16 +224,35 @@ class IntroLocationController extends Controller
             'title.en.required' => 'Tiêu đề (EN) là bắt buộc.',
             'description.vi.required' => 'Mô tả (VI) là bắt buộc.',
             'description.en.required' => 'Mô tả (EN) là bắt buộc.',
-            'stats.*.label.vi.required' => 'Nhãn (VI) là bắt buộc.',
-            'stats.*.label.en.required' => 'Label (EN) là bắt buộc.',
-            'stats.*.value.vi.required' => 'Giá trị (VI) là bắt buộc.',
-            'stats.*.value.en.required' => 'Value (EN) là bắt buộc.',
         ];
         
-        $validated = $request->validate($rules, $messages);
+        // Stats validation messages
+        foreach ($this->languages as $lang => $langName) {
+            $messages["stats.*.label.$lang.required"] = "Nhãn ($langName) là bắt buộc.";
+            $messages["stats.*.value.$lang.required"] = "Giá trị ($langName) là bắt buộc.";
+        }
+        
+        try {
+            $validated = $request->validate($rules, $messages);
+            Log::info('Validation passed, validated data:', $validated);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation failed:', [
+                'errors' => $e->errors(),
+                'request_data' => $request->all()
+            ]);
+            throw $e;
+        }
         
         try {
             DB::beginTransaction();
+            
+            // Debug logging
+            Log::info('IntroLocation update request data:', [
+                'title' => $request->title,
+                'description' => $request->description,
+                'stats' => $request->stats ?? 'no stats',
+                'has_image' => $request->hasFile('image')
+            ]);
             
             if ($request->hasFile('image')) {
                 if ($introLocation->image) {
@@ -188,7 +270,7 @@ class IntroLocationController extends Controller
             }
             
             $validated['is_active'] = $request->has('is_active');
-            
+        
             $introLocation->update([
                 'title' => $request->title,
                 'description' => $request->description,
@@ -201,24 +283,42 @@ class IntroLocationController extends Controller
             $introLocation->stats()->delete();
             
             // Create new stats
-            if (isset($request->stats)) {
+            if (isset($request->stats) && is_array($request->stats)) {
+                Log::info('Creating new stats:', $request->stats);
+                
                 foreach ($request->stats as $index => $stat) {
-                    IntroLocationStat::create([
-                        'intro_location_id' => $introLocation->id,
-                        'label' => $stat['label'],
-                        'value' => $stat['value'],
-                        'unit' => $stat['unit'] ?? null,
-                        'sort_order' => $index
-                    ]);
+                    if (isset($stat['label']) && isset($stat['value'])) {
+                        // Create multi-language stat
+                        $statData = [
+                            'intro_location_id' => $introLocation->id,
+                            'sort_order' => $index
+                        ];
+                        
+                        // Add translations for each language
+                        foreach ($this->languages as $lang => $langName) {
+                            if (isset($stat['label'][$lang])) {
+                                $statData['label'][$lang] = $stat['label'][$lang];
+                                $statData['value'][$lang] = $stat['value'][$lang];
+                                $statData['unit'][$lang] = $stat['unit'][$lang] ?? null;
+                            }
+                        }
+                        
+                        Log::info('Creating stat:', $statData);
+                        IntroLocationStat::create($statData);
+                    }
                 }
             }
-            
+                
             DB::commit();
             
             return redirect()->route('admin.intro-locations.index')
                 ->with('success', 'Thông tin vị trí đã được cập nhật thành công.');
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Error updating IntroLocation:', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
