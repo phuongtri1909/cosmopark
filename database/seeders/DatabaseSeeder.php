@@ -10,6 +10,7 @@ use Database\Seeders\AdminSeeder;
 use Database\Seeders\StateSeeder;
 use Database\Seeders\CountrySeeder;
 use Database\Seeders\IndustrySeeder;
+use Database\Seeders\ProjectSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             IntroImageSeeder::class,
             VisionMissionSeeder::class,
             IndustrySeeder::class,
+            ProjectSeeder::class,
             FeatureSeeder::class,
         ]);
     }

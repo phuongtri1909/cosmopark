@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\CategoryBlog;
+use App\Models\Industry;
 use App\Models\BlogComment;
+use App\Models\CategoryBlog;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\SlideLocation;
 
 class ProjectController extends Controller
 {
@@ -16,8 +19,12 @@ class ProjectController extends Controller
     public function show($slug)
     {
 
+        $project = Project::findBySlug($slug);
 
-        return view('client.pages.project', compact('slug'));
+        $slideLocations = SlideLocation::getActiveSlides();
+        $industries = Industry::active()->ordered()->get();
+        
+        return view('client.pages.project', compact('project', 'slideLocations', 'industries'));
     }
 
 }

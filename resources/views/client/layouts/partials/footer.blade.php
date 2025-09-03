@@ -36,9 +36,9 @@
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="">{{ __('Projects') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
-                                    href="">{{ __('Infomation & Gallery') }}</a>
+                                    href="{{ route('gallery') }}">{{ __('Infomation & Gallery') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
-                                    href="">{{ __('Contact-1') }}</a>
+                                    href="{{ route('contact') }}">{{ __('Contact-1') }}</a>
                             </div>
                         </div>
 

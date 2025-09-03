@@ -1,4 +1,4 @@
-@props(['images' => []])
+@props(['project' => null])
 
 <div class="media-project pb-5">
     <div class="container d-flex justify-content-between animate-on-scroll">
@@ -30,15 +30,12 @@
 
     <!-- Desktop Layout -->
     <div class="d-none d-md-block">
-        <div class="swiper mt-5 media-project-swiper">
-            <div class="swiper-wrapper">
-                @foreach($images as $img)
-                <div class="swiper-slide">
-                    <div class="expo-container">
-                        <img class="expo-image" src="{{ $img }}" />
+        <div class="slider-wrapper-container mt-5">
+            <div class="slider-container">
+                <div class="slider-wrapper">
+                    <div class="slider-track" id="desktop-slider-track">
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
@@ -55,15 +52,14 @@
         
         <!-- Images Data -->
         <div class="mobile-data-section active" id="images-data">
-            <div class="swiper mt-3 mobile-media-swiper">
-                <div class="swiper-wrapper">
-                    @foreach($images as $img)
-                    <div class="swiper-slide">
-                        <div class="expo-container">
-                            <img class="expo-image" src="{{ $img }}" />
+            <div class="mt-3">
+                <div class="slider-wrapper-container">
+                    <div class="slider-container">
+                        <div class="slider-wrapper">
+                            <div class="slider-track" id="mobile-images-track">
+                            </div>
                         </div>
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -119,6 +115,23 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
                 <p class="mt-2 text-muted">{{ __('Loading street views...') }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="videoIframe" src="" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -211,6 +224,62 @@
                 height: 3rem;
             }
 
+            /* Video Thumbnail Styles */
+            .video-thumbnail {
+                position: relative;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .video-thumbnail:hover {
+                transform: scale(1.05);
+            }
+
+            .video-play-button {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 60px;
+                height: 60px;
+                background: rgba(255, 0, 0, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 24px;
+                transition: all 0.3s ease;
+            }
+
+            .video-thumbnail:hover .video-play-button {
+                background: rgba(255, 0, 0, 1);
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+
+            .slide-images img {
+                object-fit: cover !important;
+                object-position: center !important;
+            }
+
+            .video-thumbnail img {
+                object-fit: cover !important;
+                object-position: center !important;
+            }
+
+            /* Empty State */
+            .empty-state {
+                text-align: center;
+                padding: 40px 20px;
+                color: #6c757d;
+            }
+
+            .empty-state i {
+                font-size: 48px;
+                margin-bottom: 16px;
+                opacity: 0.5;
+            }
+
             /* Mobile Layout */
             @media (max-width: 767px) {
                 .media-project .container {
@@ -219,7 +288,7 @@
                 }
 
                 .category-media {
-                    display: none; /* Hide desktop buttons on mobile */
+                    display: none;
                 }
 
                 .mobile-button-container {
@@ -237,204 +306,317 @@
         <script src="{{ asset('assets/js/index-slider.js') }}"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Desktop and Mobile Section Toggle with Lazy Loading
-                const categoryButtons = document.querySelectorAll('.btn-category');
-                const mobileButtons = document.querySelectorAll('.mobile-btn-category');
-                const mediaSections = document.querySelectorAll('.mobile-data-section');
-
-                // Desktop button handlers
-                categoryButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const target = this.getAttribute('data-target');
-                        const isLoaded = this.getAttribute('data-loaded') === 'true';
-                        
-                        // Remove active class from all buttons
-                        categoryButtons.forEach(btn => btn.classList.remove('active'));
-                        
-                        // Add active class to clicked button
-                        this.classList.add('active');
-                        
-                        // Desktop: Load data for the clicked category
-                        if (!isLoaded) {
-                            loadDesktopData(target, this);
-                        }
-                    });
-                });
-
-                // Mobile button handlers
-                mobileButtons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const target = this.getAttribute('data-target');
-                        const isLoaded = this.getAttribute('data-loaded') === 'true';
-                        
-                        // Remove active class from all buttons and sections
-                        mobileButtons.forEach(btn => btn.classList.remove('active'));
-                        mediaSections.forEach(section => section.classList.remove('active'));
-                        
-                        // Add active class to clicked button and target section
-                        this.classList.add('active');
-                        const targetSection = document.getElementById(target + '-data');
-                        targetSection.classList.add('active');
-                        
-                        // Load data if not already loaded
-                        if (!isLoaded) {
-                            loadSectionData(target, targetSection, this);
-                        }
-                    });
-                });
-
-                // Initialize first section by default on mobile
-                if (window.innerWidth < 768) {
-                    const firstButton = document.querySelector('.mobile-btn-category[data-target="images"]');
-                    if (firstButton) {
-                        firstButton.click();
-                    }
+                const projectSlug = '{{ $project->slug }}';
+                
+                if (!projectSlug) {
+                    console.error('Project slug not found');
+                    return;
                 }
+                
+                let currentType = 'images';
+                let mediaData = {};
+                let desktopSlider = null;
+                let mobileSlider = null;
 
-                // Function to load section data for mobile
-                function loadSectionData(sectionType, sectionElement, buttonElement) {
-                    const loadingPlaceholder = sectionElement.querySelector('.loading-placeholder');
-                    
-                    // Show loading state
-                    loadingPlaceholder.style.display = 'block';
-                    
-                    // API call (replace with actual endpoint)
-                    fetch(`/api/media/${sectionType}`)
-                        .then(response => response.json())
+                loadMediaData('images', true);
+
+                setTimeout(() => {
+                    reinitializeSliders();
+                }, 800);
+
+                setTimeout(() => {
+                    if (!mediaData.images || mediaData.images.length === 0) {
+                        showEmptyState('images');
+                    }
+                }, 2500);
+
+                document.querySelectorAll('.btn-category').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const target = this.dataset.target;
+                        if (target === currentType) return;
+
+                        document.querySelectorAll('.btn-category').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+
+                        loadMediaData(target, false);
+                        currentType = target;
+                    });
+                });
+
+                document.querySelectorAll('.mobile-btn-category').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const target = this.dataset.target;
+                        if (target === currentType) return;
+
+                        document.querySelectorAll('.mobile-btn-category').forEach(btn => btn.classList.remove('active'));
+                        document.querySelectorAll('.mobile-data-section').forEach(section => section.classList.remove('active'));
+                        
+                        this.classList.add('active');
+                        document.getElementById(target + '-data').classList.add('active');
+
+                        if (!mediaData[target]) {
+                            loadMediaData(target, false);
+                        } else {
+                            renderMedia(target);
+                        }
+                        
+                        currentType = target;
+                    });
+                });
+
+                function loadMediaData(type, isInitial = false) {
+                    const loadingPlaceholder = document.querySelector(`#${type}-data .loading-placeholder`);
+                    if (loadingPlaceholder) {
+                        loadingPlaceholder.style.display = 'block';
+                    }
+
+                    fetch(`/project-media/${projectSlug}/${type}`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
                         .then(data => {
-                            // Hide loading
-                            loadingPlaceholder.style.display = 'none';
+                            mediaData[type] = data;
+                            renderMedia(type);
                             
-                            // Render content
-                            renderSectionContent(sectionElement, sectionType, data);
-                            
-                            // Mark as loaded
-                            buttonElement.setAttribute('data-loaded', 'true');
+                            if (loadingPlaceholder) {
+                                loadingPlaceholder.style.display = 'none';
+                            }
                         })
                         .catch(error => {
-                            console.error('Error loading data:', error);
-                            loadingPlaceholder.innerHTML = `
-                                <div class="text-danger">
-                                    <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
-                                    <p>{{ __('Error loading data. Please try again.') }}</p>
-                                    <button class="btn btn-outline-primary btn-sm" onclick="loadSectionData('${sectionType}', '${sectionElement.id}', '${buttonElement.id}')">
-                                        {{ __('Retry') }}
-                                    </button>
-                                </div>
-                            `;
+                            console.error('Error loading media:', error);
+                            showEmptyState(type);
+                            
+                            if (loadingPlaceholder) {
+                                loadingPlaceholder.style.display = 'none';
+                            }
                         });
                 }
 
-                // Function to load data for desktop
-                function loadDesktopData(sectionType, buttonElement) {
-                    // Show loading state in desktop swiper
-                    const swiperContainer = document.querySelector('.media-project-swiper .swiper-wrapper');
-                    swiperContainer.innerHTML = `
-                        <div class="swiper-slide">
-                            <div class="text-center py-5">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <p class="mt-2 text-muted">{{ __('Loading') }} ${sectionType}...</p>
-                            </div>
-                        </div>
-                    `;
+                function renderMedia(type) {
+                    const data = mediaData[type];
                     
-                    // API call (replace with actual endpoint)
-                    fetch(`/api/media/${sectionType}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Render desktop content
-                            renderDesktopContent(swiperContainer, sectionType, data);
-                            
-                            // Mark as loaded
-                            buttonElement.setAttribute('data-loaded', 'true');
-                        })
-                        .catch(error => {
-                            console.error('Error loading data:', error);
-                            swiperContainer.innerHTML = `
-                                <div class="swiper-slide">
-                                    <div class="text-center py-5">
-                                        <div class="text-danger">
-                                            <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
-                                            <p>{{ __('Error loading data. Please try again.') }}</p>
-                                            <button class="btn btn-outline-primary btn-sm" onclick="loadDesktopData('${sectionType}', '${buttonElement.id}')">
-                                                {{ __('Retry') }}
-                                            </button>
+                    if (!data || data.length === 0) {
+                        showEmptyState(type);
+                        return;
+                    }
+
+                    renderDesktopSlider(type, data);
+                    
+                    renderMobileSlider(type, data);
+
+                    setTimeout(() => {
+                        reinitializeSliders();
+                    }, 100);
+                }
+
+                function renderDesktopSlider(type, data) {
+                    const track = document.getElementById('desktop-slider-track');
+                    if (!track) {
+                        return;
+                    }
+
+                    track.innerHTML = '';
+                    
+                    if (type === 'videos') {
+                        renderVideoSlides(track, data, 'desktop');
+                    } else {
+                        renderImageSlides(track, data, 'desktop');
+                    }
+                }
+
+                function renderMobileSlider(type, data) {
+                    const track = document.getElementById('mobile-' + type.replace('-', '') + '-track');
+                    if (!track) {
+                        return;
+                    }
+
+                    track.innerHTML = '';
+                    
+                    if (type === 'videos') {
+                        renderVideoSlides(track, data, 'mobile');
+                    } else {
+                        renderImageSlides(track, data, 'mobile');
+                    }
+                }
+
+                function renderImageSlides(track, data, layout) {
+                    
+                    data.forEach((item, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = `slide ${index === 0 ? 'active' : ''}`;
+                        slide.dataset.index = index;
+                        
+                        const leftImageUrl = getImageUrl(data, index - 1);
+                        const rightImageUrl = getImageUrl(data, index + 1);
+                        
+                        slide.innerHTML = `
+                            <div class="slide-images">
+                                <div class="side-image left-image">
+                                    <img src="${leftImageUrl}" alt="Left Image">
+                                </div>
+                                <div class="center-image">
+                                    <img src="${item.file_url}" alt="${item.title || 'Image'}">
+                                </div>
+                                <div class="side-image right-image">
+                                    <img src="${rightImageUrl}" alt="Right Image">
+                                </div>
+                            </div>
+                        `;
+                        
+                        track.appendChild(slide);
+                    });
+                }
+
+                function renderVideoSlides(track, data, layout) {
+                    
+                    data.forEach((item, index) => {
+                        const slide = document.createElement('div');
+                        slide.className = `slide ${index === 0 ? 'active' : ''}`;
+                        slide.dataset.index = index;
+                        
+                        const leftThumbnail = getVideoThumbnail(data, index - 1);
+                        const rightThumbnail = getVideoThumbnail(data, index + 1);
+                        
+                        slide.innerHTML = `
+                            <div class="slide-images">
+                                <div class="side-image left-image">
+                                    <img src="${leftThumbnail}" alt="Left Video">
+                                </div>
+                                <div class="center-image">
+                                    <div class="video-thumbnail" onclick="playVideo('${item.embed_url}', '${item.title || 'Video'}')">
+                                        <img src="${item.thumbnail_url}" alt="${item.title || 'Video'}">
+                                        <div class="video-play-button">
+                                            <i class="fas fa-play"></i>
                                         </div>
                                     </div>
                                 </div>
-                            `;
-                        });
-                }
-
-                // Function to render mobile section content
-                function renderSectionContent(sectionElement, sectionType, data) {
-                    let html = '';
-                    
-                    if (sectionType === 'videos') {
-                        html = `
-                            <div class="swiper mt-3 mobile-media-swiper">
-                                <div class="swiper-wrapper">
-                                    ${data.map(video => `
-                                        <div class="swiper-slide">
-                                            <div class="expo-container">
-                                                <video class="expo-image" controls>
-                                                    <source src="${video}" type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                            </div>
-                                        </div>
-                                    `).join('')}
+                                <div class="side-image right-image">
+                                    <img src="${rightThumbnail}" alt="Right Video">
                                 </div>
                             </div>
                         `;
-                    } else {
-                        html = `
-                            <div class="swiper mt-3 mobile-media-swiper">
-                                <div class="swiper-wrapper">
-                                    ${data.map(item => `
-                                        <div class="swiper-slide">
-                                            <div class="expo-container">
-                                                <img class="expo-image" src="${item}" />
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        `;
-                    }
-                    
-                    sectionElement.innerHTML = html;
+                        
+                        track.appendChild(slide);
+                    });
                 }
 
-                // Function to render desktop content
-                function renderDesktopContent(swiperContainer, sectionType, data) {
-                    let html = '';
-                    
-                    if (sectionType === 'videos') {
-                        html = data.map(video => `
-                            <div class="swiper-slide">
-                                <div class="expo-container">
-                                    <video class="expo-image" controls>
-                                        <source src="${video}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                            </div>
-                        `).join('');
-                    } else {
-                        html = data.map(item => `
-                            <div class="swiper-slide">
-                                <div class="expo-container">
-                                    <img class="expo-image" src="${item}" />
-                                </div>
-                            </div>
-                        `).join('');
+                function getImageUrl(data, index) {
+                    if (index < 0 || index >= data.length) {
+                        return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop';
+                    }
+                    return data[index].file_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop';
+                }
+
+                function getVideoThumbnail(data, index) {
+                    if (index < 0 || index >= data.length) {
+                        return 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop';
+                    }
+                    return data[index].thumbnail_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop';
+                }
+
+                function showEmptyState(type) {
+                    const typeLabels = {
+                        'images': 'hình ảnh',
+                        'plans': 'kế hoạch',
+                        'videos': 'video',
+                        'street-views': 'góc nhìn đường phố'
+                    };
+
+                    const emptyState = `
+                        <div class="empty-state">
+                            <i class="fas fa-${type === 'videos' ? 'video' : 'image'}"></i>
+                            <h5>Không có ${typeLabels[type]} nào</h5>
+                            <p>Dự án này chưa có ${typeLabels[type]} để hiển thị.</p>
+                        </div>
+                    `;
+
+                    const desktopTrack = document.getElementById('desktop-slider-track');
+                    if (desktopTrack) {
+                        desktopTrack.innerHTML = emptyState;
+                    }
+
+                    const mobileSection = document.getElementById(type + '-data');
+                    if (mobileSection) {
+                        const track = mobileSection.querySelector('.slider-track');
+                        if (track) {
+                            track.innerHTML = emptyState;
+                        }
+                    }
+
+                    if (desktopSlider && desktopSlider.autoPlayInterval) {
+                        clearInterval(desktopSlider.autoPlayInterval);
+                    }
+                    if (mobileSlider && mobileSlider.autoPlayInterval) {
+                        clearInterval(mobileSlider.autoPlayInterval);
+                    }
+                }
+
+                function reinitializeSliders() {
+                    const desktopTrack = document.getElementById('desktop-slider-track');
+                    if (desktopTrack && desktopTrack.children.length > 0) {
+                        if (window.desktopExpoSlider && typeof window.desktopExpoSlider.refreshSlides === 'function') {
+                            window.desktopExpoSlider.refreshSlides();
+                            desktopSlider = window.desktopExpoSlider;
+                        }
+                    }
+
+                    const mobileTrack = document.getElementById('mobile-' + currentType.replace('-', '') + '-track');
+                    if (mobileTrack && mobileTrack.children.length > 0) {
+                        if (window.mobileExpoSlider && typeof window.mobileExpoSlider.refreshSlides === 'function') {
+                            window.mobileExpoSlider.refreshSlides();
+                            mobileSlider = window.mobileExpoSlider;
+                        }
+                    }
+                }
+
+                window.playVideo = function(videoUrl, title) {
+                    if (!videoUrl) {
+                        return;
                     }
                     
-                    swiperContainer.innerHTML = html;
-                }
+                    const modal = document.getElementById('videoModal');
+                    const iframe = document.getElementById('videoIframe');
+                    const modalTitle = document.getElementById('videoModalLabel');
+                    
+                    if (!modal || !iframe || !modalTitle) {
+                        return;
+                    }
+                    
+                    iframe.src = videoUrl;
+                    modalTitle.textContent = title || 'Video';
+                    
+                    try {
+                        const bootstrapModal = new bootstrap.Modal(modal);
+                        bootstrapModal.show();
+                    } catch (e) {
+                        modal.style.display = 'block';
+                        modal.classList.add('show');
+                    }
+                };
+
+                document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+                    const iframe = document.getElementById('videoIframe');
+                    if (iframe) {
+                        iframe.src = '';
+                    }
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('btn-close') || e.target.closest('.btn-close')) {
+                        const modal = document.getElementById('videoModal');
+                        if (modal) {
+                            modal.style.display = 'none';
+                            modal.classList.remove('show');
+                            const iframe = document.getElementById('videoIframe');
+                            if (iframe) {
+                                iframe.src = '';
+                            }
+                        }
+                    }
+                });
             });
         </script>
     @endpush

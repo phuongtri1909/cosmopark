@@ -35,6 +35,8 @@ use App\Http\Controllers\Admin\SlideLocationController;
 use App\Http\Controllers\Admin\IntroImageController;
 use App\Http\Controllers\Admin\VisionMissionController;
 use App\Http\Controllers\Admin\IndustryController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\ProjectMediaController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
@@ -108,6 +110,18 @@ Route::group(['as' => 'admin.'], function () {
         Route::resource('intro-images', IntroImageController::class)->except(['show']);
         Route::resource('vision-missions', VisionMissionController::class)->except(['show']);
         Route::resource('industries', IndustryController::class)->except(['show']);
+        Route::resource('projects', ProjectController::class)->except(['show']);
+
+        // Project Media Management
+        Route::prefix('projects/{project}')->name('projects.media.')->group(function () {
+            Route::get('media', [ProjectMediaController::class, 'index'])->name('index');
+            Route::get('media/create', [ProjectMediaController::class, 'create'])->name('create');
+            Route::post('media', [ProjectMediaController::class, 'store'])->name('store');
+            Route::get('media/{media}/edit', [ProjectMediaController::class, 'edit'])->name('edit');
+            Route::put('media/{media}', [ProjectMediaController::class, 'update'])->name('update');
+            Route::delete('media/{media}', [ProjectMediaController::class, 'destroy'])->name('destroy');
+            Route::post('media/order', [ProjectMediaController::class, 'updateOrder'])->name('order');
+        });
         Route::resource('slide-locations', SlideLocationController::class)->except(['show']);
         // Image Homes Management
         Route::resource('image-homes', ImageHomeController::class)->except(['show']);

@@ -115,8 +115,14 @@
                                     <span>Ngành Công Nghiệp</span>
                                 </a>
                             </li>
-
                         </ul>
+                    </li>
+
+                    <li class="{{ Route::currentRouteNamed('admin.projects.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.projects.index') }}">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Dự Án</span>
+                        </a>
                     </li>
 
                     <!-- Quản lý nội dung -->
