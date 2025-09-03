@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
-@section('title', $blog->getTranslation('title', 'vi') . ' - Cosmopark')
-@section('description', Str::limit(strip_tags($blog->getTranslation('content', 'vi')), 160))
-@section('keywords', $blog->category ? $blog->category->getTranslation('name', 'vi') : 'blog' . ', Cosmopark')
+@section('title', $blog->title . ' - Cosmopark')
+@section('description', Str::limit(strip_tags($blog->content), 160))
+@section('keywords', $blog->category ? $blog->category->name : 'blog' . ', Cosmopark')
 
 @section('content')
     <section class="pt-5">
@@ -10,10 +10,12 @@
                 <!-- Main Content -->
                 <div class="col-lg-9 col-12">
                     <div class="d-flex align-items-start flex-column align-items-md-center flex-md-row">
-                        <h1 class="text-1lg-2 text-black fw-bold me-3">{{ $blog->getTranslation('title', 'vi') }}</h1>
-                        @if($blog->category)
-                            <span class="rounded-5 color-text-secondary bg-primary-11 px-3 py-2">{{ $blog->category->getTranslation('name', 'vi') }}</span>
-                        @endif
+                        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center flex-grow-1">
+                            <h1 class="text-1lg-2 text-black fw-bold me-3 mb-2 mb-md-0">{{ $blog->title }}</h1>
+                            @if($blog->category)
+                                <span class="rounded-5 color-text-secondary bg-primary-11 px-3 py-2 flex-shrink-0">{{ $blog->category->name }}</span>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="mt-3 mt-md-4 d-flex justify-content-between align-items-start align-items-md-center flex-column flex-md-row">
