@@ -150,6 +150,9 @@
             padding: 0.5rem 0.75rem;
             border-radius: 0.25rem;
             transition: all 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .toc-item.active a {
