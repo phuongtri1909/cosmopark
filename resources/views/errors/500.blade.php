@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>400 - Bad Request</title>
-    <meta name="description" content="400 - Bad Request">
+    <title>500 - Internal Server Error</title>
+    <meta name="description" content="500 - Internal Server Error">
     <link rel="icon" href="{{ $faviconPath }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ $faviconPath }}" type="image/x-icon">
     <style>
@@ -144,7 +144,7 @@
 
 <body>
     <div class="error-container">
-        <h1 class="title-error">400</h1>
+        <h1 class="title-error">500</h1>
         <a href="{{ route('home') }}" class="button-back-to-home">{{ __('Back to home') }}</a>
     </div>
 </body>

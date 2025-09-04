@@ -10,7 +10,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
@@ -20,6 +19,7 @@ use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProjectMediaController;
 use App\Http\Controllers\ReviewRatingController;
 use App\Http\Controllers\ContactSubmissionController;
+use App\Http\Controllers\GalleryController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -43,6 +43,13 @@ Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class
 Route::get('/image-homes', [ImageHomeController::class, 'getImageHomes'])->name('image-homes.get');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery/load-more', [GalleryController::class, 'loadMore'])->name('gallery.load-more');
+
+// Gallery AJAX routes for project-based loading
+Route::get('/galleries/projects', [GalleryController::class, 'getProjects'])->name('galleries.projects');
+Route::get('/galleries/project/{projectId}', [GalleryController::class, 'getByProject'])->name('galleries.project');
+Route::get('/galleries/project/{projectId}/load-more', [GalleryController::class, 'loadMoreByProject'])->name('galleries.load-more');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 Route::group(['middleware' => 'guest'], function () {

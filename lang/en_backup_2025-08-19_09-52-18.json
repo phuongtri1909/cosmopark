@@ -120,5 +120,7 @@
     "media_type_images": "images",
     "media_type_plans": "plans",
     "media_type_videos": "videos",
-    "media_type_street-views": "street views"
+    "media_type_street-views": "street views",
+    "View more": "View more",
+    "Back to home": "Back to home"
   }

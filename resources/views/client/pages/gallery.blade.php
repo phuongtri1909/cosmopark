@@ -7,11 +7,9 @@
 @section('content')
     <x-banner-page title="Gallery" alignItemCenter="true" />
 
-    <x-gallery-list :main="asset('assets/images/dev/image-1.jpg')" :images="[]" />
+    <div id="gallery-container">
+        <x-gallery-list />
+    </div>
 @endsection
 
-@push('scripts')
-@endpush
 
-@push('styles')
-@endpush

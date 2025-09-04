@@ -125,6 +125,28 @@
                         </a>
                     </li>
 
+                    <li
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.galleries.*']) ? 'open' : '' }}">
+                        <a href="#" class="submenu-toggle">
+                            <i class="fas fa-images"></i>
+                            <span>Quản lý Gallery</span>
+                            <i class="fas fa-chevron-down submenu-arrow"></i>
+                        </a>
+                        <ul class="submenu">
+
+                            <li class="{{ Route::currentRouteNamed('admin.galleries.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.galleries.index') }}">
+                                    <i class="fa-solid fa-list"></i>
+                                    <span>Gallery</span>
+                                </a>
+                            </li>
+
+                          
+                        </ul>
+                    </li>
+
+                    
+
                     <!-- Quản lý nội dung -->
                     <li
                         class="has-submenu {{ Route::currentRouteNamed(['admin.blogs.*', 'admin.banners.*', 'admin.category-blogs.*', 'admin.feature-sections.*']) ? 'open' : '' }}">

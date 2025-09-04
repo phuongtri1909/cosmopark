@@ -1,216 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>404 - Page Not Found</title>
-    <style>/* styles.css */
+    <meta name="description" content="404 - Page Not Found">
+    <link rel="icon" href="{{ $faviconPath }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $faviconPath }}" type="image/x-icon">
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
         }
-        
+
         body {
             height: 100vh;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
             overflow: hidden;
-            color: #fff;
+        }
+
+        .error-container {
+            background-image: url('{{ asset('assets/images/dev/bg-error-page.webp') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .title-error {
+            background: linear-gradient(180deg, rgba(57, 75, 155, 0.45) 19.79%, rgba(215, 211, 219, 0.20) 194.53%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: clamp(120px, 25vw, 300px);
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1;
             text-align: center;
+            margin: 0;
+            animation: fadeInUp 1.2s ease-out forwards, float 3s ease-in-out infinite 1.5s;
+            transform: translateY(50px);
+            opacity: 0;
         }
-        
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .bubble {
-            position: absolute;
-            bottom: -50px;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: rise 10s infinite ease-in-out;
-        }
-        
-        .bubble:nth-child(1) {
-            left: 10%;
-            width: 40px;
-            height: 40px;
-            animation-duration: 8s;
-            animation-delay: 0s;
-        }
-        
-        .bubble:nth-child(2) {
-            left: 30%;
-            width: 20px;
-            height: 20px;
-            animation-duration: 6s;
-            animation-delay: 2s;
-        }
-        
-        .bubble:nth-child(3) {
-            left: 50%;
-            width: 50px;
-            height: 50px;
-            animation-duration: 12s;
-            animation-delay: 4s;
-        }
-        
-        .bubble:nth-child(4) {
-            left: 70%;
-            width: 30px;
-            height: 30px;
-            animation-duration: 10s;
-            animation-delay: 6s;
-        }
-        
-        .bubble:nth-child(5) {
-            left: 90%;
-            width: 25px;
-            height: 25px;
-            animation-duration: 7s;
-            animation-delay: 8s;
-        }
-        
-        @keyframes rise {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.7;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) scale(1.2);
-                opacity: 0;
-            }
-        }
-        
-        .container {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .error-animation {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-        }
-        
-        .circle {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: #fff;
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: circlePulse 1.5s infinite;
-        }
-        
-        .cross {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .cross span {
-            position: absolute;
-            width: 60%;
-            height: 10%;
-            background: #ff3d3d;
-            border-radius: 5px;
-        }
-        
-        .cross span:first-child {
-            transform: rotate(45deg);
-            animation: crossMove 1.5s infinite;
-        }
-        
-        .cross span:last-child {
-            transform: rotate(-45deg);
-            animation: crossMove 1.5s infinite reverse;
-        }
-        
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            color: #fff;
-            background: #ff3d3d;
+
+        .button-back-to-home {
+            color: #000;
+            border-radius: 20px;
+            padding: 12px 24px;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background 0.3s ease;
+            background: #fff;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1.2s ease-out 0.5s forwards, pulse 2s ease-in-out infinite 2s;
+            transform: translateY(30px);
+            opacity: 0;
+            display: inline-block;
         }
-        
-        .btn:hover {
-            background: #e32f2f;
+
+        .button-back-to-home:hover {
+            background: #000;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
-        
-        @keyframes circlePulse {
-            0%, 100% {
-                transform: scale(1);
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
                 opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-        }
-        
-        @keyframes crossMove {
-            0%, 100% {
                 transform: translateY(0);
             }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
             50% {
-                transform: translateY(-5px);
+                transform: translateY(-10px);
             }
         }
-        </style>
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* Thêm hiệu ứng shimmer cho text 404 */
+        .title-error::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite 2s;
+            border-radius: inherit;
+        }
+
+        /* Responsive cho mobile */
+        @media (max-width: 768px) {
+            .title-error {
+                font-size: clamp(80px, 20vw, 200px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title-error {
+                font-size: clamp(60px, 15vw, 150px);
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <div class="background">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-    </div>
-    <div class="container">
-        <div class="error-animation">
-            <div class="circle"></div>
-            <div class="cross">
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <h1>404</h1>
-        <p>Oops! The page you're looking for doesn't exist.</p>
+    <div class="error-container">
+        <h1 class="title-error">404</h1>
+        <a href="{{ route('home') }}" class="button-back-to-home">{{ __('Back to home') }}</a>
     </div>
 </body>
+
 </html>

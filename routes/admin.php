@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\VisionMissionController;
 use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectMediaController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
@@ -128,6 +129,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Features Management
         Route::resource('features', FeatureController::class)->except(['show']);
+
+        // Gallery Management
+        Route::resource('galleries', GalleryController::class)->except(['show']);
     });
 
     Route::group(['middleware' => 'guest'], function () {

@@ -126,4 +126,20 @@ class Project extends Model
     {
         return $this->hasMany(ProjectMedia::class)->where('type', 'street-views');
     }
+
+    /**
+     * Get project galleries
+     */
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+    /**
+     * Get active project galleries
+     */
+    public function activeGalleries()
+    {
+        return $this->hasMany(Gallery::class)->where('is_active', true)->ordered();
+    }
 } 
