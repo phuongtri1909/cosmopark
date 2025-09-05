@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use App\Models\Project;
+use App\Models\BannerPage;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -14,7 +15,10 @@ class GalleryController extends Controller
     public function index(Request $request)
     {
         try {
-            return view('client.pages.gallery');
+            // Load banner page data for gallery
+            $bannerPage = BannerPage::getBannerForPage('gallery');
+            
+            return view('client.pages.gallery', compact('bannerPage'));
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to load gallery');
         }

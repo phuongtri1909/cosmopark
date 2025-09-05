@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\CategoryBlog;
 use App\Models\BlogComment;
+use App\Models\BannerPage;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -36,8 +37,11 @@ class BlogController extends Controller
         $categories = CategoryBlog::withCount('blog')->orderBy('name')->get();
         $latestPost = Blog::where('is_active', true)
             ->latest()->first();
+        
+        // Load banner page data for news
+        $bannerPage = BannerPage::getBannerForPage('news');
 
-        return view('client.pages.blogs.index', compact('latestNews', 'categories', 'latestPost'));
+        return view('client.pages.blogs.index', compact('latestNews', 'categories', 'latestPost', 'bannerPage'));
     }
 
     /**

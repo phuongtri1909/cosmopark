@@ -5,7 +5,7 @@
 
 
 @section('content')
-    <x-banner-page title="Gallery" alignItemCenter="true" />
+    <x-banner-page title="Gallery" alignItemCenter="true" :bannerPage="$bannerPage" />
 
     <div id="gallery-container">
         <x-gallery-list />

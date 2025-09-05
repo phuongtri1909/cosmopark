@@ -6,7 +6,7 @@
 
 
 @section('content')
-    <x-banner-page title="News" alignItemCenter="false" />
+    <x-banner-page title="News" alignItemCenter="false" :bannerPage="$bannerPage" />
 
     <x-read-recently :latestPost="$latestPost" />
 

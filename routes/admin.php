@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectMediaController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\BannerPageController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
@@ -132,6 +133,10 @@ Route::group(['as' => 'admin.'], function () {
 
         // Gallery Management
         Route::resource('galleries', GalleryController::class)->except(['show']);
+
+        // Banner Page Management
+        Route::get('banner-pages/edit', [BannerPageController::class, 'edit'])->name('banner-pages.edit');
+        Route::put('banner-pages/update/{bannerPage}', [BannerPageController::class, 'update'])->name('banner-pages.update');
     });
 
     Route::group(['middleware' => 'guest'], function () {

@@ -5,7 +5,7 @@
 
 
 @section('content')
-    <x-banner-page title="Contact" alignItemCenter="false" />
+    <x-banner-page title="Contact" alignItemCenter="false" :bannerPage="$bannerPage" />
 @endsection
 
 @push('scripts')

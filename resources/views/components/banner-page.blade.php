@@ -1,7 +1,14 @@
-<div class="banner-page position-relative overflow-hidden bg-banner-page d-flex ">
+<div class="banner-page position-relative overflow-hidden bg-banner-page d-flex " 
+     @if(isset($bannerPage) && $bannerPage && $bannerPage->image)
+         style="background-image: url('{{ $bannerPage->image_url }}');"
+     @endif>
     <div class="container position-relative z-2 py-5 mt-5 d-flex align-items-center justify-content-center {{ $alignItemCenter == 'true' ? 'align-items-md-start' : 'd-md-block' }}">
         <h1 class="fw-bold color-primary-4 mt-4 mb-2 animate-on-scroll banner-title text-2xl-4">
-            {{ __($title) }}
+            @if(isset($bannerPage) && $bannerPage && $bannerPage->getTranslation('title', app()->getLocale()))
+                {{ $bannerPage->getTranslation('title', app()->getLocale()) }}
+            @else
+                {{ __($title) }}
+            @endif
         </h1>
     </div>
 </div>
