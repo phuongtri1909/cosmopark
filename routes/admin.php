@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\LogoSiteController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\StatisticController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BannerHomeController;
 use App\Http\Controllers\Admin\ImageHomeController;
 use App\Http\Controllers\Admin\FeatureController;
@@ -57,9 +58,7 @@ Route::group(['as' => 'admin.'], function () {
     })->name('clear.cache');
 
     Route::group(['middleware' => ['auth', 'check.role:admin']], function () {
-        Route::get('/', function () {
-            return view('admin.pages.dashboard');
-        })->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
