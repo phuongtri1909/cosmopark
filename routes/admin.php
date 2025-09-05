@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\ProjectMediaController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\BannerPageController;
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\FeatureSectionController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\FranchiseContactController;
@@ -165,6 +166,9 @@ Route::group(['as' => 'admin.'], function () {
 
         // Account Management
         Route::resource('accounts', AccountController::class)->except(['show']);
+
+        // SEO Management
+        Route::resource('seo', SeoController::class)->except(['show', 'create', 'store']);
     });
 
     Route::group(['middleware' => 'guest'], function () {

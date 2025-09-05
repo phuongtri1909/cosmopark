@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\CategoryBlog;
 use App\Models\BlogComment;
 use App\Models\BannerPage;
+use App\Models\SeoSetting;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -40,8 +41,9 @@ class BlogController extends Controller
         
         // Load banner page data for news
         $bannerPage = BannerPage::getBannerForPage('news');
+        $seoSetting = SeoSetting::getByPageKey('news');
 
-        return view('client.pages.blogs.index', compact('latestNews', 'categories', 'latestPost', 'bannerPage'));
+        return view('client.pages.blogs.index', compact('latestNews', 'categories', 'latestPost', 'bannerPage', 'seoSetting'));
     }
 
     /**
@@ -114,36 +116,16 @@ class BlogController extends Controller
             ->take(5)
             ->get();
 
+        // Generate dynamic SEO for blog post
+        $baseSeo = SeoSetting::getByPageKey('news');
+        $seoData = SeoSetting::getBlogSeo($blog, $baseSeo);
+
         return view('client.pages.blogs.show', compact(
             'blog',
             'relatedPosts',
             'categories',
-            'latestPosts'
+            'latestPosts',
+            'seoData'
         ));
-    }
-
-    /**
-     * Hiển thị danh sách bài viết theo danh mục
-     */
-    public function category($slug)
-    {
-        $category = CategoryBlog::where('slug', $slug)->firstOrFail();
-
-        $blogs = Blog::with(['author', 'categories'])
-            ->where('is_active', true)
-            ->whereHas('categories', function ($q) use ($category) {
-                $q->where('category_blogs.id', $category->id);
-            })
-            ->latest()
-            ->paginate(6);
-
-        // Lấy danh mục và bài viết mới nhất cho sidebar
-        $categories = CategoryBlog::withCount('blogs')->orderBy('name')->get();
-        $latestPosts = Blog::where('is_active', true)
-            ->latest()
-            ->take(5)
-            ->get();
-
-        return view('client.pages.blogs.index', compact('blogs', 'categories', 'latestPosts', 'category'));
     }
 }

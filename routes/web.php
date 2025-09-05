@@ -28,7 +28,6 @@ Route::get('/projects/{slug}', [ProjectController::class, 'show'])->name('projec
 Route::get('/project-media/{projectSlug}/{type}', [ProjectMediaController::class, 'getMedia'])->name('project.media');
 
 Route::get('/news', [BlogController::class, 'index'])->name('news.index');
-Route::get('/news/category/{slug}', [BlogController::class, 'category'])->name('news.category');
 Route::get('/news/{slug}', [BlogController::class, 'show'])->name('news.show');
 Route::post('/news/filter', [BlogController::class, 'filter'])->name('news.filter');
 

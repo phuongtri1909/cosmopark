@@ -226,7 +226,7 @@
 
                     <!-- Cấu hình hệ thống -->
                     <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.socials.*', 'admin.logo-site.*', 'admin.languages.*']) || request()->is('admin/users*') || request()->is('admin/settings*') || request()->is('admin/setting-order*') ? 'open' : '' }}">
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.socials.*', 'admin.logo-site.*', 'admin.languages.*', 'admin.seo.*']) || request()->is('admin/users*') || request()->is('admin/settings*') || request()->is('admin/setting-order*') ? 'open' : '' }}">
                         <a href="#" class="submenu-toggle">
                             <i class="fas fa-cogs"></i>
                             <span>Cấu hình hệ thống</span>
@@ -256,6 +256,12 @@
                                 <a href="{{ route('admin.setting.index') }}">
                                     <i class="fas fa-cog"></i>
                                     <span>Cài đặt</span>
+                                </a>
+                            </li>
+                            <li class="{{ Route::currentRouteNamed('admin.seo.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.seo.index') }}">
+                                    <i class="fas fa-cog"></i>
+                                    <span>SEO</span>
                                 </a>
                             </li>
                         </ul>

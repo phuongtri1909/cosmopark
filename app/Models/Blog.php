@@ -43,7 +43,7 @@ class Blog extends Model
 
     public function getImageUrlAttribute()
     {
-        return $this->image ? Storage::disk('public')->url($this->image) : null;
+        return $this->image ? asset('storage/' . $this->image) : null;
     }
 
     public function getExcerptAttribute()

@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
             IndustrySeeder::class,
             ProjectSeeder::class,
             FeatureSeeder::class,
+            BannerPageSeeder::class,
+            SeoSettingSeeder::class,
         ]);
     }
 }

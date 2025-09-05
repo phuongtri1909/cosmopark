@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gallery;
 use App\Models\Project;
 use App\Models\BannerPage;
+use App\Models\SeoSetting;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -17,8 +18,9 @@ class GalleryController extends Controller
         try {
             // Load banner page data for gallery
             $bannerPage = BannerPage::getBannerForPage('gallery');
+            $seoSetting = SeoSetting::getByPageKey('gallery');
             
-            return view('client.pages.gallery', compact('bannerPage'));
+            return view('client.pages.gallery', compact('bannerPage', 'seoSetting'));
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to load gallery');
         }

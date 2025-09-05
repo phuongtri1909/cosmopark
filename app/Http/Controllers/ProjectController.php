@@ -7,6 +7,7 @@ use App\Models\Industry;
 use App\Models\BlogComment;
 use App\Models\CategoryBlog;
 use App\Models\Project;
+use App\Models\SeoSetting;
 use Illuminate\Http\Request;
 use App\Models\SlideLocation;
 
@@ -24,7 +25,11 @@ class ProjectController extends Controller
         $slideLocations = SlideLocation::getActiveSlides();
         $industries = Industry::active()->ordered()->get();
         
-        return view('client.pages.project', compact('project', 'slideLocations', 'industries'));
+        // Generate dynamic SEO for project
+        $baseSeo = SeoSetting::getByPageKey('projects');
+        $seoData = SeoSetting::getProjectSeo($project, $baseSeo);
+        
+        return view('client.pages.project', compact('project', 'slideLocations', 'industries', 'seoData'));
     }
 
 }

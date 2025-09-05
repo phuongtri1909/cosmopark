@@ -6,27 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>@yield('title', 'Home - Cosmopark')</title>
-    <meta name="description" content="@yield('description', 'Cosmopark')">
-    <meta name="keywords" content="@yield('keywords', 'Cosmopark,park')">
+    @php
+        $currentLocale = app()->getLocale();
+        $seoTitle = 'Home - Cosmopark';
+        $seoDescription = 'Cosmopark';
+        $seoKeywords = 'Cosmopark,park';
+        $seoThumbnail = asset('assets/images/dev/Thumbnail.png');
+        
+        // Get SEO data from view variables
+        if (isset($seoSetting) && $seoSetting) {
+            $seoTitle = $seoSetting->getTranslation('title', $currentLocale) ?: $seoSetting->getTranslation('title', 'vi');
+            $seoDescription = $seoSetting->getTranslation('description', $currentLocale) ?: $seoSetting->getTranslation('description', 'vi');
+            $seoKeywords = $seoSetting->getTranslation('keywords', $currentLocale) ?: $seoSetting->getTranslation('keywords', 'vi');
+            $seoThumbnail = $seoSetting->thumbnail_url;
+        } elseif (isset($seoData) && $seoData) {
+            // For dynamic SEO (blog posts, projects)
+            $seoTitle = $seoData->title;
+            $seoDescription = $seoData->description;
+            $seoKeywords = $seoData->keywords;
+            $seoThumbnail = $seoData->thumbnail;
+        }
+        
+        // Override with yield if provided (will be handled after PHP block)
+    @endphp
+
+    <title>@if($seoTitle){{ $seoTitle }}@elseif(@hasSection('title'))@yield('title')@else Home - Cosmopark @endif</title>
+    <meta name="description" content="@if($seoDescription){{ $seoDescription }}@elseif(@hasSection('description'))@yield('description')@else Cosmopark @endif">
+    <meta name="keywords" content="@if($seoKeywords){{ $seoKeywords }}@elseif(@hasSection('keywords'))@yield('keywords')@else Cosmopark,park @endif">
     <meta name="author" content="Cosmopark">
     <meta name="robots" content="index, follow">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('title', 'Home - Cosmopark')">
-    <meta property="og:description" content="@yield('description', '')">
+    <meta property="og:title" content="@if($seoTitle){{ $seoTitle }}@elseif(@hasSection('title'))@yield('title')@else Home - Cosmopark @endif">
+    <meta property="og:description" content="@if($seoDescription){{ $seoDescription }}@elseif(@hasSection('description'))@yield('description')@else Cosmopark @endif">
     <meta property="og:url" content="{{ url()->full() }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
     <meta property="og:locale" content="vi_VN">
-    <meta property="og:image" content="{{ asset('assets/images/dev/Thumbnail.png') }}">
-    <meta property="og:image:secure_url" content="{{ asset('assets/images/dev/Thumbnail.png') }}">
+    <meta property="og:image" content="{{ $seoThumbnail }}">
+    <meta property="og:image:secure_url" content="{{ $seoThumbnail }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="@yield('title', 'Home - Cosmopark')">
+    <meta property="og:image:alt" content="@if($seoTitle){{ $seoTitle }}@elseif(@hasSection('title'))@yield('title')@else Home - Cosmopark @endif">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('title', 'Home - Cosmopark')">
-    <meta name="twitter:description" content="@yield('description', '')">
-    <meta name="twitter:image" content="{{ asset('assets/images/dev/Thumbnail.png') }}">
-    <meta name="twitter:image:alt" content="@yield('title', 'Home - Cosmopark')">
+    <meta name="twitter:title" content="@if($seoTitle){{ $seoTitle }}@elseif(@hasSection('title'))@yield('title')@else Home - Cosmopark @endif">
+    <meta name="twitter:description" content="@if($seoDescription){{ $seoDescription }}@elseif(@hasSection('description'))@yield('description')@else Cosmopark @endif">
+    <meta name="twitter:image" content="{{ $seoThumbnail }}">
+    <meta name="twitter:image:alt" content="@if($seoTitle){{ $seoTitle }}@elseif(@hasSection('title'))@yield('title')@else Home - Cosmopark @endif">
     <link rel="icon" href="{{ $faviconPath }}" type="image/x-icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ $faviconPath }}" type="image/x-icon">

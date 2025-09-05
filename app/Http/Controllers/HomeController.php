@@ -16,6 +16,7 @@ use App\Models\IntroImage;
 use App\Models\ProductView;
 use App\Models\IntroFeature;
 use App\Models\ReviewRating;
+use App\Models\SeoSetting;
 use Illuminate\Http\Request;
 use App\Models\IntroLocation;
 use App\Models\SlideLocation;
@@ -49,8 +50,9 @@ class HomeController extends Controller
         $introImage = IntroImage::getActive();
         $visionMission = VisionMission::getActiveVisionMission();
         $slideLocations = SlideLocation::getActiveSlides();
+        $seoSetting = SeoSetting::getByPageKey('home');
 
-        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'imageHomes', 'generalIntroduction', 'introFeatures', 'introLocation', 'slideLocations', 'introImage', 'visionMission'));
+        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'imageHomes', 'generalIntroduction', 'introFeatures', 'introLocation', 'slideLocations', 'introImage', 'visionMission', 'seoSetting'));
     }
 
     public function about()
@@ -69,6 +71,7 @@ class HomeController extends Controller
         $industries = Industry::active()->ordered()->get();
 
         $bannerPage = BannerPage::getBannerForPage('about');
-        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'slideLocations', 'features', 'imageHomes', 'industries', 'bannerPage'));
+        $seoSetting = SeoSetting::getByPageKey('about');
+        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'slideLocations', 'features', 'imageHomes', 'industries', 'bannerPage', 'seoSetting'));
     }
 }
