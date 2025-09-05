@@ -23,9 +23,11 @@ return new class extends Migration
             $table->timestamps();
             
             // Indexes for performance
-            $table->index(['ip_address', 'page_url', 'view_date']);
+           
+            $table->index(['ip_address', 'view_date']);
             $table->index(['page_name', 'view_date']);
             $table->index('view_date');
+            $table->index('page_url'); 
         });
     }
 
