@@ -19,6 +19,7 @@ use App\Http\Controllers\ProjectMediaController;
 use App\Http\Controllers\ReviewRatingController;
 use App\Http\Controllers\ContactSubmissionController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\SitemapController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -49,6 +50,12 @@ Route::get('/galleries/project/{projectId}', [GalleryController::class, 'getByPr
 Route::get('/galleries/project/{projectId}/load-more', [GalleryController::class, 'loadMoreByProject'])->name('galleries.load-more');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/sitemap-static.xml', [SitemapController::class, 'static'])->name('sitemap.static');
+Route::get('/sitemap-news.xml', [SitemapController::class, 'news'])->name('sitemap.news');
+Route::get('/sitemap-projects.xml', [SitemapController::class, 'projects'])->name('sitemap.projects');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', function () {
