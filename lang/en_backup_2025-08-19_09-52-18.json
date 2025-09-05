@@ -122,5 +122,9 @@
     "media_type_videos": "videos",
     "media_type_street-views": "street views",
     "View more": "View more",
-    "Back to home": "Back to home"
+    "Back to home": "Back to home",
+    "Loading projects...": "Loading projects...",
+    "Loading gallery...": "Loading gallery...",
+    "No gallery available for this project": "No gallery available for this project",
+    "Failed to load gallery": "Failed to load gallery"
   }

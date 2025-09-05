@@ -1,12 +1,12 @@
 <div class="gallery-list feature-gradient-bg feature-rounded-top" data-gallery-id="{{ $galleryId ?? 'default' }}">
     <div class="p-100">
-        <div class="card-gallery-list" id="project-buttons">
+        <div class="card-gallery-list mb-5" id="project-buttons">
             <!-- Project buttons will be loaded here via AJAX -->
             <div class="loading-projects">
                 <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden">{{ __('Loading...') }}</span>
                 </div>
-                <p class="mt-2 text-muted">Đang tải danh sách dự án...</p>
+                <p class="mt-2 text-muted">{{ __('Loading projects...') }}</p>
             </div>
         </div>
 
@@ -14,9 +14,9 @@
             <!-- Loading state -->
             <div class="loading-gallery text-center py-5">
                 <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden">{{ __('Loading...') }}</span>
                 </div>
-                <p class="mt-2 text-muted">Đang tải gallery...</p>
+                <p class="mt-2 text-muted">{{ __('Loading gallery...') }}</p>
             </div>
 
             <!-- Gallery rows container -->
@@ -349,17 +349,14 @@
             let hasMoreGalleries = true;
 
             document.addEventListener('DOMContentLoaded', function() {
-                // Chỉ khởi tạo nếu chưa có
                 if (!window.galleryListLoaded) {
                     window.galleryListLoaded = true;
                     loadProjects();
                 }
             });
 
-            // Load projects from API
             async function loadProjects() {
                 try {
-                    // Reset loading state
                     const projectButtonsContainer = document.getElementById('project-buttons');
                     if (!projectButtonsContainer) return;
 
@@ -379,7 +376,6 @@
 
                     if (data.success) {
                         renderProjectButtons(data.data);
-                        // Load first project's gallery by default
                         if (data.data.length > 0) {
                             loadProjectGallery(data.data[0].id);
                         }
@@ -393,7 +389,6 @@
                 }
             }
 
-            // Render project buttons
             function renderProjectButtons(projects) {
                 const container = document.getElementById('project-buttons');
                 if (!container) return;
@@ -409,9 +404,7 @@
                 });
             }
 
-            // Select project and load its gallery
             async function selectProject(projectId, buttonElement) {
-                // Update active button
                 document.querySelectorAll('.btn-category-project').forEach(btn => btn.classList.remove('active'));
                 buttonElement.classList.add('active');
 
@@ -419,7 +412,6 @@
                 await loadProjectGallery(projectId);
             }
 
-            // Load gallery for specific project
             async function loadProjectGallery(projectId) {
                 try {
                     stopAllGalleryAutoSlides();
@@ -437,9 +429,9 @@
                         loadingGallery.classList.remove('d-none');
                         loadingGallery.innerHTML = `
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                        <span class="visually-hidden">{{ __('Loading...') }}</span>
                     </div>
-                    <p class="mt-2 text-muted">Đang tải gallery...</p>
+                    <p class="mt-2 text-muted">{{ __('Loading gallery...') }}</p>
                 `;
                     }
 
@@ -469,7 +461,6 @@
                     if (data.success && data.data.galleries.length > 0) {
                         allGalleries = data.data.galleries;
                         
-                        // Hide loading and show gallery rows
                         if (loadingGallery) {
                             loadingGallery.classList.add('d-none');
                         }
@@ -478,7 +469,6 @@
                             galleryRowsContainer.innerHTML = data.data.html;
                             galleryRowsContainer.classList.remove('d-none');
                             
-                            // Start auto-slide for each gallery
                             data.data.galleries.forEach((gallery, index) => {
                                 startGalleryAutoSlide(gallery.id, index);
                             });
@@ -486,15 +476,9 @@
 
                         hasMoreGalleries = data.data.has_more || false;
                         
-                        console.log('Total galleries:', data.data.total_galleries);
-                        console.log('Loaded galleries:', allGalleries.length);
-                        console.log('Has more:', hasMoreGalleries);
-                        
                         const viewMoreContainer = document.getElementById('view-more-container');
                         if (viewMoreContainer) {
-                            // Chỉ hiện view more nếu còn gallery chưa load và có has_more = true
                             const shouldShow = hasMoreGalleries && data.data.total_galleries > allGalleries.length;
-                            console.log('Should show view more:', shouldShow, 'hasMore:', hasMoreGalleries, 'total:', data.data.total_galleries, 'loaded:', allGalleries.length);
                             
                             if (shouldShow) {
                                 viewMoreContainer.classList.remove('d-none');
@@ -503,9 +487,8 @@
                             }
                         }
                     } else {
-                        // No galleries found
                         if (loadingGallery) {
-                            loadingGallery.innerHTML = '<p class="text-muted">Chưa có gallery cho dự án này</p>';
+                            loadingGallery.innerHTML = '<p class="text-muted">{{ __('No gallery available for this project') }}</p>';
                         }
 
                         hasMoreGalleries = false;
@@ -518,7 +501,7 @@
                     console.error('Error loading gallery:', error);
                     const loadingGallery = document.querySelector('.loading-gallery');
                     if (loadingGallery) {
-                        loadingGallery.innerHTML = '<p class="text-danger">Không thể tải gallery</p>';
+                        loadingGallery.innerHTML = '<p class="text-danger">{{ __('Failed to load gallery') }}</p>';
                     }
                 }
             }
@@ -530,7 +513,7 @@
                 const viewMoreBtn = document.querySelector('#view-more-container button');
                 if (viewMoreBtn) {
                     viewMoreBtn.disabled = true;
-                    viewMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang tải...';
+                    viewMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> {{ __('Loading...') }}';
                 }
 
                 try {
@@ -565,16 +548,9 @@
 
                         hasMoreGalleries = data.data.has_more;
                         
-                        console.log('Load more - Has more:', hasMoreGalleries);
-                        console.log('Load more - Loaded count:', data.data.data.length);
-                        console.log('Load more - Total galleries:', data.data.total_galleries);
-                        console.log('Load more - Loaded count total:', data.data.loaded_count);
-                        
                         const viewMoreContainer = document.getElementById('view-more-container');
                         if (viewMoreContainer) {
-                            // Ẩn view more nếu không còn data hoặc has_more = false
                             const shouldShow = hasMoreGalleries && data.data.data.length > 0;
-                            console.log('Load more - Should show view more:', shouldShow, 'hasMore:', hasMoreGalleries, 'dataLength:', data.data.data.length);
                             
                             if (shouldShow) {
                                 viewMoreContainer.classList.remove('d-none');

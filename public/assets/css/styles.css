@@ -546,8 +546,10 @@ html {
     object-fit: cover;
 }
 
-.header-custom .phone-us {
+.header-custom .phone-us,.phone-us {
     border-bottom: 1px solid var(--primary-color-6);
+    color: white;
+    text-decoration: none;
 }
 
 /* Mobile Side Menu */

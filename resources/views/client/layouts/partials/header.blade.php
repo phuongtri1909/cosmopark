@@ -190,8 +190,8 @@
                         @endif
                     </div>
 
-                    <span class="me-4 text-sm fw-medium ">{{ __('Call us') }}: <span
-                            class="phone-us">0968255399</span></span>
+                    <span class="me-4 text-sm fw-medium ">{{ __('Call us') }}: <a href="tel:0968255399" 
+                            class="phone-us text-decoration-none">0968255399</a></span>
                     <button class="btn btn-lg border rounded-5 bg-white text-md fw-medium btn-contact"
                         data-bs-toggle="modal" data-bs-target="#contactModal">{{ __('Get information') }}</button>
                 </div>
@@ -318,7 +318,8 @@
                     @endif
                 </div>
 
-                <span class="text-sm fw-medium">{{ __('Call us') }}: <span class="phone-us">0968255399</span></span>
+                <span class="text-sm fw-medium">{{ __('Call us') }}: <a href="tel:0968255399" 
+                            class="phone-us text-decoration-none">0968255399</a></span>
             </div>
             <button class="mobile-cta-button btn-contact" data-bs-toggle="modal" data-bs-target="#contactModal">
                 {{ __('Get information') }}

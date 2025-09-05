@@ -10,7 +10,7 @@
         <div class="col-12 col-lg-6">
             <div class="position-relative h-100">
                 <img src="{{ $main ?? asset('assets/images/dev/image-1.jpg') }}"
-                    class="img-fluid w-100 rounded-4 h-100 object-fit-cover animate-on-scroll main-image" style="min-height:258px;">
+                    class="img-fluid w-100 rounded-4 h-100 object-fit-cover animate-on-scroll main-image" style="min-height:258px; aspect-ratio: 4/3; object-fit:cover;">
                 <div class="rounded-4 position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-end align-items-center"
                     style="background:{{ $overlay }};">
                     <h2 class="text-white fw-bold text-center text-md-start text-1lg-3 pb-3 animate-on-scroll main-title" style="line-height:1.2;">
@@ -23,7 +23,7 @@
             <div class="row g-4 sub-images-container">
                 @foreach($images as $img)
                 <div class="col-6">
-                    <img src="{{ $img }}" class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll sub-image" style="aspect-ratio: 4/3;">
+                    <img src="{{ $img }}" class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll sub-image" style="aspect-ratio: 4/3; object-fit:cover;">
                 </div>
                 @endforeach
             </div>

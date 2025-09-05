@@ -66,7 +66,7 @@
         <div class="modal-content">
             <div class="modal-body text-center p-4">
                 <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Đang tải...</span>
+                    <span class="visually-hidden">Loading...</span>
                 </div>
                 <p class="mt-3 mb-0">Đang xử lý...</p>
             </div>

@@ -122,5 +122,9 @@
     "media_type_videos": "video",
     "media_type_street-views": "Đường phố",
     "View more": "Xem thêm",
-    "Back to home": "Về trang chủ"
+    "Back to home": "Về trang chủ",
+    "Loading projects...": "Đang tải dự án...",
+    "Loading gallery...": "Đang tải hình ảnh...",
+    "No gallery available for this project": "Không có hình ảnh cho dự án này",
+    "Failed to load gallery": "Không thể tải hình ảnh"
 }

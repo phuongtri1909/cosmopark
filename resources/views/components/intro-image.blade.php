@@ -286,13 +286,6 @@
                     );
                 }
 
-                if (images.length > 1) {
-                    setInterval(rotateImages, 8000);
-                } else {
-                    images = demoImages;
-                    setInterval(rotateImages, 5000); 
-                }
-
                 const demoImages = [{
                         src: imgElement?.src || '{{ asset('assets/images/dev/image-6.jpg') }}',
                         title: 'COSMOPARK',
@@ -310,30 +303,13 @@
                     }
                 ];
 
-                const testButton = document.createElement('button');
-                testButton.innerHTML = 'Test Animation';
-                testButton.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    z-index: 9999;
-                    padding: 10px 20px;
-                    background: #007bff;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                `;
-                testButton.onclick = function() {
-                    const randomIndex = Math.floor(Math.random() * demoImages.length);
-                    const randomImage = demoImages[randomIndex];
-                    changeImageWithAnimation(
-                        randomImage.src,
-                        randomImage.title,
-                        randomImage.description
-                    );
-                };
-                document.body.appendChild(testButton);
+                if (images.length > 1) {
+                    setInterval(rotateImages, 8000);
+                } else {
+                    images = demoImages;
+                    setInterval(rotateImages, 5000); 
+                }
+
 
                 window.changeIntroImage = changeImageWithAnimation;
             });

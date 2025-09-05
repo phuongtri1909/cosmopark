@@ -9,44 +9,60 @@
         $gallery->image_4,
         $gallery->image_5
     ])->filter();
+    
+    // Prepare data for image-home component
+    $mainImage = $images->count() > 0 ? asset('storage/' . $images->first()) : asset('assets/images/dev/image-1.jpg');
+    $subImages = $images->skip(1)->take(4)->map(function($image) {
+        return asset('storage/' . $image);
+    })->toArray();
 @endphp
 
-<div class="row g-4 mt-4 align-items-stretch {{ $isEven ? '' : 'flex-row-reverse' }}" data-gallery-id="{{ $gallery->id }}" style="min-height: 300px; max-height: 500px;">
-    <div class="col-12 col-lg-6 order-1 d-flex">
-        <div class="position-relative w-100 rounded-4 overflow-hidden" style="aspect-ratio: 4/3;">
-            @if($images->count() > 0)
-                <img src="{{ asset('storage/' . $images->first()) }}"
-                    class="img-fluid w-100 h-100 rounded-4 object-fit-cover animate-on-scroll main-image"
-                    style="cursor: pointer;" 
-                    onclick="openLightbox('{{ asset('storage/' . $images->first()) }}')" 
+<div class="container py-4 {{ $isEven ? '' : 'flex-row-reverse' }}" data-gallery-id="{{ $gallery->id }}">
+    <div class="row g-4 h-100">
+        <div class="col-12 col-lg-6">
+            <div class="position-relative h-100">
+                <img src="{{ $mainImage }}"
+                    class="img-fluid w-100 rounded-4 h-100 object-fit-cover animate-on-scroll main-image" 
+                    style="min-height:258px; aspect-ratio: 4/3; object-fit:cover; cursor: pointer;" 
+                    onclick="openLightbox('{{ $mainImage }}')" 
                     data-gallery-main="{{ $gallery->id }}"
-                    data-current-src="{{ asset('storage/' . $images->first()) }}">
-            @else
-                <img src="{{ asset('assets/images/dev/image-1.jpg') }}"
-                    class="img-fluid w-100 h-100 rounded-4 object-fit-cover animate-on-scroll main-image"
-                    style="cursor: pointer;" 
-                    onclick="openLightbox('{{ asset('assets/images/dev/image-1.jpg') }}')" 
-                    data-gallery-main="{{ $gallery->id }}"
-                    data-current-src="{{ asset('assets/images/dev/image-1.jpg') }}">
-            @endif
+                    data-current-src="{{ $mainImage }}">
+            </div>
         </div>
-    </div>
-    <div class="col-12 col-lg-6 order-2 d-flex">
-        <div class="row g-4 sub-images-container w-100">
-            @if($images->count() > 1)
-                @foreach($images->skip(1)->take(4) as $index => $image)
-                    <div class="col-6">
-                        <div class="position-relative w-100 rounded-4 overflow-hidden" style="aspect-ratio: 4/3;">
-                            <img src="{{ asset('storage/' . $image) }}" 
-                                 class="img-fluid w-100 h-100 rounded-4 object-fit-cover animate-on-scroll sub-image" 
-                                 style="cursor: pointer;"
-                                 onclick="openLightbox('{{ asset('storage/' . $image) }}')"
-                                 data-gallery-sub="{{ $gallery->id }}"
-                                 data-sub-src="{{ asset('storage/' . $image) }}">
-                        </div>
-                    </div>
+        <div class="col-12 col-lg-6 h-100">
+            <div class="row g-4 sub-images-container">
+                @foreach($subImages as $subImage)
+                <div class="col-6">
+                    <img src="{{ $subImage }}" 
+                         class="img-fluid w-100 rounded-4 object-fit-cover animate-on-scroll sub-image" 
+                         style="aspect-ratio: 4/3; object-fit:cover; cursor: pointer;"
+                         onclick="openLightbox('{{ $subImage }}')"
+                         data-gallery-sub="{{ $gallery->id }}"
+                         data-sub-src="{{ $subImage }}">
+                </div>
                 @endforeach
-            @endif
+            </div>
         </div>
     </div>
 </div>
+
+@once
+    @push('styles')
+        <style>
+            @keyframes fadeInImgHome {
+                from { opacity: 0; transform: scale(0.92) translateY(40px);}
+                to { opacity: 1; transform: scale(1) translateY(0);}
+            }
+            .animate-on-scroll { opacity: 0; }
+            .animate-on-scroll.animated { opacity: 1; }
+            .img-fluid.animate-on-scroll.animated {
+                animation: fadeInImgHome 0.9s both;
+            }
+            /* Stagger effect for grid images */
+            .col-lg-6 .row .col-6:nth-child(1) .img-fluid.animate-on-scroll.animated { animation-delay: 0.1s;}
+            .col-lg-6 .row .col-6:nth-child(2) .img-fluid.animate-on-scroll.animated { animation-delay: 0.2s;}
+            .col-lg-6 .row .col-6:nth-child(3) .img-fluid.animate-on-scroll.animated { animation-delay: 0.3s;}
+            .col-lg-6 .row .col-6:nth-child(4) .img-fluid.animate-on-scroll.animated { animation-delay: 0.4s;}
+        </style>
+    @endpush
+@endonce
