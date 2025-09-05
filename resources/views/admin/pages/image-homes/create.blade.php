@@ -1,6 +1,6 @@
 @extends('admin.layouts.sidebar')
 
-@section('title', 'Thêm hình ảnh trang chủ mới')
+@section('title', 'Thêm hình ảnh mới')
 
 @section('main-content')
 <div class="category-form-container">
@@ -8,7 +8,7 @@
     <div class="content-breadcrumb">
         <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.image-homes.index') }}">Hình Ảnh Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.image-homes.index') }}">Hình Ảnh</a></li>
             <li class="breadcrumb-item current">Thêm mới</li>
         </ol>
     </div>
@@ -17,7 +17,9 @@
         <div class="form-header">
             <div class="form-title">
                 <i class="fas fa-plus icon-title"></i>
-                <h5>Thêm hình ảnh trang chủ mới</h5>
+                <h5>Thêm hình ảnh mới</h5>
+                
+                <small class="text-muted">(Dùng chung cho trang chủ và trang về chúng tôi)</small>
             </div>
         </div>
         <div class="form-body"> 

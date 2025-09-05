@@ -150,7 +150,7 @@
         }
 
         .bg-banner-about {
-            background: url('/assets/images/dev/hero-slider.jpg') center/cover no-repeat;
+            background: url({{ $bannerPage->image_url ?? asset('assets/images/dev/hero-slider.jpg') }}) center/cover no-repeat;
             min-height: 700px;
         }
 

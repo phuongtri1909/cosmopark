@@ -1,6 +1,6 @@
 @extends('admin.layouts.sidebar')
 
-@section('title', 'Chỉnh sửa hình ảnh trang chủ')
+@section('title', 'Chỉnh sửa hình ảnh')
 
 @section('main-content')
 <div class="category-form-container">
@@ -8,7 +8,7 @@
     <div class="content-breadcrumb">
         <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('admin.image-homes.index') }}">Hình Ảnh Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.image-homes.index') }}">Hình Ảnh</a></li>
             <li class="breadcrumb-item current">Chỉnh sửa</li>
         </ol>
     </div>
@@ -17,7 +17,8 @@
         <div class="form-header">
             <div class="form-title">
                 <i class="fas fa-edit icon-title"></i>
-                <h5>Chỉnh sửa hình ảnh trang chủ</h5>
+                <h5>Chỉnh sửa hình ảnh</h5>
+                <small class="text-muted">(Dùng chung cho trang chủ và trang về chúng tôi)</small>
             </div>
             <div class="category-meta">
                 <div class="category-created">

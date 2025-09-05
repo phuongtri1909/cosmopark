@@ -110,6 +110,14 @@ Route::group(['as' => 'admin.'], function () {
         Route::resource('intro-features', IntroFeatureController::class)->except(['show']);
         Route::resource('intro-locations', IntroLocationController::class)->except(['show']);
         Route::resource('intro-images', IntroImageController::class)->except(['show']);
+        Route::resource('intro-images-about', IntroImageController::class)->except(['show'])->names([
+            'index' => 'intro-images-about.index',
+            'create' => 'intro-images-about.create',
+            'store' => 'intro-images-about.store',
+            'edit' => 'intro-images-about.edit',
+            'update' => 'intro-images-about.update',
+            'destroy' => 'intro-images-about.destroy'
+        ]);
         Route::resource('vision-missions', VisionMissionController::class)->except(['show']);
         Route::resource('industries', IndustryController::class)->except(['show']);
         Route::resource('projects', ProjectController::class)->except(['show']);
@@ -125,8 +133,24 @@ Route::group(['as' => 'admin.'], function () {
             Route::post('media/order', [ProjectMediaController::class, 'updateOrder'])->name('order');
         });
         Route::resource('slide-locations', SlideLocationController::class)->except(['show']);
+        Route::resource('slide-locations-about', SlideLocationController::class)->except(['show'])->names([
+            'index' => 'slide-locations-about.index',
+            'create' => 'slide-locations-about.create',
+            'store' => 'slide-locations-about.store',
+            'edit' => 'slide-locations-about.edit',
+            'update' => 'slide-locations-about.update',
+            'destroy' => 'slide-locations-about.destroy'
+        ]);
         // Image Homes Management
         Route::resource('image-homes', ImageHomeController::class)->except(['show']);
+        Route::resource('image-homes-about', ImageHomeController::class)->except(['show'])->names([
+            'index' => 'image-homes-about.index',
+            'create' => 'image-homes-about.create',
+            'store' => 'image-homes-about.store',
+            'edit' => 'image-homes-about.edit',
+            'update' => 'image-homes-about.update',
+            'destroy' => 'image-homes-about.destroy'
+        ]);
 
         // Features Management
         Route::resource('features', FeatureController::class)->except(['show']);

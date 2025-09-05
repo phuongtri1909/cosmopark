@@ -1,6 +1,6 @@
 @extends('admin.layouts.sidebar')
 
-@section('title', 'Quản lý hình ảnh trang chủ')
+@section('title', 'Quản lý hình ảnh')
 
 @section('main-content')
 <div class="category-container">
@@ -8,7 +8,7 @@
     <div class="content-breadcrumb">
         <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item current">Hình Ảnh Trang Chủ</li>
+            <li class="breadcrumb-item current">Hình Ảnh</li>
         </ol>
     </div>
 
@@ -16,7 +16,8 @@
         <div class="card-top">
             <div class="card-title">
                 <i class="fas fa-images icon-title"></i>
-                <h5>Danh sách hình ảnh trang chủ</h5>
+                <h5>Danh sách hình ảnh</h5>
+                <small class="text-muted">(Dùng chung cho trang chủ và trang về chúng tôi)</small>
             </div>
             <a href="{{ route('admin.image-homes.create') }}" class="action-button">
                 <i class="fas fa-plus"></i> Thêm hình ảnh
@@ -29,8 +30,8 @@
                     <div class="empty-state-icon">
                         <i class="fas fa-images"></i>
                     </div>
-                    <h4>Chưa có hình ảnh trang chủ nào</h4>
-                    <p>Bắt đầu bằng cách thêm hình ảnh đầu tiên cho trang chủ.</p>
+                    <h4>Chưa có hình ảnh nào</h4>
+                    <p>Bắt đầu bằng cách thêm hình ảnh đầu tiên.</p>
                     <a href="{{ route('admin.image-homes.create') }}" class="action-button">
                         <i class="fas fa-plus"></i> Thêm hình ảnh mới
                     </a>

@@ -67,7 +67,7 @@ class BannerPage extends Model
         if ($this->image) {
             return asset('storage/' . $this->image);
         }
-        return asset('assets/images/dev/banner-default.jpg');
+        return asset('assets/images/dev/hero-slider.jpg');
     }
 
     /**

@@ -17,6 +17,7 @@
                 <div class="card-title">
                     <i class="fas fa-images icon-title"></i>
                     <h5>Danh sách slide vị trí</h5>
+                <small class="text-muted">(Dùng chung cho trang chủ và trang về chúng tôi)</small>
                 </div>
                 <a href="{{ route('admin.slide-locations.create') }}" class="action-button">
                     <i class="fas fa-plus"></i> Thêm slide vị trí

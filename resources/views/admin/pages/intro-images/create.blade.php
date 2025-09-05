@@ -18,6 +18,7 @@
                 <div class="card-title">
                     <i class="fas fa-plus icon-title"></i>
                     <h5>Thêm ảnh giới thiệu mới</h5>
+                <small class="text-muted">(Dùng chung cho trang chủ và trang về chúng tôi)</small>
                 </div>
             </div>
 

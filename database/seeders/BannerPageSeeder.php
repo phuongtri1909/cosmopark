@@ -43,6 +43,16 @@ class BannerPageSeeder extends Seeder
                 'image' => null,
                 'is_active' => true,
                 'sort_order' => 3
+            ],
+            [
+                'key' => 'about',
+                'title' => [
+                    'vi' => 'Về chúng tôi',
+                    'en' => 'About Us'
+                ],
+                'image' => null,
+                'is_active' => true,
+                'sort_order' => 4
             ]
         ];
 

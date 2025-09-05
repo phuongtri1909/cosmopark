@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Industry;
 use App\Models\ImageHome;
 use App\Models\BannerHome;
+use App\Models\BannerPage;
 use App\Models\DressStyle;
 use App\Models\IntroImage;
 use App\Models\ProductView;
@@ -69,6 +70,8 @@ class HomeController extends Controller
         $introImage = IntroImage::getActive();
         $slideLocations = SlideLocation::getActiveSlides();
         $industries = Industry::active()->ordered()->get();
-        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'slideLocations', 'features', 'imageHomes', 'industries'));
+
+        $bannerPage = BannerPage::getBannerForPage('about');
+        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'slideLocations', 'features', 'imageHomes', 'industries', 'bannerPage'));
     }
 }

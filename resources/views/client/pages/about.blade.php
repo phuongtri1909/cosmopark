@@ -7,7 +7,7 @@
 
 
 @section('content')
-    <x-banner-about :generalIntroduction="$generalIntroduction" :introFeatures="$introFeatures" />
+    <x-banner-about :generalIntroduction="$generalIntroduction" :introFeatures="$introFeatures" :bannerPage="$bannerPage" />
 
     <x-vision-mission :visionMission="$visionMission" />
 

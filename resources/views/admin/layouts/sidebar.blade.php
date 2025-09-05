@@ -67,13 +67,20 @@
                     </li>
 
                     <li
-                        class="has-submenu {{ Route::currentRouteNamed(['admin.vision-missions.*', 'admin.features.*', 'admin.industries.*']) ? 'open' : '' }}">
+                        class="has-submenu {{ Route::currentRouteNamed(['admin.vision-missions.*', 'admin.features.*', 'admin.industries.*', 'admin.image-homes-about.*', 'admin.intro-images-about.*', 'admin.slide-locations-about.*']) ? 'open' : '' }}">
                         <a href="#" class="submenu-toggle">
                             <i class="fas fa-info-circle"></i>
                             <span>Trang giới thiệu</span>
                             <i class="fas fa-chevron-down submenu-arrow"></i>
                         </a>
                         <ul class="submenu">
+
+                            <li class="{{ Route::currentRouteNamed('admin.banner-pages.edit') && request()->get('page') == 'about' ? 'active' : '' }}">
+                                <a href="{{ route('admin.banner-pages.edit', ['page' => 'about']) }}">
+                                    <i class="fas fa-image"></i>
+                                    <span>Banner Về Chúng Tôi</span>
+                                </a>
+                            </li>
                             
                             <li class="{{ Route::currentRouteNamed('admin.vision-missions.*') ? 'active' : '' }}">
                                 <a href="{{ route('admin.vision-missions.index') }}">
@@ -88,22 +95,22 @@
                                     <span>Feature Section</span>
                                 </a>
                             </li>
-                            <li class="{{ Route::currentRouteNamed('admin.image-homes.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.image-homes.index') }}">
+                            <li class="{{ Route::currentRouteNamed('admin.image-homes-about.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.image-homes-about.index') }}">
                                     <i class="fas fa-images"></i>
                                     <span>Hình Ảnh Trang About</span>
                                 </a>
                             </li>
 
-                            <li class="{{ Route::currentRouteNamed('admin.intro-images.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.intro-images.index') }}">
+                            <li class="{{ Route::currentRouteNamed('admin.intro-images-about.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.intro-images-about.index') }}">
                                     <i class="fas fa-image"></i>
                                     <span>Ảnh Giới Thiệu</span>
                                 </a>
                             </li>
 
-                            <li class="{{ Route::currentRouteNamed('admin.slide-locations.*') ? 'active' : '' }}">
-                                <a href="{{ route('admin.slide-locations.index') }}">
+                            <li class="{{ Route::currentRouteNamed('admin.slide-locations-about.*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.slide-locations-about.index') }}">
                                     <i class="fas fa-images"></i>
                                     <span>Slide Vị Trí</span>
                                 </a>

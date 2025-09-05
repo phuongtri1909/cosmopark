@@ -25,7 +25,7 @@ class BannerPageController extends Controller
     {
         $pageKey = $request->get('page');
         
-        if (!$pageKey || !in_array($pageKey, ['contact', 'news', 'gallery'])) {
+        if (!$pageKey || !in_array($pageKey, ['contact', 'news', 'gallery', 'about'])) {
             return redirect()->route('admin.dashboard')
                 ->with('error', 'Trang không hợp lệ.');
         }
@@ -38,7 +38,7 @@ class BannerPageController extends Controller
             $bannerPage = BannerPage::create([
                 'key' => $pageKey,
                 'title' => [
-                    'vi' => $pageKey === 'contact' ? 'Liên hệ' : ($pageKey === 'news' ? 'Tin tức' : 'Thư viện ảnh'),
+                    'vi' => $pageKey === 'contact' ? 'Liên hệ' : ($pageKey === 'news' ? 'Tin tức' : ($pageKey === 'gallery' ? 'Thư viện ảnh' : 'Về chúng tôi')),
                     'en' => ucfirst($pageKey)
                 ],
                 'is_active' => true,

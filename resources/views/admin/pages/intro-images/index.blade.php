@@ -17,6 +17,7 @@
                 <div class="card-title">
                     <i class="fas fa-image icon-title"></i>
                     <h5>Danh sách ảnh giới thiệu</h5>
+                <small class="text-muted">(Dùng chung cho trang chủ và trang về chúng tôi)</small>
                 </div>
                 <a href="{{ route('admin.intro-images.create') }}" class="action-button">
                     <i class="fas fa-plus"></i> Thêm ảnh giới thiệu
