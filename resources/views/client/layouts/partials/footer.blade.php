@@ -33,8 +33,19 @@
                                     href="{{ route('home') }}">{{ __('home') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="{{ route('about') }}">{{ __('About COSMOPark') }}</a>
-                                <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
-                                    href="">{{ __('Projects') }}</a>
+                                <div class="dropdown mb-3 mb-md-4">
+                                    <a href="#" class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ __('Projects') }}
+                                    </a>
+                                    <ul class="dropdown-menu pe-4">
+                                        @foreach ($projects as $project)
+                                            <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                                    href="{{ route('projects.show', ['slug' => $project->slug]) }}">{{ $project->title }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"
                                     href="{{ route('gallery') }}">{{ __('Infomation & Gallery') }}</a>
                                 <a class="color-text-secondary text-sm-1 text-decoration-none mb-3 mb-md-4"

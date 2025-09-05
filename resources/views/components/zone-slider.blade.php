@@ -29,9 +29,9 @@
             <div class="swiper zone-swiper">
                 <div class="swiper-wrapper">
 
-                    @foreach ($zones as $zone)
+                    @foreach ($projects as $project)
                         <div class="swiper-slide">
-                            <x-card-zone :zone="$zone" />
+                            <x-card-zone :project="$project" />
                         </div>
                     @endforeach
                 </div>

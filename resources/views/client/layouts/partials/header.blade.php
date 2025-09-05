@@ -130,21 +130,11 @@
                                 {{ __('Projects') }}
                             </a>
                             <ul class="dropdown-menu pe-4">
-                                <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-eco-industrial-zone']) }}">{{ __('COSMOPARK ECO INDUSTRIAL ZONE') }}</a>
-                                </li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-convenient']) }}">{{ __('COSMOPARK CONVENIENT') }}</a>
-                                </li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmo-solar-park']) }}">{{ __('COSMO SOLAR PARK') }}</a>
-                                </li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'san-golf-resort-villa']) }}">{{ __('SAN GOLF RESORT VILLA') }}</a>
-                                </li>
-                                <li><a class="dropdown-item text-dark text-sm fw-medium"
-                                        href="{{ route('projects.show', ['slug' => 'cosmopark-smart-ai-city']) }}">{{ __('COSMOPARK SMART AI CITY') }}</a>
-                                </li>
+                                @foreach ($projects as $project)
+                                    <li><a class="dropdown-item text-dark text-sm fw-medium"
+                                            href="{{ route('projects.show', ['slug' => $project->slug]) }}">{{ $project->title }}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <a href="{{ route('news.index') }}" class="text-sm fw-medium">{{ __('News-1') }}</a>

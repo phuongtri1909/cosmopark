@@ -30,7 +30,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        // Load 3 tin tức mới nhất
         $latestNews = Blog::with(['author', 'category'])
             ->where('is_active', true)
             ->latest()
@@ -39,13 +38,11 @@ class HomeController extends Controller
 
         $bannerHomes = BannerHome::active()->ordered()->get();
         
-        // Load image homes for the image-home component
         $imageHomes = ImageHome::with('subImages')
             ->active()
             ->ordered()
             ->get();
         
-        // Load general introduction and features
         $generalIntroduction = GeneralIntroduction::getActive();
         $introFeatures = IntroFeature::active()->ordered()->get();
         $introLocation = IntroLocation::getActive();

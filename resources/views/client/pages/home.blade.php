@@ -15,37 +15,7 @@
 
     <x-location :slideLocations="$slideLocations" />
 
-    @php
-        $zones = [
-            [
-                'name' => 'COMSPARK ECO-INDUSTRIAL ZONE',
-                'image' => asset('assets/images/dev/intro-project.jpg'),
-                'slug' => 'cosmopark-eco-industrial-zone',
-            ],
-            [
-                'name' => 'COSMO PARK CONVENIENT',
-                'image' => asset('assets/images/dev/intro-project-1.jpg'),
-                'slug' => 'cosmopark-convenient',
-            ],
-            [
-                'name' => 'COSMO SOLAR PARK',
-                'image' => asset('assets/images/dev/intro-project-2.webp'),
-                'slug' => 'cosmo-solar-park',
-            ],
-            [
-                'name' => 'SÂN GOLF, RESORT & VILLA',
-                'image' => asset('assets/images/dev/intro-project-3.jpg'),
-                'slug' => 'san-golf-resort-villa',
-            ],
-            [
-                'name' => 'COSMOPARL SMART AI CITY',
-                'image' => asset('assets/images/dev/intro-project-1.jpg'),
-                'slug' => 'cosmopark-smart-ai-city',
-            ],
-        ];
-    @endphp
-
-    <x-zone-slider :zones="$zones" />
+    <x-zone-slider/>
 
     @if($imageHomes->count() > 0)
         @php

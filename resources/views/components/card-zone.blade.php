@@ -2,10 +2,10 @@
     <!-- Image Section -->
     <section class="card-image animate-on-scroll">
         <div class="position-relative">
-            <div class="bg animate-on-scroll" style="background-image: url('{{ $zone['image'] }}');">
+            <div class="bg animate-on-scroll" style="background-image: url('{{ Storage::url($project->hero_image) }}');">
 
             </div>
-            <a href="{{ route('projects.show', ['slug' => $zone['slug']]) }}" class="action-btn animate-on-scroll">
+            <a href="{{ route('projects.show', ['slug' => $project->slug]) }}" class="action-btn animate-on-scroll">
                 <img class="arrow-icon-main" src="{{ asset('assets/images/svg/arrow-left.svg') }}" />
             </a>
         </div>
@@ -14,7 +14,7 @@
     <!-- Content Section -->
     <section class="card-content animate-on-scroll">
         <div class="zone-name-wrapper">
-            <a href="{{ route('projects.show', ['slug' => $zone['slug']]) }}" class="fw-bold text-lg-2 text-decoration-none text-dark">{{ $zone['name'] }}</a>
+            <a href="{{ route('projects.show', ['slug' => $project->slug]) }}" class="fw-bold text-lg-2 text-decoration-none text-dark">{{ $project->title }}</a>
         </div>
     </section>
 </article>
