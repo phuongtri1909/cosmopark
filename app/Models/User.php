@@ -19,21 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'full_name',
-        'phone',
         'email',
         'password',
         'role',
         'avatar',
         'active',
-        'key_active',
-        'key_reset_password',
-        'reset_password_at',
-        'google_id',
     ];
 
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
-    const ROLE_STAFF = 'staff';
 
     const ACTIVE_YES = 1;
     const ACTIVE_NO = 0;
@@ -47,16 +41,6 @@ class User extends Authenticatable
     public function isActive(): bool
     {
         return $this->active === self::ACTIVE_YES;
-    }
-
-    public function addresses()
-    {
-        return $this->hasMany(Address::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
     }
 
     /**

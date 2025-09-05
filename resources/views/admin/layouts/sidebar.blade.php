@@ -216,6 +216,14 @@
                         </ul>
                     </li>
 
+                    <!-- Quản lý tài khoản -->
+                    <li class="{{ Route::currentRouteNamed('admin.accounts.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.accounts.index') }}">
+                            <i class="fas fa-users"></i>
+                            <span>Quản lý tài khoản</span>
+                        </a>
+                    </li>
+
                     <!-- Cấu hình hệ thống -->
                     <li
                         class="has-submenu {{ Route::currentRouteNamed(['admin.socials.*', 'admin.logo-site.*', 'admin.languages.*']) || request()->is('admin/users*') || request()->is('admin/settings*') || request()->is('admin/setting-order*') ? 'open' : '' }}">
