@@ -32,6 +32,7 @@
         <style>
             .intro-image-wrapper {
                 position: relative;
+                overflow: hidden;
             }
 
             .img-intro {
@@ -142,24 +143,24 @@
             @keyframes imageFadeOut {
                 from {
                     opacity: 1;
-                    transform: scale(1);
+                    transform: translateY(0);
                 }
 
                 to {
                     opacity: 0;
-                    transform: scale(1.05);
+                    transform: translateY(-10px);
                 }
             }
 
             @keyframes imageFadeIn {
                 from {
                     opacity: 0;
-                    transform: scale(0.95);
+                    transform: translateY(10px);
                 }
 
                 to {
                     opacity: 1;
-                    transform: scale(1);
+                    transform: translateY(0);
                 }
             }
 

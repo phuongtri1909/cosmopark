@@ -1,61 +1,29 @@
-<div class="position-relative d-flex justify-content-center">
-    <!-- Slider Container -->
-    <div class="location-slider-container">
-        <div class="location-slider">
-            @if($slideLocations && $slideLocations->count() > 0)
-                @foreach($slideLocations as $index => $slide)
-                    <div class="location-slide {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index + 1 }}">
-                        <img class="img-fluid animate-on-scroll w-100" 
-                             src="{{ $slide->image_url }}" 
-                             alt="Location {{ $index + 1 }}">
-                    </div>
-                @endforeach
-            @else
-                <!-- Fallback images -->
-                <div class="location-slide active" data-slide="1">
-                    <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 1">
-                </div>
-                <div class="location-slide" data-slide="2">
-                    <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 2">
-                </div>
-                <div class="location-slide" data-slide="3">
-                    <img class="img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/dev/location.png') }}" alt="Location 3">
-                </div>
-            @endif
-        </div>
-
-        <!-- Desktop Navigation Buttons -->
-        <div class="slider-nav desktop-only">
-            <button class="nav-btn prev-btn" onclick="changeSlide(-1)">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-            <button class="nav-btn next-btn" onclick="changeSlide(1)">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Pagination Dots -->
-        <div class="slider-pagination mobile-only">
-            @if($slideLocations && $slideLocations->count() > 0)
-                @foreach($slideLocations as $index => $slide)
-                    <span class="pagination-dot {{ $index === 0 ? 'active' : '' }}" 
-                          data-slide="{{ $index + 1 }}" 
-                          onclick="goToSlide({{ $index + 1 }})"></span>
-                @endforeach
-            @else
-                <span class="pagination-dot active" data-slide="1" onclick="goToSlide(1)"></span>
-                <span class="pagination-dot" data-slide="2" onclick="goToSlide(2)"></span>
-                <span class="pagination-dot" data-slide="3" onclick="goToSlide(3)"></span>
-            @endif
-        </div>
+<!-- Main container -->
+<div class="location-container">
+    <!-- Images container -->
+    <div class="images-container position-relative d-flex justify-content-center">
+        <img class="d-none d-lg-block img-fluid animate-on-scroll w-100" src="{{ asset('assets/images/locations/background.gif') }}" alt="">
+        <img class="d-block d-lg-none w-100 animate-on-scroll" src="{{ asset('assets/images/locations/background.gif') }}" alt="">
+        
+        <!-- Overlay images -->
+        <img id="line-overlay" class="overlay-image show" src="{{ asset('assets/images/locations/line.gif') }}" alt="">
+        <img id="cang-overlay" class="overlay-image d-none" src="{{ asset('assets/images/locations/Group.png') }}" alt="">
     </div>
 
-    <div class="content-location p-4 mt-3 mt-md-0 text-end animate-on-scroll">
-        <h5 class="fw-bold text-1lg-3 color-primary-4 animate-on-scroll">{{ __('STRATEGIC LOCATION MAP') }}</h5>
+    <!-- Content container -->
+    <div class="content-location p-4 mt-3 mt-md-0 text-center text-md-end animate-on-scroll" style="max-width: 450px;">
+        <h5 class="fw-bold text-2xl-1 color-primary-4 animate-on-scroll">{!! __('STRATEGIC LOCATION MAP') !!}</h5>
+
+        <div class="bg-white rounded-4 box-shadow mt-3 px-3 py-4 animate-on-scroll">
+            <div class="d-flex align-items-center mb-0 mb-lg-3 animate-on-scroll clickable-item active" data-target="line">
+                <img src="{{ asset('assets/images/svg/line-1.svg') }}" alt="" class="me-2">
+                <span class="text-sm-1 color-text-secondary">TUYẾN ĐƯỜNG TRỌNG ĐIỂM</span>
+            </div>
+            <div class="d-flex align-items-center animate-on-scroll clickable-item" data-target="cang">
+                <img src="{{ asset('assets/images/svg/cang.svg') }}" alt="" class="me-3">
+                <span class="text-sm-1 color-text-secondary ms-1">CẢNG/CỬA KHẨU</span>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -66,301 +34,174 @@
         }
 
         .content-location {
-            position: absolute;
-            top: -20px;
-            right: 10%;
+            margin-top: 20px;
             z-index: 2;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 768px) and (max-width: 991px) {
             .content-location {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .location-container {
+                position: relative;
+            }
+            
+            .content-location {
+                position: absolute;
                 transform: none;
                 left: auto;
                 top: 24px;
                 right: 100px;
                 min-width: 340px;
-            }
-        }
-
-        /* Slider Styles */
-        .location-slider-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .location-slider {
-            position: relative;
-            width: 100%;
-            height: auto;
-        }
-
-        .location-slide {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .location-slide.active {
-            display: block;
-            opacity: 1;
-        }
-
-        .location-slide img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        /* Desktop Navigation Buttons */
-        .slider-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 10;
-        }
-
-        .nav-btn {
-            background: var(--primary-color-4, #333);
-            border: none;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-btn svg {
-            color: white;
-        }
-
-        .nav-btn:hover svg {
-            color: var(--primary-color-4, #333);
-        }
-
-        /* Mobile Pagination Dots */
-        .slider-pagination {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 10;
-        }
-
-        .pagination-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .pagination-dot.active {
-            background: var(--color-primary, #fff);
-            transform: scale(1.2);
-        }
-
-        .pagination-dot:hover {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Responsive */
-        .desktop-only {
-            display: none;
-        }
-
-        .mobile-only {
-            display: flex;
-        }
-
-        @media (min-width: 768px) {
-            .desktop-only {
-                display: flex;
-            }
-
-            .mobile-only {
-                display: none;
+                margin-top: 0;
             }
         }
 
         /* Animation keyframes */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: none;
-            }
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: none;}
         }
-
         @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-
-            to {
-                opacity: 1;
-                transform: none;
-            }
+            from { opacity: 0; transform: translateX(40px);}
+            to { opacity: 1; transform: none;}
         }
-
         @keyframes zoomIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8);}
+            to { opacity: 1; transform: scale(1);}
         }
 
-        .animate-on-scroll {
-            opacity: 0;
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-        }
+        .animate-on-scroll { opacity: 0; }
+        .animate-on-scroll.animated { opacity: 1; }
 
         /* Ảnh lớn */
         .img-fluid.animate-on-scroll.animated,
         .w-100.animate-on-scroll.animated {
             animation: zoomIn 1s both;
         }
-
         /* Box nội dung */
         .content-location.animate-on-scroll.animated {
             animation: fadeInRight 1s 0.2s both;
         }
-
         /* Tiêu đề */
         .content-location h5.animate-on-scroll.animated {
             animation: fadeInUp 0.8s 0.4s both;
         }
-
         /* Mô tả */
         .content-location span.animate-on-scroll.animated {
             animation: fadeInUp 0.8s 0.6s both;
         }
-
         /* Box trắng */
         .bg-white.animate-on-scroll.animated {
             animation: fadeInUp 0.8s 0.8s both;
         }
-
         /* Các dòng tuyến đường */
         .bg-white .d-flex.animate-on-scroll.animated {
             animation: fadeInUp 0.7s both;
         }
+        .bg-white .d-flex.animate-on-scroll.animated:nth-child(1) { animation-delay: 1s;}
+        .bg-white .d-flex.animate-on-scroll.animated:nth-child(2) { animation-delay: 1.2s;}
+        .bg-white .d-flex.animate-on-scroll.animated:nth-child(3) { animation-delay: 1.4s;}
+        .bg-white .d-flex.animate-on-scroll.animated:nth-child(4) { animation-delay: 1.6s;}
 
-        .bg-white .d-flex.animate-on-scroll.animated:nth-child(1) {
-            animation-delay: 1s;
+        /* Overlay images styles */
+        .overlay-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            z-index: 1;
+            transition: opacity 0.3s ease-in-out;
         }
 
-        .bg-white .d-flex.animate-on-scroll.animated:nth-child(2) {
-            animation-delay: 1.2s;
+        .overlay-image.show {
+            opacity: 1;
         }
 
-        .bg-white .d-flex.animate-on-scroll.animated:nth-child(3) {
-            animation-delay: 1.4s;
+        .overlay-image.hide {
+            opacity: 0;
         }
 
-        .bg-white .d-flex.animate-on-scroll.animated:nth-child(4) {
-            animation-delay: 1.6s;
+        /* Clickable items */
+        .clickable-item {
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-radius: 8px;
+            padding: 8px;
+            margin: -8px;
+        }
+
+        .clickable-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .clickable-item.active {
+            background-color: rgba(0, 123, 255, 0.1);
         }
     </style>
 @endpush
 
 @push('scripts')
-    <script>
-        let currentSlide = 1;
-        const totalSlides = {{ $slideLocations && $slideLocations->count() > 0 ? $slideLocations->count() : 3 }};
+<script>
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top < window.innerHeight - 60 &&
+        rect.bottom > 0
+    );
+}
+function animateOnScroll() {
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        if (isInViewport(el)) {
+            el.classList.add('animated');
+        }
+    });
+}
 
-        function changeSlide(direction) {
-            currentSlide += direction;
+// Handle click events for location items
+function handleLocationClick() {
+    const clickableItems = document.querySelectorAll('.clickable-item');
+    const lineOverlay = document.getElementById('line-overlay');
+    const cangOverlay = document.getElementById('cang-overlay');
+    
+    clickableItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const target = this.getAttribute('data-target');
             
-            if (currentSlide > totalSlides) {
-                currentSlide = 1;
-            } else if (currentSlide < 1) {
-                currentSlide = totalSlides;
+            // Remove active class from all items
+            clickableItems.forEach(el => el.classList.remove('active'));
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Hide all overlays first
+            lineOverlay.classList.add('d-none');
+            cangOverlay.classList.add('d-none');
+            
+            // Show the appropriate overlay
+            if (target === 'line') {
+                lineOverlay.classList.remove('d-none');
+                lineOverlay.classList.add('show');
+                cangOverlay.classList.remove('show');
+            } else if (target === 'cang') {
+                cangOverlay.classList.remove('d-none');
+                cangOverlay.classList.add('show');
+                lineOverlay.classList.remove('show');
             }
-            
-            updateSlider();
-        }
-
-        function goToSlide(slideNumber) {
-            currentSlide = slideNumber;
-            updateSlider();
-        }
-
-        function updateSlider() {
-            // Update slides
-            document.querySelectorAll('.location-slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
-            
-            // Update pagination dots
-            document.querySelectorAll('.pagination-dot').forEach(dot => {
-                dot.classList.remove('active');
-            });
-            
-            document.querySelector(`[data-slide="${currentSlide}"]`).classList.add('active');
-        }
-
-        // Auto-play slider
-        function autoPlay() {
-            setInterval(() => {
-                changeSlide(1);
-            }, 5000); // Change slide every 5 seconds
-        }
-
-        // Initialize slider
-        document.addEventListener('DOMContentLoaded', function() {
-            updateSlider();
-            autoPlay();
         });
+    });
+}
 
-        function isInViewport(element) {
-            const rect = element.getBoundingClientRect();
-            return (
-                rect.top < window.innerHeight - 60 &&
-                rect.bottom > 0
-            );
-        }
-
-        function animateOnScroll() {
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                if (isInViewport(el)) {
-                    el.classList.add('animated');
-                }
-            });
-        }
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('DOMContentLoaded', animateOnScroll);
-    </script>
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('DOMContentLoaded', function() {
+    animateOnScroll();
+    handleLocationClick();
+});
+</script>
 @endpush

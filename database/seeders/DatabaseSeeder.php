@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
             GeneralIntroductionSeeder::class,
             IntroFeatureSeeder::class,
             IntroLocationSeeder::class,
-            SlideLocationSeeder::class,
             ImageHomeSeeder::class,
             IntroImageSeeder::class,
             VisionMissionSeeder::class,

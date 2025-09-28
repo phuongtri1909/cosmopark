@@ -13,7 +13,7 @@
 
     <x-intro-location :introLocation="$introLocation" />
 
-    <x-location :slideLocations="$slideLocations" />
+    <x-location />
 
     <x-zone-slider/>
 

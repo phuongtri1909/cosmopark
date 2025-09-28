@@ -45,7 +45,7 @@
     <x-intro-image :introImage="$introImage" />
 
 
-    <x-location :slideLocations="$slideLocations" />
+    <x-location />
     
     <x-branch :industries="$industries" />
 @endsection

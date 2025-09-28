@@ -49,10 +49,9 @@ class HomeController extends Controller
         $introLocation = IntroLocation::getActive();
         $introImage = IntroImage::getActive();
         $visionMission = VisionMission::getActiveVisionMission();
-        $slideLocations = SlideLocation::getActiveSlides();
         $seoSetting = SeoSetting::getByPageKey('home');
 
-        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'imageHomes', 'generalIntroduction', 'introFeatures', 'introLocation', 'slideLocations', 'introImage', 'visionMission', 'seoSetting'));
+        return view('client.pages.home', compact('latestNews', 'bannerHomes', 'imageHomes', 'generalIntroduction', 'introFeatures', 'introLocation', 'introImage', 'visionMission', 'seoSetting'));
     }
 
     public function about()
@@ -67,11 +66,10 @@ class HomeController extends Controller
             ->ordered()
             ->get();
         $introImage = IntroImage::getActive();
-        $slideLocations = SlideLocation::getActiveSlides();
         $industries = Industry::active()->ordered()->get();
 
         $bannerPage = BannerPage::getBannerForPage('about');
         $seoSetting = SeoSetting::getByPageKey('about');
-        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'slideLocations', 'features', 'imageHomes', 'industries', 'bannerPage', 'seoSetting'));
+        return view('client.pages.about', compact('introFeatures', 'generalIntroduction', 'introImage', 'visionMission', 'features', 'imageHomes', 'industries', 'bannerPage', 'seoSetting'));
     }
 }

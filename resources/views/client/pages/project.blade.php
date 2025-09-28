@@ -24,7 +24,7 @@
     <x-media-project :project="$project" />
 
     @if ($project->slug == 'cosmopark-eco-industrial-zone')
-        <x-location :slideLocations="$slideLocations" />
+        <x-location />
         <x-branch :industries="$industries" />
     @endif
 @endsection
