@@ -7,7 +7,7 @@
         
         <!-- Overlay images -->
         <img id="line-overlay" class="overlay-image show" src="{{ asset('assets/images/locations/line.gif') }}" alt="">
-        <img id="cang-overlay" class="overlay-image d-none" src="{{ asset('assets/images/locations/Group.png') }}" alt="">
+        <img id="cang-overlay" class="overlay-image d-none" src="{{ asset('assets/images/locations/cang.png') }}" alt="">
     </div>
 
     <!-- Content container -->
